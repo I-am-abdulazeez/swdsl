@@ -8,6 +8,13 @@ const customTheme: object = extendTheme({
     heading: FontFamily,
     mono: FontFamily,
   },
+  styles: {
+    global: {
+      body: {
+        color: "#2c3e50",
+      },
+    },
+  },
   colors: {
     primary: {
       50: "#ffeae9",
