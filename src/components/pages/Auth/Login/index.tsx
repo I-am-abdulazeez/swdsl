@@ -75,7 +75,9 @@ const Index: FC = (): JSX.Element => {
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input type="email" placeholder="you@example.com" />
-                <InputRightElement children={<RiMailOpenLine />} />
+                <InputRightElement>
+                  <RiMailOpenLine />
+                </InputRightElement>
               </InputGroup>
             </FormControl>
             <FormControl id="password">

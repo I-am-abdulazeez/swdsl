@@ -80,10 +80,9 @@ const Index: FC = (): JSX.Element => {
         <Container maxW="container.sm">
           <Box>
             <InputGroup size="lg">
-              <InputLeftElement
-                pointerEvents="none"
-                children={<RiSearch2Line color="#CBD5E0" size="20px" />}
-              />
+              <InputLeftElement pointerEvents="none">
+                <RiSearch2Line color="#CBD5E0" size="20px" />
+              </InputLeftElement>
               <Input
                 type="text"
                 fontSize="14px"

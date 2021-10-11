@@ -74,7 +74,9 @@ const Index: FC = (): JSX.Element => {
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input type="email" placeholder="you@example.com" />
-                <InputRightElement children={<RiMailOpenLine />} />
+                <InputRightElement>
+                  <RiMailOpenLine />
+                </InputRightElement>
               </InputGroup>
             </FormControl>
             <Stack
@@ -86,14 +88,18 @@ const Index: FC = (): JSX.Element => {
                 <FormLabel>Firstname</FormLabel>
                 <InputGroup>
                   <Input type="text" placeholder="Olamide" />
-                  <InputRightElement children={<RiUserLine />} />
+                  <InputRightElement>
+                    <RiUserLine />
+                  </InputRightElement>
                 </InputGroup>
               </FormControl>
               <FormControl id="last-name">
                 <FormLabel>Lastname</FormLabel>
                 <InputGroup>
                   <Input type="text" placeholder="Olanrewaju" />
-                  <InputRightElement children={<RiUserLine />} />
+                  <InputRightElement>
+                    <RiUserLine />
+                  </InputRightElement>
                 </InputGroup>
               </FormControl>
             </Stack>
@@ -119,7 +125,9 @@ const Index: FC = (): JSX.Element => {
               <FormLabel>Phone Number</FormLabel>
               <InputGroup>
                 <Input type="text" placeholder="0908********" />
-                <InputRightElement children={<RiPhoneLine />} />
+                <InputRightElement>
+                  <RiPhoneLine />
+                </InputRightElement>
               </InputGroup>
             </FormControl>
             <Box display="flex" width="100%">
