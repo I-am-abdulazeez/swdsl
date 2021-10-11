@@ -171,7 +171,7 @@ const Index: FC = (): JSX.Element => {
           id="drunk"
           p={6}
           as="section"
-          bg={`linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(255, 0, 150, 0.3)), url("/images/shayo-drinks.jpg")`}
+          bg="linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(255, 0, 150, 0.3)), url('/images/shayo-drinks.jpg')"
           bgSize="cover"
           display="flex"
           alignItems="center"
