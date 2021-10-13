@@ -11,7 +11,7 @@ import {
   FormLabel,
   IconButton,
 } from "@chakra-ui/react";
-import { ChakraNextImage } from "@components/ChakraImage";
+import { ChakraNextImage } from "@components/ChakraNextImage";
 import NextLink from "next/link";
 import Head from "next/head";
 import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from "react-icons/ri";
@@ -44,37 +44,48 @@ const Index: FC = (): JSX.Element => {
         align="center"
         justify="center"
         h="100vh"
-        spacing={5}
+        spacing={6}
       >
         <Box textAlign="center">
           <Box mb={2}>
-            <ChakraNextImage
-              width="200px"
-              height="100px"
-              src="/svgs/swdsl-logo.svg"
-              alt="shayo-logo"
-            />
+            <NextLink href="/">
+              <a>
+                <ChakraNextImage
+                  width="200px"
+                  height="100px"
+                  src="/svgs/swdsl-logo.svg"
+                  alt="shayo-logo"
+                />
+              </a>
+            </NextLink>
           </Box>
           <Text fontWeight="bold" fontSize="24px">
-            Signin your Account
+            Sign in to your account
           </Text>
           <Text fontSize="sm">
-            Don’t have an account?
+            Don’t have an account? {""}
             <NextLink href="/auth/register">
               <chakra.a cursor="pointer" textDecor="underline" color="#501815">
                 {" "}
-                Register
+                Sign up
               </chakra.a>
             </NextLink>
           </Text>
         </Box>
 
         <form>
-          <VStack spacing={3} width={{ base: "20em", md: "20em" }}>
+          <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
             <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
-                <Input type="email" placeholder="you@example.com" />
+                <Input
+                  _focus={{
+                    borderColor: "primary.500",
+                    boxShadow: "#b33b32 0px 0px 0px 1px",
+                  }}
+                  type="email"
+                  placeholder="you@example.com"
+                />
                 <InputRightElement>
                   <RiMailOpenLine />
                 </InputRightElement>
@@ -84,6 +95,10 @@ const Index: FC = (): JSX.Element => {
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
+                  _focus={{
+                    borderColor: "primary.500",
+                    boxShadow: "#b33b32 0px 0px 0px 1px",
+                  }}
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
                 />
@@ -114,7 +129,7 @@ const Index: FC = (): JSX.Element => {
             </Box>
 
             <Button colorScheme="primary" isFullWidth>
-              Signin
+              Sign in
             </Button>
           </VStack>
         </form>

@@ -1,18 +1,18 @@
 import {
-  Box,
-  Container,
-  Spacer,
-  HStack,
-  Flex,
   Button,
   IconButton,
+  useMediaQuery,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import { Box, Flex, HStack, Container, Spacer } from "@chakra-ui/layout";
 import NextLink from "next/link";
-import { RiShoppingCartLine, RiUserLine } from "react-icons/ri";
+import { RiShoppingCartLine, RiStore2Line, RiUserLine } from "react-icons/ri";
+import { useRouter } from "next/dist/client/router";
 
 const Navbar = (): JSX.Element => {
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
+  const [isMobile] = useMediaQuery(`(min-width: 40em)`);
+  const router = useRouter();
 
   return (
     <Box
@@ -25,14 +25,29 @@ const Navbar = (): JSX.Element => {
       position="sticky"
       transition="box-shadow 0.2s, background-color 0.2s ease-in-out"
       borderBottom="1px solid #EDF2F7"
-      role="Navigation"
     >
       <Container maxW="container.lg" h="3.5rem">
         <Flex height="100%" width="100%" align="center">
           <NextLink href="/">
-            <Button size={buttonSize} variant="ghost">
-              Home
-            </Button>
+            {router.pathname === "/" ? (
+              <Button
+                color={router.pathname === "/" ? "primary.500" : "initial"}
+                size={buttonSize}
+                variant="ghost"
+              >
+                Home
+              </Button>
+            ) : (
+              <Button
+                color={
+                  router.pathname === "/contact" ? "primary.500" : "initial"
+                }
+                size={buttonSize}
+                variant="ghost"
+              >
+                Contact
+              </Button>
+            )}
           </NextLink>
           <Spacer />
           <HStack>
@@ -41,19 +56,37 @@ const Navbar = (): JSX.Element => {
                 Login
               </Button>
             </NextLink>
-            <NextLink href="/">
+            <NextLink href="/auth/register">
               <Button size={buttonSize} variant="ghost">
                 Signup
               </Button>
             </NextLink>
+            <NextLink href="/shop">
+              {isMobile ? (
+                <Button
+                  size={buttonSize}
+                  variant="ghost"
+                  leftIcon={<RiStore2Line size="17px" />}
+                >
+                  Shop
+                </Button>
+              ) : (
+                <IconButton
+                  aria-label="Store"
+                  size={buttonSize}
+                  variant="ghost"
+                  icon={<RiStore2Line size="17px" />}
+                />
+              )}
+            </NextLink>
             <IconButton
-              aria-label="shoppign cart"
+              aria-label="shopping cart"
               size={buttonSize}
               variant="ghost"
               icon={<RiShoppingCartLine size="17px" />}
             />
             <IconButton
-              aria-label="shoppign cart"
+              aria-label="shopping cart"
               size={buttonSize}
               variant="ghost"
               icon={<RiUserLine size="17px" />}

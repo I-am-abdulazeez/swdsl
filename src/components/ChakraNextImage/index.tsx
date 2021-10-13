@@ -1,5 +1,6 @@
 import { Box, BoxProps } from "@chakra-ui/layout";
-import { chakra } from "@chakra-ui/system";
+import { Union } from "@chakra-ui/styled-system/dist/types/utils";
+import { chakra, ResponsiveValue } from "@chakra-ui/system";
 import NextImage, { ImageLoaderProps, ImageProps } from "next/image";
 
 const ChakraNextUnwrappedImage = chakra(NextImage, {
@@ -46,7 +47,7 @@ export const ChakraNextImage = ({
   quality,
   height,
   ...rest
-}: ImageProps & BoxProps) => {
+}: ImageProps & BoxProps & {}): JSX.Element => {
   return (
     <Box pos="relative" {...rest}>
       <ChakraNextUnwrappedImage

@@ -36,12 +36,23 @@ code {
     monospace;
 }
 
-#home .swiper-pagination-bullet {
+#home .swiper-pagination-bullet,
+#contact-carousel .swiper-pagination-bullet {
   background-color: #ecf0f1;
 }
 
-#home .swiper-pagination-bullet-active {
+#home .swiper-pagination-bullet-active,
+#contact-carousel .swiper-pagination-bullet-active {
   background-color: #c97200;
+}
+
+#drunk .swiper-pagination-bullet {
+  background-color: #fff;
+}
+
+#drunk .swiper-pagination-bullet-active {
+  background-color: #ff0096;
+  opacity: 0.7;
 }
 
 .fade-in-down {

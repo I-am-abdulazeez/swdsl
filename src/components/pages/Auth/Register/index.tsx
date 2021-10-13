@@ -3,7 +3,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { Box, Stack, Text, VStack } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
-import { ChakraNextImage } from "@components/ChakraImage";
+import { ChakraNextImage } from "@components/ChakraNextImage";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import {
@@ -43,37 +43,47 @@ const Index: FC = (): JSX.Element => {
         align="center"
         justify="center"
         h="100vh"
-        spacing={5}
+        spacing={6}
       >
         <Box textAlign="center">
           <Box mb={2}>
-            <ChakraNextImage
-              width="200px"
-              height="100px"
-              src="/svgs/swdsl-logo.svg"
-              alt="shayo-logo"
-            />
+            <NextLink href="/">
+              <a>
+                <ChakraNextImage
+                  width="200px"
+                  height="100px"
+                  src="/svgs/swdsl-logo.svg"
+                  alt="shayo-logo"
+                />
+              </a>
+            </NextLink>
           </Box>
           <Text fontWeight="bold" fontSize="24px">
-            Create an Account
+            Create an account
           </Text>
           <Text fontSize="sm">
-            Already have an account?
+            Already have an account? {""}
             <NextLink href="/auth/login">
               <chakra.a cursor="pointer" textDecor="underline" color="#501815">
-                {" "}
-                Signin
+                Sign in
               </chakra.a>
             </NextLink>
           </Text>
         </Box>
 
         <form>
-          <VStack spacing={3} width={{ base: "20em", md: "21em" }}>
+          <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
             <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
-                <Input type="email" placeholder="you@example.com" />
+                <Input
+                  _focus={{
+                    borderColor: "primary.500",
+                    boxShadow: "#b33b32 0px 0px 0px 1px",
+                  }}
+                  type="email"
+                  placeholder="you@example.com"
+                />
                 <InputRightElement>
                   <RiMailOpenLine />
                 </InputRightElement>
@@ -81,60 +91,100 @@ const Index: FC = (): JSX.Element => {
             </FormControl>
             <Stack
               direction={{ base: "column", md: "row" }}
-              width={{ base: "inherit", md: "21em" }}
-              spacing={3}
+              width={{ base: "inherit", md: "23em" }}
+              spacing={2}
             >
               <FormControl id="first-name">
-                <FormLabel>Firstname</FormLabel>
+                <FormLabel>First Name</FormLabel>
                 <InputGroup>
-                  <Input type="text" placeholder="Olamide" />
+                  <Input
+                    _focus={{
+                      borderColor: "primary.500",
+                      boxShadow: "#b33b32 0px 0px 0px 1px",
+                    }}
+                    type="text"
+                    placeholder="SHIESTY"
+                  />
                   <InputRightElement>
                     <RiUserLine />
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
               <FormControl id="last-name">
-                <FormLabel>Lastname</FormLabel>
+                <FormLabel>Last Name</FormLabel>
                 <InputGroup>
-                  <Input type="text" placeholder="Olanrewaju" />
+                  <Input
+                    _focus={{
+                      borderColor: "primary.500",
+                      boxShadow: "#b33b32 0px 0px 0px 1px",
+                    }}
+                    type="text"
+                    placeholder="GANG"
+                  />
                   <InputRightElement>
                     <RiUserLine />
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
             </Stack>
-            <FormControl id="password">
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
-                <Input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="********"
-                />
-                <InputRightElement>
-                  <IconButton
-                    size="sm"
-                    variant="ghost"
-                    aria-label="password"
-                    onClick={() => setShowPassword(!showPassword)}
-                    icon={showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
+            <Stack
+              direction={{ base: "column", md: "row" }}
+              width={{ base: "inherit", md: "23em" }}
+              spacing={2}
+            >
+              <FormControl id="password">
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    _focus={{
+                      borderColor: "primary.500",
+                      boxShadow: "#b33b32 0px 0px 0px 1px",
+                    }}
+                    type={showPassword ? "text" : "password"}
+                    placeholder="********"
                   />
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <FormControl id="phonenumber">
-              <FormLabel>Phone Number</FormLabel>
-              <InputGroup>
-                <Input type="text" placeholder="0908********" />
-                <InputRightElement>
-                  <RiPhoneLine />
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
+                  <InputRightElement>
+                    <IconButton
+                      size="sm"
+                      variant="ghost"
+                      aria-label="password"
+                      onClick={() => setShowPassword(!showPassword)}
+                      icon={showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
+                    />
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <FormControl id="phonenumber">
+                <FormLabel>Phone Number</FormLabel>
+                <InputGroup>
+                  <Input
+                    _focus={{
+                      borderColor: "primary.500",
+                      boxShadow: "#b33b32 0px 0px 0px 1px",
+                    }}
+                    type="text"
+                    placeholder="0908********"
+                  />
+                  <InputRightElement>
+                    <RiPhoneLine />
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+            </Stack>
             <Box display="flex" width="100%">
-              <Checkbox defaultIsChecked>I’m 18 years or older</Checkbox>
+              <Checkbox
+                _focus={{
+                  borderColor: "primary.500",
+                  boxShadow: "#b33b32 0px 0px 0px 1px",
+                }}
+                defaultIsChecked
+                colorScheme="primary"
+              >
+                I’m 18 years or older
+              </Checkbox>
             </Box>
             <Button colorScheme="primary" isFullWidth>
-              Signin
+              Sign up
             </Button>
           </VStack>
         </form>
