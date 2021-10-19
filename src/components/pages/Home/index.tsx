@@ -5,14 +5,13 @@ import {
   Text,
   Heading,
 } from "@chakra-ui/react";
-import { Flex, Box, Container, VStack } from "@chakra-ui/layout";
+import { Box, Container, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import { ChakraNextImage } from "@components/ChakraNextImage";
 import NextLink from "next/link";
 import Navbar from "@components/Navbar";
 import Head from "next/head";
 import { RiArrowDownLine, RiSearch2Line } from "react-icons/ri";
-import VimeoVideo from "@u-wave/react-vimeo";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
