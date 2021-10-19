@@ -33,8 +33,8 @@ const Navbar = (): JSX.Element => {
     >
       <Container maxW="container.lg" h="3.5rem">
         <Flex height="100%" width="100%" align="center">
-          <NextLink href="/">
-            {router.pathname === "/" ? (
+          {router.pathname === "/" && (
+            <NextLink href="/">
               <Button
                 color={router.pathname === "/" ? "primary.500" : "initial"}
                 size={buttonSize}
@@ -43,7 +43,20 @@ const Navbar = (): JSX.Element => {
               >
                 Home
               </Button>
-            ) : (
+            </NextLink>
+          )}
+          {router.pathname === "/contact" && (
+            <NextLink href="/">
+              <IconButton
+                size="sm"
+                variant="ghost"
+                aria-label="go-back"
+                icon={<RiArrowLeftLine size="18px" />}
+              />
+            </NextLink>
+          )}
+          {router.pathname === "/contact" && (
+            <NextLink href="/contact">
               <Button
                 color={
                   router.pathname === "/contact" ? "primary.500" : "initial"
@@ -51,12 +64,12 @@ const Navbar = (): JSX.Element => {
                 fontWeight="bold"
                 size={buttonSize}
                 variant="ghost"
-                leftIcon={<RiArrowLeftLine />}
               >
-                Goback home
+                Contact
               </Button>
-            )}
-          </NextLink>
+            </NextLink>
+          )}
+
           <Spacer />
           <HStack>
             <NextLink href="/auth/login">

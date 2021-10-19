@@ -11,13 +11,18 @@ import { ChakraNextImage } from "@components/ChakraNextImage";
 import NextLink from "next/link";
 import Navbar from "@components/Navbar";
 import Head from "next/head";
-import { RiArrowDownLine, RiSearch2Line } from "react-icons/ri";
+import {
+  RiArrowDownLine,
+  RiArrowRightLine,
+  RiSearch2Line,
+} from "react-icons/ri";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
 import ShowCase from "@components/Showcase";
 import { ShayoQuotes, ShayoVideos } from "src/data";
 import { QuotesTalks } from "src/interfaces";
+import { defaultShadow } from "@utils/index";
 
 const Index = (): JSX.Element => {
   return (
@@ -53,7 +58,7 @@ const Index = (): JSX.Element => {
                 type="text"
                 _focus={{
                   borderColor: "primary.500",
-                  boxShadow: "#b33b32 0px 0px 0px 1px",
+                  boxShadow: defaultShadow,
                 }}
                 fontSize="14px"
                 placeholder="Search for drinks"
@@ -81,6 +86,7 @@ const Index = (): JSX.Element => {
             fadeEffect={{
               crossFade: true,
             }}
+            navigation
           >
             {ShayoVideos.map(({ videoId, videoUrl }) => (
               <SwiperSlide key={videoId}>
