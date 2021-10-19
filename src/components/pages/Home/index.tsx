@@ -11,21 +11,18 @@ import { ChakraNextImage } from "@components/ChakraNextImage";
 import NextLink from "next/link";
 import Navbar from "@components/Navbar";
 import Head from "next/head";
-import {
-  RiArrowDownLine,
-  RiDoubleQuotesL,
-  RiSearch2Line,
-} from "react-icons/ri";
+import { RiArrowDownLine, RiSearch2Line } from "react-icons/ri";
+import VimeoVideo from "@u-wave/react-vimeo";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
 import ShowCase from "@components/Showcase";
-import { ShayoQuotes } from "src/data";
+import { ShayoQuotes, ShayoVideos } from "src/data";
 import { QuotesTalks } from "src/interfaces";
 
 const Index = (): JSX.Element => {
   return (
-    <Box>
+    <>
       <Head>
         <title>ShayoWithDSL | #1 Online wine store</title>
         <meta
@@ -46,7 +43,7 @@ const Index = (): JSX.Element => {
 
       <Navbar />
 
-      <Box as="main" mt="4rem">
+      <Box as="main" mt={{ base: "6rem", md: "8rem" }}>
         <Container maxW="container.sm">
           <Box>
             <InputGroup size="lg">
@@ -70,7 +67,7 @@ const Index = (): JSX.Element => {
           <NextLink href="/">
             <a>
               <ChakraNextImage
-                width="315px"
+                width="400px"
                 height="149px"
                 src="/svgs/swdsl-logo.svg"
                 alt="shayo-logo"
@@ -79,16 +76,31 @@ const Index = (): JSX.Element => {
           </NextLink>
         </Box>
 
-        <Flex
-          bg="#000"
-          mt="4rem"
-          opacity="0.75"
-          justify="center"
-          align="center"
-          h="400px"
-        >
-          <Text color="#eee">Video</Text>
-        </Flex>
+        <Box mt="4rem">
+          <Swiper
+            effect="fade"
+            fadeEffect={{
+              crossFade: true,
+            }}
+          >
+            {ShayoVideos.map(({ videoId, videoUrl }) => (
+              <SwiperSlide key={videoId}>
+                <video
+                  autoPlay={false}
+                  controls
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    width: "100%",
+                  }}
+                  preload="auto"
+                >
+                  <source src={videoUrl} />
+                </video>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
 
         <ShowCase />
 
@@ -97,6 +109,7 @@ const Index = (): JSX.Element => {
             "linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(255, 0, 150, 0.3)), url('/images/shayo-drinks.jpg')"
           }
           bgSize="cover"
+          bgPosition="center"
           display="flex"
           alignItems="center"
           justifyContent="center"
@@ -105,26 +118,16 @@ const Index = (): JSX.Element => {
         >
           <Box id="drunk" w={{ base: "20em", md: "40rem" }} textAlign="center">
             <Swiper
-              pagination={{
-                clickable: true,
-                dynamicBullets: true,
-                type: "bullets",
-              }}
               effect="flip"
               autoplay={{
-                delay: 3000,
+                delay: 5000,
               }}
               parallax={true}
             >
               {ShayoQuotes.map(
-                ({ quoteAuthor, quouteContent }: QuotesTalks, idx) => (
-                  <SwiperSlide key={idx}>
-                    <VStack h="19em" spacing={6}>
-                      <RiDoubleQuotesL
-                        size="100px"
-                        color="#ff0096"
-                        opacity="0.4"
-                      />
+                ({ quoteAuthor, quouteContent, quoteId }: QuotesTalks) => (
+                  <SwiperSlide key={quoteId}>
+                    <VStack h="10em" spacing={6}>
                       <Text
                         fontWeight="semibold"
                         fontSize={{ base: "xl", md: "2xl" }}
@@ -181,7 +184,7 @@ const Index = (): JSX.Element => {
       <Footer />
 
       <ScrollToTop />
-    </Box>
+    </>
   );
 };
 

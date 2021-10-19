@@ -12,9 +12,9 @@ const TeamStack: FC = (): JSX.Element => {
       </Stack>
 
       <Stack direction="row" spacing={3} width={{ base: "unset", md: "250px" }}>
-        <Avatar size="sm" name="D" bg="#C97200" />
-        <Avatar size="sm" name="S" bg="#C97200" />
-        <Avatar size="sm" name="L" bg="#C97200" />
+        <Avatar size="sm" name="D" bg="#501815" />
+        <Avatar size="sm" name="S" bg="#501815" />
+        <Avatar size="sm" name="L" bg="#501815" />
       </Stack>
     </>
   );

@@ -6,7 +6,12 @@ import {
 } from "@chakra-ui/react";
 import { Box, Flex, HStack, Container, Spacer } from "@chakra-ui/layout";
 import NextLink from "next/link";
-import { RiShoppingCartLine, RiStore2Line, RiUserLine } from "react-icons/ri";
+import {
+  RiArrowLeftLine,
+  RiShoppingCartLine,
+  RiStore2Line,
+  RiUserLine,
+} from "react-icons/ri";
 import { useRouter } from "next/dist/client/router";
 
 const Navbar = (): JSX.Element => {
@@ -33,6 +38,7 @@ const Navbar = (): JSX.Element => {
               <Button
                 color={router.pathname === "/" ? "primary.500" : "initial"}
                 size={buttonSize}
+                fontWeight="bold"
                 variant="ghost"
               >
                 Home
@@ -42,10 +48,12 @@ const Navbar = (): JSX.Element => {
                 color={
                   router.pathname === "/contact" ? "primary.500" : "initial"
                 }
+                fontWeight="bold"
                 size={buttonSize}
                 variant="ghost"
+                leftIcon={<RiArrowLeftLine />}
               >
-                Contact
+                Goback home
               </Button>
             )}
           </NextLink>

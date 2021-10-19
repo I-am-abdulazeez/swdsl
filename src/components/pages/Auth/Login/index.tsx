@@ -75,7 +75,7 @@ const Index: FC = (): JSX.Element => {
 
         <form>
           <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
-            <FormControl id="email">
+            <FormControl id="email" isRequired>
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input
@@ -91,7 +91,7 @@ const Index: FC = (): JSX.Element => {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <FormControl id="password">
+            <FormControl id="password" isRequired>
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
@@ -101,6 +101,7 @@ const Index: FC = (): JSX.Element => {
                   }}
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
+                  minLength={6}
                 />
                 <InputRightElement>
                   <IconButton
@@ -128,7 +129,7 @@ const Index: FC = (): JSX.Element => {
               </NextLink>
             </Box>
 
-            <Button colorScheme="primary" isFullWidth>
+            <Button type="submit" colorScheme="primary" isFullWidth>
               Sign in
             </Button>
           </VStack>

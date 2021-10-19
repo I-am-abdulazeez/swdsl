@@ -28,7 +28,7 @@ export default function ScrollToTop() {
   }, []);
 
   return (
-    <Box position="fixed" bottom={5} right={5}>
+    <Box position="fixed" zIndex={5} bottom={20} right={5}>
       {isVisible && (
         <IconButton
           aria-label="go-up"

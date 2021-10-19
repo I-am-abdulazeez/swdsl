@@ -8,10 +8,11 @@ import { ChakraNextImage } from "@components/ChakraNextImage";
 import { DSLFounders } from "src/data";
 import { Founders } from "src/interfaces";
 import TeamStack from "@components/TeamStack";
+import { chakra } from "@chakra-ui/system";
 
 const Index: FC = (): JSX.Element => {
   return (
-    <Box>
+    <>
       <Head>
         <title>Contact Shayo Team | No result found </title>
         <meta
@@ -68,8 +69,8 @@ const Index: FC = (): JSX.Element => {
               <NextLink href="/">
                 <a>
                   <ChakraNextImage
-                    width="270px"
-                    height="80px"
+                    width="300px"
+                    height="90px"
                     src="/svgs/swdsl-logo.svg"
                     alt="shayo-logo"
                   />
@@ -77,9 +78,9 @@ const Index: FC = (): JSX.Element => {
               </NextLink>
             </Box>
             <Box w={{ base: "20em", md: "25em" }} textAlign="center">
-              <Swiper autoplay={{ delay: 3000 }}>
-                {DSLFounders.map(({ founderName }: Founders, idx: number) => (
-                  <SwiperSlide key={idx}>
+              <Swiper autoplay={{ delay: 5000 }}>
+                {DSLFounders.map(({ founderName, founderId }: Founders) => (
+                  <SwiperSlide key={founderId}>
                     <Text fontWeight="bold" fontSize="lg">
                       {founderName}
                     </Text>
@@ -95,7 +96,7 @@ const Index: FC = (): JSX.Element => {
               py={{ base: "1rem", md: "5rem" }}
               as="section"
             >
-              <Swiper autoplay={{ delay: 3000 }}>
+              <Swiper autoplay={{ delay: 5000 }}>
                 {DSLFounders.map(
                   (
                     { founderEmail, founderPhoneNumber }: Founders,
@@ -103,8 +104,18 @@ const Index: FC = (): JSX.Element => {
                   ) => (
                     <SwiperSlide key={idx}>
                       <VStack>
-                        <Text>Business Email: {founderEmail}</Text>
-                        <Text>Business Number: {founderPhoneNumber}</Text>
+                        <Text>
+                          Business Email:{" "}
+                          <chakra.span fontWeight="bold">
+                            {founderEmail}
+                          </chakra.span>
+                        </Text>
+                        <Text>
+                          Business Number:{" "}
+                          <chakra.span fontWeight="bold">
+                            {founderPhoneNumber}
+                          </chakra.span>
+                        </Text>
                       </VStack>
                     </SwiperSlide>
                   )
@@ -161,7 +172,7 @@ const Index: FC = (): JSX.Element => {
           </SimpleGrid>
         </Flex>
       </SimpleGrid>
-    </Box>
+    </>
   );
 };
 

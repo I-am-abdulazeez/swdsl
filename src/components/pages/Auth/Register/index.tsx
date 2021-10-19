@@ -19,7 +19,7 @@ import { Checkbox } from "@chakra-ui/checkbox";
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
-    <Box>
+    <>
       <Head>
         <title>Register | ShayoWithDSL</title>
         <meta
@@ -73,7 +73,7 @@ const Index: FC = (): JSX.Element => {
 
         <form>
           <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
-            <FormControl id="email">
+            <FormControl id="email" isRequired>
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input
@@ -94,7 +94,7 @@ const Index: FC = (): JSX.Element => {
               width={{ base: "inherit", md: "23em" }}
               spacing={2}
             >
-              <FormControl id="first-name">
+              <FormControl id="first-name" isRequired>
                 <FormLabel>First Name</FormLabel>
                 <InputGroup>
                   <Input
@@ -110,7 +110,7 @@ const Index: FC = (): JSX.Element => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl id="last-name">
+              <FormControl id="last-name" isRequired>
                 <FormLabel>Last Name</FormLabel>
                 <InputGroup>
                   <Input
@@ -132,7 +132,7 @@ const Index: FC = (): JSX.Element => {
               width={{ base: "inherit", md: "23em" }}
               spacing={2}
             >
-              <FormControl id="password">
+              <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
@@ -142,6 +142,7 @@ const Index: FC = (): JSX.Element => {
                     }}
                     type={showPassword ? "text" : "password"}
                     placeholder="********"
+                    minLength={6}
                   />
                   <InputRightElement>
                     <IconButton
@@ -154,7 +155,7 @@ const Index: FC = (): JSX.Element => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl id="phonenumber">
+              <FormControl id="phonenumber" isRequired>
                 <FormLabel>Phone Number</FormLabel>
                 <InputGroup>
                   <Input
@@ -172,24 +173,25 @@ const Index: FC = (): JSX.Element => {
               </FormControl>
             </Stack>
             <Box display="flex" width="100%">
-              <Checkbox
-                _focus={{
-                  borderColor: "primary.500",
-                  boxShadow: "#b33b32 0px 0px 0px 1px",
-                }}
-                defaultIsChecked
-                colorScheme="primary"
-              >
-                I’m 18 years or older
-              </Checkbox>
+              <FormControl id="checkbox">
+                <Checkbox
+                  _focus={{
+                    borderColor: "primary.500",
+                    boxShadow: "#b33b32 0px 0px 0px 1px",
+                  }}
+                  colorScheme="primary"
+                >
+                  I’m 18 years or older
+                </Checkbox>
+              </FormControl>
             </Box>
-            <Button colorScheme="primary" isFullWidth>
+            <Button type="submit" colorScheme="primary" isFullWidth>
               Sign up
             </Button>
           </VStack>
         </form>
       </VStack>
-    </Box>
+    </>
   );
 };
 

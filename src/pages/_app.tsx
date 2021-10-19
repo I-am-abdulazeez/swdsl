@@ -1,27 +1,28 @@
 import ClientOnly from "@components/ClientOnly";
 import { AppProps } from "next/app";
 import { ChakraProvider } from "@chakra-ui/react";
-import customTheme from "@theme/index";
-// import Swiper core and required modules
+import { QueryClient, QueryClientProvider } from "react-query";
 import SwiperCore, { Parallax, Pagination, EffectFlip, Autoplay } from "swiper";
-// install Swiper modules
-SwiperCore.use([Parallax, Pagination, EffectFlip, Autoplay]);
-// Import Swiper styles
+import customTheme from "@theme/index";
+import "@styles/index.css";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 import "swiper/css/parallax";
 import "swiper/css/effect-flip";
 
-import "@styles/index.css";
+SwiperCore.use([Parallax, Pagination, EffectFlip, Autoplay]);
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const queryClient = new QueryClient();
   return (
-    <ClientOnly>
-      <ChakraProvider theme={customTheme}>
-        <Component {...pageProps} />
-      </ChakraProvider>
-    </ClientOnly>
+    <ChakraProvider theme={customTheme}>
+      <QueryClientProvider client={queryClient}>
+        <ClientOnly>
+          <Component {...pageProps} />
+        </ClientOnly>
+      </QueryClientProvider>
+    </ChakraProvider>
   );
 }
 

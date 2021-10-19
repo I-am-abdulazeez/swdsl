@@ -58,8 +58,8 @@ const ShowCase: FC = (): JSX.Element => {
             delay: 3000,
           }}
         >
-          {ShayoBannerImages.map(({ alt, src }: ShayoBanner, idx: number) => (
-            <SwiperSlide key={idx}>
+          {ShayoBannerImages.map(({ alt, src, imageId }: ShayoBanner) => (
+            <SwiperSlide key={imageId}>
               <Box textAlign="center">
                 <ChakraNextImage
                   src={src}
