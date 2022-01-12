@@ -1,12 +1,4 @@
-import { Avatar } from "@chakra-ui/avatar";
-import {
-  Box,
-  Container,
-  SimpleGrid,
-  Stack,
-  Text,
-  VStack,
-} from "@chakra-ui/layout";
+import { Box, Container, SimpleGrid, Text, VStack } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
 import { ChakraNextImage } from "@components/ChakraNextImage";
 import TeamStack from "@components/TeamStack";

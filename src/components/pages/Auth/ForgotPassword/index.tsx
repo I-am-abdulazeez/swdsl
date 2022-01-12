@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/layout";
 
-const Index = () => {
+const Index = (): JSX.Element => {
   return (
     <Box>
       <Text>Forgot Password Page</Text>

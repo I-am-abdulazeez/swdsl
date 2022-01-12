@@ -25,9 +25,10 @@ const Navbar = (): JSX.Element => {
       left={0}
       top={0}
       right={0}
-      bg="white"
+      bg="rgba(255,255,255,0.8)"
       zIndex={3}
       position="sticky"
+      backdropFilter="blur(12px)"
       transition="box-shadow 0.2s, background-color 0.2s ease-in-out"
       borderBottom="1px solid #EDF2F7"
     >
@@ -38,7 +39,6 @@ const Navbar = (): JSX.Element => {
               <Button
                 color={router.pathname === "/" ? "primary.500" : "initial"}
                 size={buttonSize}
-                fontWeight="bold"
                 variant="ghost"
               >
                 Home

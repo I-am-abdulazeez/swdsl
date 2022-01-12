@@ -1,9 +1,5 @@
 import { FC, useState } from "react";
-import Head from "next/head";
-import NextLink from "next/link";
-import { Box, Stack, Text, VStack } from "@chakra-ui/layout";
-import { chakra } from "@chakra-ui/system";
-import { ChakraNextImage } from "@components/ChakraNextImage";
+import { Box, Stack, VStack } from "@chakra-ui/layout";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
 import {
@@ -16,28 +12,15 @@ import {
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 
+import { shadowLightMd } from "@utils/index";
+import Helmet from "@components/Helmet";
+import AuthHeading from "@components/AuthHeading";
+
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   return (
     <>
-      <Head>
-        <title>Register | ShayoWithDSL</title>
-        <meta
-          name="description"
-          content="ShayoWithDSL | #1 Online wine store"
-        />
-        <meta
-          property="og:title"
-          content="ShayoWithDSL | #1 Online wine store"
-        />
-        <meta
-          property="og:description"
-          content="ShayoWithDSL |#1 Online wine store"
-        />
-        <meta property="og:image" content="/images/logo.png" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+      <Helmet title="Register | ShayoWithDSL" />
       <VStack
         as="section"
         align="center"
@@ -45,31 +28,12 @@ const Index: FC = (): JSX.Element => {
         h="100vh"
         spacing={6}
       >
-        <Box textAlign="center">
-          <Box mb={2}>
-            <NextLink href="/">
-              <a>
-                <ChakraNextImage
-                  width="200px"
-                  height="100px"
-                  src="/svgs/swdsl-logo.svg"
-                  alt="shayo-logo"
-                />
-              </a>
-            </NextLink>
-          </Box>
-          <Text fontWeight="bold" fontSize="24px">
-            Create an account
-          </Text>
-          <Text fontSize="sm">
-            Already have an account? {""}
-            <NextLink href="/auth/login">
-              <chakra.a cursor="pointer" textDecor="underline" color="#501815">
-                Sign in
-              </chakra.a>
-            </NextLink>
-          </Text>
-        </Box>
+        <AuthHeading
+          authHeading="Create an account"
+          authText="Already have an account?"
+          authHref="/auth/login"
+          authRoute="Signin"
+        />
 
         <form>
           <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
@@ -185,7 +149,14 @@ const Index: FC = (): JSX.Element => {
                 </Checkbox>
               </FormControl>
             </Box>
-            <Button type="submit" colorScheme="primary" isFullWidth>
+            <Button
+              _focus={{
+                boxShadow: shadowLightMd,
+              }}
+              type="submit"
+              colorScheme="primary"
+              isFullWidth
+            >
               Sign up
             </Button>
           </VStack>
