@@ -2,6 +2,7 @@ import { Box } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import { ShayoVideos } from "src/data";
+import { SVideos } from "src/interfaces";
 
 const VideoSwipe = (): JSX.Element => {
   return (
@@ -9,13 +10,14 @@ const VideoSwipe = (): JSX.Element => {
       <Swiper
         effect="fade"
         autoplay={{
-          delay: 25000,
+          disableOnInteraction: true,
+          delay: 43000,
         }}
         fadeEffect={{
           crossFade: true,
         }}
       >
-        {ShayoVideos.map(({ videoId, videoUrl }) => (
+        {ShayoVideos.map(({ videoId, videoUrl }: SVideos) => (
           <SwiperSlide key={videoId}>
             <video
               autoPlay
@@ -25,7 +27,6 @@ const VideoSwipe = (): JSX.Element => {
                 width: "100%",
               }}
               preload="auto"
-              controls
             >
               <source src={videoUrl} />
             </video>

@@ -52,11 +52,6 @@ export const ShayoQuotes: QuotesTalks[] = [
     quoteId: nanoid(7),
   },
   {
-    quoteAuthor: "DSL",
-    quouteContent: "Come shayo with DSL",
-    quoteId: nanoid(7),
-  },
-  {
     quoteAuthor: "(L)ateef",
     quouteContent: "Stay Grinding, it makes sense at the End",
     quoteId: nanoid(7),
@@ -100,12 +95,12 @@ export const DSLFounders: Founders[] = [
 export const ShayoVideos: SVideos[] = [
   {
     videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FDrink%20advertising%20Video%20Shoot.webm?alt=media&token=578a67e5-7a3b-4804-8d9e-d1add8543e6c",
+      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FY2Mate.is%20-%20EPIC%20Cocktail%20B-ROLL%20Video%20(Inspired%20by%20DANIEL%20SCHIFFER)-P2EOVODrSzs-1080p-1641819470018.mp4?alt=media&token=4ed4bd1d-8acf-475d-b66c-10ba5a32ec60",
     videoId: nanoid(7),
   },
   {
     videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FClase%20Azul%20Mezcal%20Guerrero%20-%20A%20Warrior%20Cloaked%20in%20Beauty.webm?alt=media&token=e66932d8-7371-41d5-a146-3332b8524582",
+      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FWhatsApp%20Video%202022-01-12%20at%204.12.21%20PM.mp4?alt=media&token=9e162559-7384-4baa-b0d1-abfd8de714dd",
     videoId: nanoid(7),
   },
   {

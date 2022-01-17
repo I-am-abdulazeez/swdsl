@@ -28,15 +28,24 @@ const WrappedSwiper = (): JSX.Element => {
           {ShayoQuotes.map(
             ({ quoteAuthor, quouteContent, quoteId }: QuotesTalks) => (
               <SwiperSlide key={quoteId}>
-                <VStack h="10em" spacing={6}>
+                <VStack
+                  h="10em"
+                  justify={"center"}
+                  align={"center"}
+                  spacing={6}
+                >
                   <Text
                     fontWeight="semibold"
                     fontSize={{ base: "xl", md: "2xl" }}
                     lineHeight="1.5"
+                    textTransform={"uppercase"}
                   >
                     {quouteContent}
                   </Text>
-                  <Text fontWeight="bold" fontSize={{ base: "md", md: "lg" }}>
+                  <Text
+                    fontWeight="semibold"
+                    fontSize={{ base: "md", md: "lg" }}
+                  >
                     {quoteAuthor}
                   </Text>
                 </VStack>
