@@ -6,7 +6,7 @@ export interface ShayoBanner {
 
 export interface QuotesTalks {
   quoteAuthor: string;
-  quouteContent: string;
+  quouteContent: string | JSX.Element | JSX.Element[];
   quoteId: string;
 }
 

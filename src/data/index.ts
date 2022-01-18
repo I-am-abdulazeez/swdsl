@@ -1,6 +1,8 @@
 import { Founders, QuotesTalks, ShayoBanner, SVideos } from "src/interfaces";
 import { nanoid } from "nanoid";
 
+import ReactParser from "html-react-parser";
+
 export const ShayoBannerImages: ShayoBanner[] = [
   {
     src: "/images/party-one.png",
@@ -26,7 +28,7 @@ export const ShayoQuotes: QuotesTalks[] = [
     quoteId: nanoid(7),
   },
   {
-    quoteAuthor: "Paulaways",
+    quoteAuthor: "Stoney Paula",
     quouteContent: "Friends that force you to level up * 100",
     quoteId: nanoid(7),
   },
@@ -42,13 +44,14 @@ export const ShayoQuotes: QuotesTalks[] = [
   },
   {
     quoteAuthor: "TAT BLACK WEIRDO",
-    quouteContent:
-      "Even if you're not ready for day, it cannot always be night",
+    quouteContent: ReactParser(
+      `Even if you're not ready for day <br /> it cannot always be night`
+    ),
     quoteId: nanoid(7),
   },
   {
     quoteAuthor: "WIZKID",
-    quouteContent: "Everywhere STEW.......",
+    quouteContent: "Everywhere STEW....",
     quoteId: nanoid(7),
   },
   {
