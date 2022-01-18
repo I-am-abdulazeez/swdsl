@@ -8,13 +8,8 @@ const VideoSwipe = (): JSX.Element => {
   return (
     <Box mt="4rem">
       <Swiper
-        effect="fade"
         autoplay={{
-          disableOnInteraction: true,
           delay: 43000,
-        }}
-        fadeEffect={{
-          crossFade: true,
         }}
       >
         {ShayoVideos.map(({ videoId, videoUrl }: SVideos) => (
@@ -26,7 +21,7 @@ const VideoSwipe = (): JSX.Element => {
                 height: "100%",
                 width: "100%",
               }}
-              preload="auto"
+              muted
             >
               <source src={videoUrl} />
             </video>

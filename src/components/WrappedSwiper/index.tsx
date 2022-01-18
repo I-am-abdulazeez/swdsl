@@ -7,10 +7,10 @@ const WrappedSwiper = (): JSX.Element => {
   return (
     <Box
       bg={
-        "linear-gradient(0deg, rgba(0, 0, 0, 0.8), rgba(255, 0, 150, 0.3)), url('/images/shayo-drinks.jpg')"
+        "linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url('/images/shayo-drinks.jpg')"
       }
       bgSize="cover"
-      bgPosition="center"
+      bgPosition="top"
       display="flex"
       alignItems="center"
       justifyContent="center"

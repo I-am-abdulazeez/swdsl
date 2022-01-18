@@ -9,15 +9,28 @@ import {
   RiPhoneLine,
   RiUserLine,
 } from "react-icons/ri";
+
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
 
-import { shadowLightMd } from "@utils/index";
+import { inputFocus, shadowLightMd } from "@utils/index";
+
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
+import { useForm } from "react-hook-form";
 
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleSignup = (data: any) => {
+    console.log(data);
+  };
+
   return (
     <>
       <Helmet title="Register | ShayoWithDSL" />
@@ -35,18 +48,16 @@ const Index: FC = (): JSX.Element => {
           authRoute="Signin"
         />
 
-        <form>
+        <form onSubmit={handleSubmit(handleSignup)}>
           <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
-            <FormControl id="email" isRequired>
+            <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input
-                  _focus={{
-                    borderColor: "primary.500",
-                    boxShadow: "#b33b32 0px 0px 0px 1px",
-                  }}
+                  _focus={inputFocus}
                   type="email"
                   placeholder="you@example.com"
+                  {...register("email", { required: true })}
                 />
                 <InputRightElement>
                   <RiMailOpenLine />
@@ -58,32 +69,28 @@ const Index: FC = (): JSX.Element => {
               width={{ base: "inherit", md: "23em" }}
               spacing={2}
             >
-              <FormControl id="first-name" isRequired>
+              <FormControl id="first-name">
                 <FormLabel>First Name</FormLabel>
                 <InputGroup>
                   <Input
-                    _focus={{
-                      borderColor: "primary.500",
-                      boxShadow: "#b33b32 0px 0px 0px 1px",
-                    }}
+                    _focus={inputFocus}
                     type="text"
                     placeholder="SHIESTY"
+                    {...register("first-name", { required: true })}
                   />
                   <InputRightElement>
                     <RiUserLine />
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl id="last-name" isRequired>
+              <FormControl id="last-name">
                 <FormLabel>Last Name</FormLabel>
                 <InputGroup>
                   <Input
-                    _focus={{
-                      borderColor: "primary.500",
-                      boxShadow: "#b33b32 0px 0px 0px 1px",
-                    }}
+                    _focus={inputFocus}
                     type="text"
                     placeholder="GANG"
+                    {...register("last-name", { required: true })}
                   />
                   <InputRightElement>
                     <RiUserLine />
@@ -96,17 +103,15 @@ const Index: FC = (): JSX.Element => {
               width={{ base: "inherit", md: "23em" }}
               spacing={2}
             >
-              <FormControl id="password" isRequired>
+              <FormControl id="password">
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
                   <Input
-                    _focus={{
-                      borderColor: "primary.500",
-                      boxShadow: "#b33b32 0px 0px 0px 1px",
-                    }}
+                    _focus={inputFocus}
                     type={showPassword ? "text" : "password"}
                     placeholder="********"
                     minLength={6}
+                    {...register("password", { required: true })}
                   />
                   <InputRightElement>
                     <IconButton
@@ -119,16 +124,14 @@ const Index: FC = (): JSX.Element => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
-              <FormControl id="phonenumber" isRequired>
+              <FormControl id="phonenumber">
                 <FormLabel>Phone Number</FormLabel>
                 <InputGroup>
                   <Input
-                    _focus={{
-                      borderColor: "primary.500",
-                      boxShadow: "#b33b32 0px 0px 0px 1px",
-                    }}
+                    _focus={inputFocus}
                     type="text"
                     placeholder="0908********"
+                    {...register("phonenumber", { required: true })}
                   />
                   <InputRightElement>
                     <RiPhoneLine />
@@ -137,13 +140,11 @@ const Index: FC = (): JSX.Element => {
               </FormControl>
             </Stack>
             <Box display="flex" width="100%">
-              <FormControl id="checkbox">
+              <FormControl id="accept" isRequired>
                 <Checkbox
-                  _focus={{
-                    borderColor: "primary.500",
-                    boxShadow: "#b33b32 0px 0px 0px 1px",
-                  }}
+                  _focus={inputFocus}
                   colorScheme="primary"
+                  {...register("accept", { required: true })}
                 >
                   I’m 18 years or older
                 </Checkbox>
