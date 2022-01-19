@@ -1,7 +1,12 @@
 import { FC, useState } from "react";
 import { Box, Stack, VStack } from "@chakra-ui/layout";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
-import { Input, InputGroup, InputRightElement } from "@chakra-ui/input";
+import {
+  Input,
+  InputGroup,
+  InputRightElement,
+  InputLeftAddon,
+} from "@chakra-ui/input";
 import {
   RiEyeLine,
   RiEyeOffLine,
@@ -18,14 +23,13 @@ import { inputFocus, shadowLightMd } from "@utils/index";
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 import { useForm } from "react-hook-form";
+import { Alert, AlertIcon, AlertTitle, useToast } from "@chakra-ui/react";
 
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit, formState } = useForm();
+
+  const { errors } = formState;
 
   const handleSignup = (data: any) => {
     console.log(data);
@@ -49,7 +53,7 @@ const Index: FC = (): JSX.Element => {
         />
 
         <form onSubmit={handleSubmit(handleSignup)}>
-          <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
+          <VStack spacing={3} width={{ base: "20em", md: "30em" }}>
             <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
@@ -66,7 +70,7 @@ const Index: FC = (): JSX.Element => {
             </FormControl>
             <Stack
               direction={{ base: "column", md: "row" }}
-              width={{ base: "inherit", md: "23em" }}
+              width={{ base: "inherit", md: "30em" }}
               spacing={2}
             >
               <FormControl id="first-name">
@@ -100,7 +104,7 @@ const Index: FC = (): JSX.Element => {
             </Stack>
             <Stack
               direction={{ base: "column", md: "row" }}
-              width={{ base: "inherit", md: "23em" }}
+              width={{ base: "inherit", md: "30em" }}
               spacing={2}
             >
               <FormControl id="password">
@@ -127,16 +131,29 @@ const Index: FC = (): JSX.Element => {
               <FormControl id="phonenumber">
                 <FormLabel>Phone Number</FormLabel>
                 <InputGroup>
+                  <InputLeftAddon>+234</InputLeftAddon>
                   <Input
                     _focus={inputFocus}
                     type="text"
-                    placeholder="0908********"
-                    {...register("phonenumber", { required: true })}
+                    placeholder="908********"
+                    {...register("phonenumber", {
+                      required: true,
+                      minLength: 10,
+                      maxLength: 11,
+                    })}
                   />
                   <InputRightElement>
                     <RiPhoneLine />
                   </InputRightElement>
                 </InputGroup>
+                {errors.phonenumber && (
+                  <Alert status="error">
+                    <AlertIcon />
+                    <AlertTitle fontSize={"12px"} fontWeight={"medium"} mr={2}>
+                      Please, check the phone number inputed.
+                    </AlertTitle>
+                  </Alert>
+                )}
               </FormControl>
             </Stack>
             <Box display="flex" width="100%">
