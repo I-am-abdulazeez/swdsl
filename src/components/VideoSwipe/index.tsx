@@ -15,6 +15,7 @@ const VideoSwipe = (): JSX.Element => {
         {ShayoVideos.map(({ videoId, videoUrl }: SVideos) => (
           <SwiperSlide key={videoId}>
             <video
+              loop
               autoPlay
               style={{
                 maxWidth: "100%",

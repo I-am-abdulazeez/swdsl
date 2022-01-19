@@ -97,23 +97,15 @@ export const DSLFounders: Founders[] = [
 
 export const ShayoVideos: SVideos[] = [
   {
-    videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FY2Mate.is%20-%20EPIC%20Cocktail%20B-ROLL%20Video%20(Inspired%20by%20DANIEL%20SCHIFFER)-P2EOVODrSzs-1080p-1641819470018.mp4?alt=media&token=4ed4bd1d-8acf-475d-b66c-10ba5a32ec60",
+    videoUrl: "/videos/video-1.mp4",
     videoId: nanoid(7),
   },
   {
-    videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FWhatsApp%20Video%202022-01-12%20at%204.12.21%20PM.mp4?alt=media&token=9e162559-7384-4baa-b0d1-abfd8de714dd",
+    videoUrl: "/videos/video-2.webm",
     videoId: nanoid(7),
   },
   {
-    videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FGlenfiddich%2012%20year%20whiskey%20commercial.webm?alt=media&token=566a4dd5-2df2-4b3c-896b-881a2cedb35b",
-    videoId: nanoid(7),
-  },
-  {
-    videoUrl:
-      "https://firebasestorage.googleapis.com/v0/b/swdsl-5185c.appspot.com/o/site-videos%2FRED%20WINE%20ADS.webm?alt=media&token=df84faa5-a1d2-4482-9846-5795ac78b11a",
+    videoUrl: "/videos/video-3.webm",
     videoId: nanoid(7),
   },
 ];
