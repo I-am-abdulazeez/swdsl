@@ -131,7 +131,7 @@ const Index: FC = (): JSX.Element => {
               <FormControl id="phonenumber">
                 <FormLabel>Phone Number</FormLabel>
                 <InputGroup>
-                  <InputLeftAddon children="+234" />
+                  <InputLeftAddon>+234</InputLeftAddon>
                   <Input
                     _focus={inputFocus}
                     type="text"
