@@ -24,10 +24,9 @@ import { useAuth } from "src/hooks/useAuth";
 const Navbar = (): JSX.Element => {
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const { signOutUser } = useAuth();
+  const { signOutUser, user } = useAuth();
   const router = useRouter();
-
-  const { isLoggedIn, user } = useAuth();
+  const getUser = JSON.stringify(localStorage.getItem("user"));
 
   return (
     <Box
@@ -82,14 +81,14 @@ const Navbar = (): JSX.Element => {
 
           <Spacer />
           <HStack>
-            {!isLoggedIn && (
+            {!getUser && (
               <NextLink href="/auth/login">
                 <Button size={buttonSize} variant="ghost">
                   Login
                 </Button>
               </NextLink>
             )}
-            {!isLoggedIn && (
+            {!getUser && (
               <NextLink href="/auth/register">
                 <Button size={buttonSize} variant="ghost">
                   Signup
@@ -120,7 +119,7 @@ const Navbar = (): JSX.Element => {
               variant="ghost"
               icon={<RiShoppingCartLine size="17px" />}
             />
-            {isLoggedIn && (
+            {getUser && (
               <Menu>
                 <MenuButton
                   as={IconButton}
@@ -135,14 +134,14 @@ const Navbar = (): JSX.Element => {
                     icon={<RiLogoutCircleLine size={"18px"} />}
                     fontSize={"sm"}
                     color={"red.500"}
-                    onClick={() => signOutUser}
+                    onClick={() => signOutUser()}
                   >
                     Logout
                   </MenuItem>
                 </MenuList>
               </Menu>
             )}
-            {isLoggedIn && <Text fontSize={"14px"}>{user?.email}</Text>}
+            {getUser && <Text fontSize={"14px"}>{user?.email}</Text>}
           </HStack>
         </Flex>
       </Container>

@@ -15,6 +15,8 @@ export const useAuth = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const signOutMutation = useAuthSignOut(firebaseAuth);
 
+  const storage = localStorage;
+
   // SignUp User Mutation
   const signUpMutation = useAuthCreateUserWithEmailAndPassword(firebaseAuth, {
     onError(error) {
@@ -26,6 +28,7 @@ export const useAuth = () => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
+      storage.setItem("user", JSON.stringify(currentUser));
       console.log(currentUser);
       router.push("/");
     },
@@ -40,6 +43,7 @@ export const useAuth = () => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
+      storage.setItem("user", JSON.stringify(currentUser));
       console.log(currentUser);
       router.push("/");
     },
@@ -74,12 +78,14 @@ export const useAuth = () => {
     signOutMutation.mutate();
     setUser(null);
     setIsLoggedIn(false);
+    storage.clear();
     router.push("/");
   };
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
+        storage.getItem("user");
         setUser(user);
         setIsLoggedIn(true);
         console.log(user);
