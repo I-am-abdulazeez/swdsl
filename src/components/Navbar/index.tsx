@@ -3,21 +3,31 @@ import {
   IconButton,
   useMediaQuery,
   useBreakpointValue,
+  Menu,
+  MenuButton,
+  Text,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import { Box, Flex, HStack, Container, Spacer } from "@chakra-ui/layout";
 import NextLink from "next/link";
 import {
   RiArrowLeftLine,
+  RiLogoutCircleLine,
   RiShoppingCartLine,
   RiStore2Line,
   RiUserLine,
 } from "react-icons/ri";
 import { useRouter } from "next/dist/client/router";
+import { useAuth } from "src/hooks/useAuth";
 
 const Navbar = (): JSX.Element => {
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
+  const { signOutUser } = useAuth();
   const router = useRouter();
+
+  const { isLoggedIn, user } = useAuth();
 
   return (
     <Box
@@ -72,16 +82,20 @@ const Navbar = (): JSX.Element => {
 
           <Spacer />
           <HStack>
-            <NextLink href="/auth/login">
-              <Button size={buttonSize} variant="ghost">
-                Login
-              </Button>
-            </NextLink>
-            <NextLink href="/auth/register">
-              <Button size={buttonSize} variant="ghost">
-                Signup
-              </Button>
-            </NextLink>
+            {!isLoggedIn && (
+              <NextLink href="/auth/login">
+                <Button size={buttonSize} variant="ghost">
+                  Login
+                </Button>
+              </NextLink>
+            )}
+            {!isLoggedIn && (
+              <NextLink href="/auth/register">
+                <Button size={buttonSize} variant="ghost">
+                  Signup
+                </Button>
+              </NextLink>
+            )}
             <NextLink href="/shop">
               {isMobile ? (
                 <Button
@@ -106,12 +120,29 @@ const Navbar = (): JSX.Element => {
               variant="ghost"
               icon={<RiShoppingCartLine size="17px" />}
             />
-            <IconButton
-              aria-label="shopping cart"
-              size={buttonSize}
-              variant="ghost"
-              icon={<RiUserLine size="17px" />}
-            />
+            {isLoggedIn && (
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="shopping cart"
+                  size={buttonSize}
+                  variant="ghost"
+                  icon={<RiUserLine size="17px" />}
+                />
+                <MenuList>
+                  <MenuItem fontSize={"sm"}>My Account</MenuItem>
+                  <MenuItem
+                    icon={<RiLogoutCircleLine size={"18px"} />}
+                    fontSize={"sm"}
+                    color={"red.500"}
+                    onClick={() => signOutUser}
+                  >
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            )}
+            {isLoggedIn && <Text fontSize={"14px"}>{user?.email}</Text>}
           </HStack>
         </Flex>
       </Container>

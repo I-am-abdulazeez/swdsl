@@ -13,8 +13,13 @@ import { shadowSm } from "@utils/index";
 import WrappedSwiper from "@components/WrappedSwiper";
 import Helmet from "@components/Helmet";
 import VideoSwipe from "@components/VideoSwipe";
+import { useAuth } from "src/hooks/useAuth";
 
 const Index = (): JSX.Element => {
+  const { isLoggedIn } = useAuth();
+
+  console.log(isLoggedIn);
+
   return (
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />

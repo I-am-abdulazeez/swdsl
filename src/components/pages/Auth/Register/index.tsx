@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Box, Stack, VStack } from "@chakra-ui/layout";
+import { Stack, VStack } from "@chakra-ui/layout";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
 import {
   Input,
@@ -17,22 +17,45 @@ import {
 
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
-
-import { inputFocus, shadowLightMd } from "@utils/index";
+import { useForm } from "react-hook-form";
+import { Text } from "@chakra-ui/react";
 
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
-import { useForm } from "react-hook-form";
-import { Alert, AlertIcon, AlertTitle, useToast } from "@chakra-ui/react";
+
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+
+import { inputFocus, shadowLightMd } from "@utils/index";
+import { firebaseFirestore } from "src/lib/firebase";
+import { useAuth } from "src/hooks/useAuth";
+import { IUserRegister } from "src/interfaces";
 
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { register, handleSubmit, formState } = useForm();
+  const collectionRef = collection(firebaseFirestore, "users");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserRegister>();
 
-  const { errors } = formState;
+  const { SignUpUser, isLoading } = useAuth();
 
-  const handleSignup = (data: any) => {
+  const handleUserSignup = (data: any) => {
     console.log(data);
+    const newData = {
+      email: data.email,
+      firstname: data.firstname,
+      lastname: data.lastname,
+      password: data.password,
+      phonenumber: data.phonenumber,
+      accept: data.accept,
+      createdAt: Timestamp.fromDate(new Date()).toDate().toDateString(),
+    };
+    console.log(newData);
+    SignUpUser(newData.email, newData.password);
+    // Add Data to firestore
+    addDoc(collectionRef, newData);
   };
 
   return (
@@ -52,7 +75,7 @@ const Index: FC = (): JSX.Element => {
           authRoute="Signin"
         />
 
-        <form onSubmit={handleSubmit(handleSignup)}>
+        <form onSubmit={handleSubmit(handleUserSignup)}>
           <VStack spacing={3} width={{ base: "20em", md: "30em" }}>
             <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
@@ -61,7 +84,10 @@ const Index: FC = (): JSX.Element => {
                   _focus={inputFocus}
                   type="email"
                   placeholder="you@example.com"
-                  {...register("email", { required: true })}
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  })}
                 />
                 <InputRightElement>
                   <RiMailOpenLine />
@@ -73,33 +99,50 @@ const Index: FC = (): JSX.Element => {
               width={{ base: "inherit", md: "30em" }}
               spacing={2}
             >
-              <FormControl id="first-name">
+              <FormControl id="firstname">
                 <FormLabel>First Name</FormLabel>
                 <InputGroup>
                   <Input
                     _focus={inputFocus}
                     type="text"
                     placeholder="SHIESTY"
-                    {...register("first-name", { required: true })}
+                    {...register("firstname", {
+                      required: true,
+                    })}
                   />
                   <InputRightElement>
                     <RiUserLine />
                   </InputRightElement>
                 </InputGroup>
+                {errors.firstname && (
+                  <Text fontSize={"xs"} mt={1} color={"red.500"}>
+                    Field is required!
+                  </Text>
+                )}
               </FormControl>
-              <FormControl id="last-name">
+              <FormControl id="lastname">
                 <FormLabel>Last Name</FormLabel>
                 <InputGroup>
                   <Input
                     _focus={inputFocus}
                     type="text"
                     placeholder="GANG"
-                    {...register("last-name", { required: true })}
+                    {...register("lastname", {
+                      required: {
+                        value: true,
+                        message: "This field is required",
+                      },
+                    })}
                   />
                   <InputRightElement>
                     <RiUserLine />
                   </InputRightElement>
                 </InputGroup>
+                {errors.lastname && (
+                  <Text fontSize={"xs"} mt={1} color={"red.500"}>
+                    Field is required!
+                  </Text>
+                )}
               </FormControl>
             </Stack>
             <Stack
@@ -114,8 +157,10 @@ const Index: FC = (): JSX.Element => {
                     _focus={inputFocus}
                     type={showPassword ? "text" : "password"}
                     placeholder="********"
-                    minLength={6}
-                    {...register("password", { required: true })}
+                    {...register("password", {
+                      required: true,
+                      minLength: 6,
+                    })}
                   />
                   <InputRightElement>
                     <IconButton
@@ -127,9 +172,14 @@ const Index: FC = (): JSX.Element => {
                     />
                   </InputRightElement>
                 </InputGroup>
+                {errors.password && (
+                  <Text fontSize={"xs"} mt={1} color={"red.500"}>
+                    Password is required and minimum of 6 characters.
+                  </Text>
+                )}
               </FormControl>
               <FormControl id="phonenumber">
-                <FormLabel>Phone Number</FormLabel>
+                <FormLabel htmlFor="phonenumber">Phone Number</FormLabel>
                 <InputGroup>
                   <InputLeftAddon>+234</InputLeftAddon>
                   <Input
@@ -138,8 +188,9 @@ const Index: FC = (): JSX.Element => {
                     placeholder="908********"
                     {...register("phonenumber", {
                       required: true,
-                      minLength: 10,
-                      maxLength: 11,
+                      maxLength: 10,
+                      pattern:
+                        /((^90)([23589]))|((^70)([1-9]))|((^80)([2-9]))|((^81)([0-9]))(\d{7})/,
                     })}
                   />
                   <InputRightElement>
@@ -147,31 +198,32 @@ const Index: FC = (): JSX.Element => {
                   </InputRightElement>
                 </InputGroup>
                 {errors.phonenumber && (
-                  <Alert status="error">
-                    <AlertIcon />
-                    <AlertTitle fontSize={"12px"} fontWeight={"medium"} mr={2}>
-                      Please, check the phone number inputed.
-                    </AlertTitle>
-                  </Alert>
+                  <Text fontSize={"xs"} mt={1} color={"red.500"}>
+                    Please, enter a valid phonenumber.
+                  </Text>
                 )}
               </FormControl>
             </Stack>
-            <Box display="flex" width="100%">
-              <FormControl id="accept" isRequired>
-                <Checkbox
-                  _focus={inputFocus}
-                  colorScheme="primary"
-                  {...register("accept", { required: true })}
-                >
-                  I’m 18 years or older
-                </Checkbox>
-              </FormControl>
-            </Box>
+            <FormControl id="accept">
+              <Checkbox
+                _focus={inputFocus}
+                colorScheme="primary"
+                {...register("accept", { required: true })}
+              >
+                I’m 18 years or older
+              </Checkbox>
+              {errors.accept && (
+                <Text fontSize={"xs"} mt={1} color={"red.500"}>
+                  Please, accept the terms.
+                </Text>
+              )}
+            </FormControl>
             <Button
               _focus={{
                 boxShadow: shadowLightMd,
               }}
               type="submit"
+              isLoading={isLoading}
               colorScheme="primary"
               isFullWidth
             >

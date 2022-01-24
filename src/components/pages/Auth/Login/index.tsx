@@ -17,10 +17,21 @@ import { useState } from "react";
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
-import { shadowLightMd } from "@utils/index";
+import { inputFocus, shadowLightMd } from "@utils/index";
+import { useForm } from "react-hook-form";
+import { useAuth } from "src/hooks/useAuth";
 
 const Index: React.FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { SignInUser } = useAuth();
+  const { register, handleSubmit, formState } =
+    useForm<{ email: string; password: string }>();
+
+  const handleUserLogin = (data: any) => {
+    console.log(data);
+    SignInUser(data.email, data.password);
+  };
+
   return (
     <Box>
       <Helmet title="Login | ShayoWithDSL" />
@@ -37,17 +48,18 @@ const Index: React.FC = (): JSX.Element => {
           authRoute="Signup"
           authHref="/auth/register"
         />
-        <form>
+        <form onSubmit={handleSubmit(handleUserLogin)}>
           <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
-            <FormControl id="email" isRequired>
+            <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input
-                  _focus={{
-                    borderColor: "primary.500",
-                    boxShadow: "#b33b32 0px 0px 0px 1px",
-                  }}
+                  _focus={inputFocus}
                   type="email"
+                  {...register("email", {
+                    required: true,
+                    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  })}
                   placeholder="you@example.com"
                 />
                 <InputRightElement>
@@ -55,17 +67,17 @@ const Index: React.FC = (): JSX.Element => {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-            <FormControl id="password" isRequired>
+            <FormControl id="password">
               <FormLabel>Password</FormLabel>
               <InputGroup>
                 <Input
-                  _focus={{
-                    borderColor: "primary.500",
-                    boxShadow: "#b33b32 0px 0px 0px 1px",
-                  }}
+                  _focus={inputFocus}
                   type={showPassword ? "text" : "password"}
                   placeholder="********"
-                  minLength={6}
+                  {...register("password", {
+                    required: true,
+                    minLength: 6,
+                  })}
                 />
                 <InputRightElement>
                   <IconButton

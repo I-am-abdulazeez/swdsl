@@ -22,3 +22,12 @@ export interface SVideos {
   videoUrl: string;
   videoId: string;
 }
+
+export interface IUserRegister {
+  email: string;
+  firstname: string;
+  lastname: string;
+  password: string;
+  phonenumber: string;
+  accept: boolean;
+}

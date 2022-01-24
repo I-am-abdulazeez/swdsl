@@ -1348,6 +1348,11 @@
   "resolved" "https://registry.npmjs.org/@react-query-firebase/auth/-/auth-0.3.3.tgz"
   "version" "0.3.3"
 
+"@react-query-firebase/firestore@^0.4.2":
+  "integrity" "sha512-7eYp905+sfBRcBTdj7W7BAc3bI3V0D0kKca4/juOTnN4gyoNyaCNOCjLPY467dTq325hGs7BX0ol7Pw3JENdHA=="
+  "resolved" "https://registry.npmjs.org/@react-query-firebase/firestore/-/firestore-0.4.2.tgz"
+  "version" "0.4.2"
+
 "@rushstack/eslint-patch@^1.0.6":
   "integrity" "sha512-3Zi2LGbCLDz4IIL7ir6wD0u/ggHotLkK5SlVzFzTcYaNgPR4MAt/9JYZqXWKcofPWEoptfpnCJU8Bq9sxw8QUg=="
   "resolved" "https://registry.npmjs.org/@rushstack/eslint-patch/-/eslint-patch-1.0.7.tgz"
