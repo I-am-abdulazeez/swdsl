@@ -12,6 +12,7 @@ import {
 import { Box, Flex, HStack, Container, Spacer } from "@chakra-ui/layout";
 import NextLink from "next/link";
 import {
+  RiArrowDownSLine,
   RiArrowLeftLine,
   RiLogoutCircleLine,
   RiShoppingCartLine,
@@ -22,11 +23,10 @@ import { useRouter } from "next/dist/client/router";
 import { useAuth } from "src/hooks/useAuth";
 
 const Navbar = (): JSX.Element => {
+  const router = useRouter();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const { signOutUser, user } = useAuth();
-  const router = useRouter();
-  const getUser = JSON.stringify(localStorage.getItem("user"));
+  const { signOutUser, user, isLoggedIn } = useAuth();
 
   return (
     <Box
@@ -81,14 +81,14 @@ const Navbar = (): JSX.Element => {
 
           <Spacer />
           <HStack>
-            {!getUser && (
+            {!user && !isLoggedIn && (
               <NextLink href="/auth/login">
                 <Button size={buttonSize} variant="ghost">
                   Login
                 </Button>
               </NextLink>
             )}
-            {!getUser && (
+            {!user && !isLoggedIn && (
               <NextLink href="/auth/register">
                 <Button size={buttonSize} variant="ghost">
                   Signup
@@ -119,15 +119,17 @@ const Navbar = (): JSX.Element => {
               variant="ghost"
               icon={<RiShoppingCartLine size="17px" />}
             />
-            {getUser && (
+            {user && isLoggedIn && (
               <Menu>
                 <MenuButton
-                  as={IconButton}
-                  aria-label="shopping cart"
+                  as={Button}
                   size={buttonSize}
                   variant="ghost"
-                  icon={<RiUserLine size="17px" />}
-                />
+                  leftIcon={<RiUserLine size="17px" />}
+                  rightIcon={<RiArrowDownSLine size="17px" />}
+                >
+                  Hi, {user?.displayName}
+                </MenuButton>
                 <MenuList>
                   <MenuItem fontSize={"sm"}>My Account</MenuItem>
                   <MenuItem
@@ -141,7 +143,6 @@ const Navbar = (): JSX.Element => {
                 </MenuList>
               </Menu>
             )}
-            {getUser && <Text fontSize={"14px"}>{user?.email}</Text>}
           </HStack>
         </Flex>
       </Container>

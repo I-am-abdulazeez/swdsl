@@ -23,7 +23,7 @@ import { useAuth } from "src/hooks/useAuth";
 
 const Index: React.FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { SignInUser } = useAuth();
+  const { SignInUser, isLoading } = useAuth();
   const { register, handleSubmit, formState } =
     useForm<{ email: string; password: string }>();
 
@@ -111,6 +111,7 @@ const Index: React.FC = (): JSX.Element => {
               }}
               type="submit"
               colorScheme="primary"
+              isLoading={isLoading}
               isFullWidth
             >
               Sign in

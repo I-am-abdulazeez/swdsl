@@ -23,26 +23,27 @@ import { Text } from "@chakra-ui/react";
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
-import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 
 import { inputFocus, shadowLightMd } from "@utils/index";
 import { firebaseFirestore } from "src/lib/firebase";
 import { useAuth } from "src/hooks/useAuth";
 import { IUserRegister } from "src/interfaces";
+import { getAuth, updateProfile } from "firebase/auth";
 
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const collectionRef = collection(firebaseFirestore, "users");
+  const auth = getAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserRegister>();
 
-  const { SignUpUser, isLoading } = useAuth();
+  const { isLoading, SignUpUser, user } = useAuth();
 
   const handleUserSignup = (data: any) => {
-    console.log(data);
     const newData = {
       email: data.email,
       firstname: data.firstname,
@@ -54,8 +55,11 @@ const Index: FC = (): JSX.Element => {
     };
     console.log(newData);
     SignUpUser(newData.email, newData.password);
-    // Add Data to firestore
-    addDoc(collectionRef, newData);
+    setTimeout(() => {
+      updateProfile(auth.currentUser!, {
+        displayName: newData.firstname,
+      });
+    }, 2000);
   };
 
   return (
