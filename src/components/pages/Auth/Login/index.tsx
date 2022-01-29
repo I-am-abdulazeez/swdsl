@@ -23,13 +23,13 @@ import { useAuth } from "src/hooks/useAuth";
 
 const Index: React.FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { SignInUser, isLoading } = useAuth();
+  const { signInUser, isLoading } = useAuth();
   const { register, handleSubmit, formState } =
     useForm<{ email: string; password: string }>();
 
   const handleUserLogin = (data: any) => {
     console.log(data);
-    SignInUser(data.email, data.password);
+    signInUser(data.email, data.password);
   };
 
   return (

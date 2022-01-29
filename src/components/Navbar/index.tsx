@@ -21,12 +21,16 @@ import {
 } from "react-icons/ri";
 import { useRouter } from "next/dist/client/router";
 import { useAuth } from "src/hooks/useAuth";
+import { ChakraNextImage } from "@components/ChakraNextImage";
 
 const Navbar = (): JSX.Element => {
   const router = useRouter();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
+  const logoSize = useBreakpointValue({ base: "80px", md: "90px" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
   const { signOutUser, user, isLoggedIn } = useAuth();
+  const activeShop = router.pathname === "/shop" ? "primary" : "";
+  const storageHasItem = localStorage.getItem("displayName");
 
   return (
     <Box
@@ -54,6 +58,18 @@ const Navbar = (): JSX.Element => {
               </Button>
             </NextLink>
           )}
+          {router.pathname === "/shop" && (
+            <NextLink href="/">
+              <a>
+                <ChakraNextImage
+                  width={logoSize}
+                  height="250px"
+                  src="/svgs/swdsl-logo.svg"
+                  alt="shayo-logo"
+                />
+              </a>
+            </NextLink>
+          )}
           {router.pathname === "/contact" && (
             <NextLink href="/">
               <IconButton
@@ -64,6 +80,7 @@ const Navbar = (): JSX.Element => {
               />
             </NextLink>
           )}
+
           {router.pathname === "/contact" && (
             <NextLink href="/contact">
               <Button
@@ -81,14 +98,14 @@ const Navbar = (): JSX.Element => {
 
           <Spacer />
           <HStack>
-            {!user && !isLoggedIn && (
+            {!storageHasItem && (
               <NextLink href="/auth/login">
                 <Button size={buttonSize} variant="ghost">
                   Login
                 </Button>
               </NextLink>
             )}
-            {!user && !isLoggedIn && (
+            {!storageHasItem && (
               <NextLink href="/auth/register">
                 <Button size={buttonSize} variant="ghost">
                   Signup
@@ -100,6 +117,7 @@ const Navbar = (): JSX.Element => {
                 <Button
                   size={buttonSize}
                   variant="ghost"
+                  colorScheme={activeShop}
                   leftIcon={<RiStore2Line size="17px" />}
                 >
                   Shop
@@ -109,6 +127,7 @@ const Navbar = (): JSX.Element => {
                   aria-label="Store"
                   size={buttonSize}
                   variant="ghost"
+                  colorScheme={activeShop}
                   icon={<RiStore2Line size="17px" />}
                 />
               )}
@@ -119,21 +138,21 @@ const Navbar = (): JSX.Element => {
               variant="ghost"
               icon={<RiShoppingCartLine size="17px" />}
             />
-            {user && isLoggedIn && (
-              <Menu>
+            {storageHasItem && (
+              <Menu closeOnBlur={true}>
                 <MenuButton
                   as={Button}
                   size={buttonSize}
                   variant="ghost"
-                  leftIcon={<RiUserLine size="17px" />}
-                  rightIcon={<RiArrowDownSLine size="17px" />}
+                  leftIcon={<RiUserLine size="14px" />}
+                  rightIcon={<RiArrowDownSLine size="14px" />}
                 >
-                  Hi, {user?.displayName}
+                  Hi, {storageHasItem}
                 </MenuButton>
                 <MenuList>
                   <MenuItem fontSize={"sm"}>My Account</MenuItem>
                   <MenuItem
-                    icon={<RiLogoutCircleLine size={"18px"} />}
+                    icon={<RiLogoutCircleLine size={"14px"} />}
                     fontSize={"sm"}
                     color={"red.500"}
                     onClick={() => signOutUser()}

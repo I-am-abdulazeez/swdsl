@@ -4,12 +4,10 @@ import {
   useAuthSignInWithEmailAndPassword,
   useAuthSignOut,
 } from "@react-query-firebase/auth";
-import { useFirestoreCollectionMutation } from "@react-query-firebase/firestore";
-import { updateProfile, UserInfo } from "firebase/auth";
-import { collection } from "firebase/firestore";
+import { UserInfo } from "firebase/auth";
 import { useRouter } from "next/dist/client/router";
 import { useEffect, useState } from "react";
-import { firebaseAuth, firebaseFirestore } from "src/lib/firebase";
+import { firebaseAuth } from "src/lib/firebase";
 
 export const useAuth = () => {
   const router = useRouter();
@@ -17,16 +15,8 @@ export const useAuth = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const signOutMutation = useAuthSignOut(firebaseAuth);
-  const collectionRef = collection(firebaseFirestore, "users");
-  const addDocumentMutation = useFirestoreCollectionMutation(collectionRef, {
-    onError(error) {
-      console.log(error);
-    },
-    onSuccess(data) {
-      console.log(data);
-    },
-  });
   const chakraToast = useToast();
+  const storage = localStorage;
 
   // SignUp User Mutation
   const signUpMutation = useAuthCreateUserWithEmailAndPassword(firebaseAuth, {
@@ -45,8 +35,9 @@ export const useAuth = () => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
-
       console.log(currentUser);
+      storage.setItem("user", JSON.stringify(user));
+      storage.setItem("displayName", user?.displayName!);
       router.push("/");
     },
   });
@@ -66,13 +57,15 @@ export const useAuth = () => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
+      storage.setItem("user", JSON.stringify(user));
+      storage.setItem("displayName", user?.displayName!);
       console.log(currentUser);
       router.push("/");
     },
   });
 
   // Create Users
-  const SignUpUser = (email: string, password: string) => {
+  const signUpUser = (email: string, password: string) => {
     setIsLoading(true);
     if (email && password) {
       signUpMutation.mutate({
@@ -84,7 +77,7 @@ export const useAuth = () => {
   };
 
   // Login Users
-  const SignInUser = (email: string, password: string) => {
+  const signInUser = (email: string, password: string) => {
     setIsLoading(true);
     if (email && password) {
       signInMutation.mutate({
@@ -100,21 +93,22 @@ export const useAuth = () => {
     signOutMutation.mutate();
     setUser(null);
     setIsLoggedIn(false);
+    storage.clear();
     router.push("/");
   };
-
-  const addUser = (newUserData: any) => {};
 
   useEffect(() => {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
-        // storage.getItem("user");
         setUser(user);
         setIsLoggedIn(true);
+        storage.setItem("user", JSON.stringify(user));
+        storage.setItem("displayName", user?.displayName!);
         console.log(user);
       } else {
         setUser(null);
         setIsLoggedIn(false);
+        storage.clear();
       }
     });
     // Cleanup subscription on unmount
@@ -125,8 +119,8 @@ export const useAuth = () => {
     user,
     isLoggedIn,
     isLoading,
-    SignUpUser,
+    signUpUser,
     signOutUser,
-    SignInUser,
+    signInUser,
   };
 };

@@ -14,6 +14,7 @@ import {
   RiPhoneLine,
   RiUserLine,
 } from "react-icons/ri";
+import { getAuth, updateProfile } from "firebase/auth";
 
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
@@ -23,25 +24,39 @@ import { Text } from "@chakra-ui/react";
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
-import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
+import { collection, doc, Timestamp } from "firebase/firestore";
 
 import { inputFocus, shadowLightMd } from "@utils/index";
 import { firebaseFirestore } from "src/lib/firebase";
 import { useAuth } from "src/hooks/useAuth";
 import { IUserRegister } from "src/interfaces";
-import { getAuth, updateProfile } from "firebase/auth";
+import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 
 const Index: FC = (): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const collectionRef = collection(firebaseFirestore, "users");
   const auth = getAuth();
+  const { isLoading, signUpUser, user } = useAuth();
+  const userId: string = String(user?.uid);
+  const collectionRef = collection(firebaseFirestore, "users");
+  const ref = doc(collectionRef, userId);
+  const docMutation = useFirestoreDocumentMutation(
+    ref,
+    {},
+    {
+      onError(error) {
+        console.log(error);
+      },
+      onSuccess(data) {
+        console.log(data);
+      },
+    }
+  );
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserRegister>();
-
-  const { isLoading, SignUpUser, user } = useAuth();
 
   const handleUserSignup = (data: any) => {
     const newData = {
@@ -54,11 +69,18 @@ const Index: FC = (): JSX.Element => {
       createdAt: Timestamp.fromDate(new Date()).toDate().toDateString(),
     };
     console.log(newData);
-    SignUpUser(newData.email, newData.password);
+    signUpUser(newData.email, newData.password);
     setTimeout(() => {
-      updateProfile(auth.currentUser!, {
+      updateProfile(auth?.currentUser!, {
         displayName: newData.firstname,
-      });
+      })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      docMutation.mutate(newData);
     }, 2000);
   };
 
@@ -194,7 +216,7 @@ const Index: FC = (): JSX.Element => {
                       required: true,
                       maxLength: 10,
                       pattern:
-                        /((^90)([23589]))|((^70)([1-9]))|((^80)([2-9]))|((^81)([0-9]))(\d{7})/,
+                        /((^90)([0-9]))|((^70)([0-9]))|((^80)([0-9]))|((^81)([0-9]))(\d{7})/,
                     })}
                   />
                   <InputRightElement>
