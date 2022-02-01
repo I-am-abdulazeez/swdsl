@@ -1,7 +1,7 @@
-import { Founders, QuotesTalks, ShayoBanner, SVideos } from "src/interfaces";
 import { nanoid } from "nanoid";
-
 import ReactParser from "html-react-parser";
+
+import { Founders, QuotesTalks, ShayoBanner, SVideos } from "src/interfaces";
 
 export const ShayoBannerImages: ShayoBanner[] = [
   {
@@ -109,3 +109,15 @@ export const ShayoVideos: SVideos[] = [
     videoId: nanoid(7),
   },
 ];
+
+export const authContextDefaultValues = {
+  user: null,
+  isLoggedIn: false,
+  isLoading: false,
+  setUser: () => {},
+  signUpUser: () => {},
+  signOutUser: () => {},
+  resetPassword: () => {},
+  sendPasswordEmailReset: () => {},
+  signInUser: () => {},
+};

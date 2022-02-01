@@ -1,3 +1,5 @@
+import { UserInfo } from "firebase/auth";
+
 export interface ShayoBanner {
   src: string;
   alt: string;
@@ -30,4 +32,16 @@ export interface IUserRegister {
   password: string;
   phonenumber: string;
   accept: boolean;
+}
+
+export interface AuthContextType {
+  user: UserInfo | null;
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  setUser: any;
+  resetPassword: (oobCode: string, newPassword: string) => void;
+  signUpUser: (email: string, password: string) => void;
+  sendPasswordEmailReset: (email: string) => void;
+  signInUser: (email: string, password: string) => void;
+  signOutUser: () => void;
 }

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   VStack,
   Box,
@@ -12,22 +13,23 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from "react-icons/ri";
-import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
-
 import { inputFocus, shadowLightMd } from "@utils/index";
-import { useForm } from "react-hook-form";
-import { useAuth } from "src/hooks/useAuth";
 
-const Index: React.FC = (): JSX.Element => {
+import { withPublic } from "src/hooks/routes";
+
+const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { signInUser, isLoading } = useAuth();
-  const { register, handleSubmit, formState } =
+  const { signInUser, isLoading } = userAuth;
+  const { register, handleSubmit } =
     useForm<{ email: string; password: string }>();
 
-  const handleUserLogin = (data: any) => {
+  const handleUserLogin: SubmitHandler<{ email: string; password: string }> = (
+    data
+  ) => {
     console.log(data);
     signInUser(data.email, data.password);
   };
@@ -90,7 +92,6 @@ const Index: React.FC = (): JSX.Element => {
                 </InputRightElement>
               </InputGroup>
             </FormControl>
-
             <Box display="flex" width="100%" justifyContent="right">
               <NextLink href="/auth/forgot-password">
                 <chakra.a
@@ -104,11 +105,7 @@ const Index: React.FC = (): JSX.Element => {
                 </chakra.a>
               </NextLink>
             </Box>
-
             <Button
-              _focus={{
-                boxShadow: shadowLightMd,
-              }}
               type="submit"
               colorScheme="primary"
               isLoading={isLoading}
@@ -123,4 +120,4 @@ const Index: React.FC = (): JSX.Element => {
   );
 };
 
-export default Index;
+export default withPublic(Index);
