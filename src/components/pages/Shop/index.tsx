@@ -7,6 +7,7 @@ const Index = () => {
     <Box>
       <Helmet title="Shop Wine | Shayowithdsl" />
       <Navbar />
+      <Box></Box>
     </Box>
   );
 };

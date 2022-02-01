@@ -18,7 +18,7 @@ import { getAuth, updateProfile } from "firebase/auth";
 
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Text } from "@chakra-ui/react";
 
 import Helmet from "@components/Helmet";
@@ -28,17 +28,22 @@ import { collection, doc, Timestamp } from "firebase/firestore";
 
 import { inputFocus, shadowLightMd } from "@utils/index";
 import { firebaseFirestore } from "src/lib/firebase";
-import { useAuth } from "src/hooks/useAuth";
 import { IUserRegister } from "src/interfaces";
 import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
+import { withPublic } from "src/hooks/routes";
 
-const Index: FC = (): JSX.Element => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
   const auth = getAuth();
-  const { isLoading, signUpUser, user } = useAuth();
+  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { isLoading, signUpUser, user } = userAuth;
   const userId: string = String(user?.uid);
   const collectionRef = collection(firebaseFirestore, "users");
   const ref = doc(collectionRef, userId);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IUserRegister>();
   const docMutation = useFirestoreDocumentMutation(
     ref,
     {},
@@ -52,13 +57,7 @@ const Index: FC = (): JSX.Element => {
     }
   );
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IUserRegister>();
-
-  const handleUserSignup = (data: any) => {
+  const handleUserSignup: SubmitHandler<IUserRegister> = (data) => {
     const newData = {
       email: data.email,
       firstname: data.firstname,
@@ -236,7 +235,7 @@ const Index: FC = (): JSX.Element => {
                 colorScheme="primary"
                 {...register("accept", { required: true })}
               >
-                I’m 18 years or older
+                I’m 18 years or older.
               </Checkbox>
               {errors.accept && (
                 <Text fontSize={"xs"} mt={1} color={"red.500"}>
@@ -245,9 +244,6 @@ const Index: FC = (): JSX.Element => {
               )}
             </FormControl>
             <Button
-              _focus={{
-                boxShadow: shadowLightMd,
-              }}
               type="submit"
               isLoading={isLoading}
               colorScheme="primary"
@@ -262,4 +258,4 @@ const Index: FC = (): JSX.Element => {
   );
 };
 
-export default Index;
+export default withPublic(Index);

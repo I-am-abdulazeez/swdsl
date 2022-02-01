@@ -5,21 +5,17 @@ import NextLink from "next/link";
 import { RiArrowDownLine, RiSearch2Line } from "react-icons/ri";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
+import { shadowSm } from "@utils/index";
+
 import Navbar from "@components/Navbar";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
 import ShowCase from "@components/Showcase";
-import { shadowSm } from "@utils/index";
 import WrappedSwiper from "@components/WrappedSwiper";
 import Helmet from "@components/Helmet";
 import VideoSwipe from "@components/VideoSwipe";
-import { useAuth } from "src/hooks/useAuth";
 
 const Index = (): JSX.Element => {
-  const { isLoggedIn } = useAuth();
-
-  console.log(isLoggedIn);
-
   return (
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />
