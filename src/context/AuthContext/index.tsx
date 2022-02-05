@@ -47,10 +47,7 @@ export const AuthProvider = ({ children }: { children: any }) => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
-      setTimeout(() => {
-        setIsLoading(true);
-        router.push("/");
-      }, 1500);
+      setIsLoading(false);
     },
   });
 
@@ -81,8 +78,6 @@ export const AuthProvider = ({ children }: { children: any }) => {
       setUser(currentUser);
       setIsLoggedIn(true);
       setIsLoading(false);
-      console.log(currentUser);
-      router.push("/");
     },
   });
 

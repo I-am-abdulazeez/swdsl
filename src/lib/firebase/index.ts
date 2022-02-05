@@ -30,4 +30,4 @@ const adminApp = initializeApp(firebaseConfigAdmin, "admin-app");
 export const firebaseAuth = getAuth(app);
 
 export const firebaseFirestore = getFirestore(app);
-export const fireaseFirestoreAdmin = getFirestore(adminApp);
+export const firebaseFirestoreAdmin = getFirestore(adminApp);

@@ -10,7 +10,6 @@ export default function ClientOnly({ children, ...delegated }: any) {
     const unsubscribe = firebaseAuth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-
         setHasMounted(true);
         console.log(user);
       } else {

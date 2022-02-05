@@ -1,11 +1,10 @@
-import { Input, InputLeftElement, InputGroup, Heading } from "@chakra-ui/react";
+import { Heading } from "@chakra-ui/react";
 import { Box, Container, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
 import NextLink from "next/link";
-import { RiArrowDownLine, RiSearch2Line } from "react-icons/ri";
+import { RiArrowDownLine } from "react-icons/ri";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
-import { shadowSm } from "@utils/index";
 
 import Navbar from "@components/Navbar";
 import ScrollToTop from "@components/ScrollToTop";
@@ -14,6 +13,7 @@ import ShowCase from "@components/Showcase";
 import WrappedSwiper from "@components/WrappedSwiper";
 import Helmet from "@components/Helmet";
 import VideoSwipe from "@components/VideoSwipe";
+import DrinkSearch from "@components/DrinkSearch";
 
 const Index = (): JSX.Element => {
   return (
@@ -22,23 +22,8 @@ const Index = (): JSX.Element => {
       <Navbar />
       <Box as="main" mt={{ base: "6rem", md: "8rem" }}>
         <Container maxW="container.sm">
-          <Box>
-            <InputGroup size="lg">
-              <InputLeftElement pointerEvents="none">
-                <RiSearch2Line color="#CBD5E0" size="20px" />
-              </InputLeftElement>
-              <Input
-                type="text"
-                _focus={{
-                  boxShadow: shadowSm,
-                }}
-                fontSize="14px"
-                placeholder="Search for drinks"
-              />
-            </InputGroup>
-          </Box>
+          <DrinkSearch />
         </Container>
-
         <Box textAlign="center" mt={{ base: "3rem", md: "5rem" }}>
           <NextLink href="/">
             <a>
@@ -86,9 +71,7 @@ const Index = (): JSX.Element => {
           Get your Now!
         </Button>
       </VStack>
-
       <Footer />
-
       <ScrollToTop />
     </>
   );
