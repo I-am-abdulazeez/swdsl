@@ -1,4 +1,5 @@
 import { UserInfo } from "firebase/auth";
+import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 export interface ShayoBanner {
   src: string;
@@ -44,4 +45,14 @@ export interface AuthContextType {
   sendPasswordEmailReset: (email: string) => void;
   signInUser: (email: string, password: string) => void;
   signOutUser: () => void;
+}
+
+export interface DrinkCategoryInterface {
+  drinkName: string;
+  drinkNameList: string[];
+}
+
+export interface ProductListProps {
+  product: DocumentData;
+  docsSnapshot: QueryDocumentSnapshot<DocumentData>;
 }

@@ -1,3 +1,4 @@
+import { collection, doc, setDoc, Timestamp } from "firebase/firestore";
 import { FC, useState } from "react";
 import { Stack, VStack } from "@chakra-ui/layout";
 import { FormControl, FormLabel } from "@chakra-ui/form-control";
@@ -15,47 +16,29 @@ import {
   RiUserLine,
 } from "react-icons/ri";
 import { getAuth, updateProfile } from "firebase/auth";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 import { Button, IconButton } from "@chakra-ui/button";
 import { Checkbox } from "@chakra-ui/checkbox";
-import { SubmitHandler, useForm } from "react-hook-form";
 import { Text } from "@chakra-ui/react";
 
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
-import { collection, doc, Timestamp } from "firebase/firestore";
-
-import { inputFocus, shadowLightMd } from "@utils/index";
+import { inputFocus } from "@utils/index";
 import { firebaseFirestore } from "src/lib/firebase";
 import { IUserRegister } from "src/interfaces";
-import { useFirestoreDocumentMutation } from "@react-query-firebase/firestore";
 import { withPublic } from "src/hooks/routes";
 
 const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
   const auth = getAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const { isLoading, signUpUser, user } = userAuth;
-  const userId: string = String(user?.uid);
-  const collectionRef = collection(firebaseFirestore, "users");
-  const ref = doc(collectionRef, userId);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserRegister>();
-  const docMutation = useFirestoreDocumentMutation(
-    ref,
-    {},
-    {
-      onError(error) {
-        console.log(error);
-      },
-      onSuccess(data) {
-        console.log(data);
-      },
-    }
-  );
 
   const handleUserSignup: SubmitHandler<IUserRegister> = (data) => {
     const newData = {
@@ -72,14 +55,16 @@ const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
     setTimeout(() => {
       updateProfile(auth?.currentUser!, {
         displayName: newData.firstname,
-      })
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-      docMutation.mutate(newData);
+      }).catch((error) => {
+        console.log(error);
+      });
+      const userId = auth?.currentUser?.uid;
+      const collectionRef = collection(firebaseFirestore, "users");
+      const ref = doc(collectionRef, userId);
+      setDoc(ref, newData).then(() => {
+        console.log("done, saved to DB");
+      });
+      console.log(userId, auth?.currentUser?.displayName);
     }, 2000);
   };
 

@@ -9,7 +9,9 @@ export const withPublic = (Component: any) => {
     const router = useRouter();
 
     if (auth.user) {
-      router.replace("/");
+      setTimeout(() => {
+        router.replace("/");
+      }, 2000);
       return (
         <Flex align={"center"} h={"100vh"} justify={"center"}>
           <Spinner color="primary.600" />

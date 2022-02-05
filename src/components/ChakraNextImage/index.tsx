@@ -7,6 +7,7 @@ const ChakraNextUnwrappedImage = chakra(NextImage, {
     [
       "width",
       "height",
+      "layout",
       "src",
       "alt",
       "quality",
@@ -45,6 +46,7 @@ export const ChakraNextImage = ({
   width,
   quality,
   height,
+  layout,
   ...rest
 }: ImageProps & BoxProps & {}): JSX.Element => {
   return (
@@ -56,6 +58,7 @@ export const ChakraNextImage = ({
         width={width}
         quality={quality}
         height={height}
+        layout={layout}
         placeholder="blur"
         blurDataURL={`data:image/png;base64,${toBase64(shimmer(700, 475))}`}
         src={src}
