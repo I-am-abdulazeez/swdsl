@@ -1,17 +1,9 @@
-import { Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
-import { Box, Flex, Container, Spacer } from "@chakra-ui/layout";
-import NextLink from "next/link";
-import { RiArrowLeftLine } from "react-icons/ri";
-import { useRouter } from "next/dist/client/router";
+import { Box, Flex, Container } from "@chakra-ui/layout";
 
-import NavLinks from "@components/NavLinks";
-import NavDrawer from "@components/NavDrawer";
+import NavSecLinks from "@components/Navbar/NavSecLinks";
+import NavPrimaryLinks from "@components/Navbar/NavPrimaryLinks";
 
-const Navbar = (): JSX.Element => {
-  const router = useRouter();
-  const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
-  const activeShop = router.pathname === "/shop" ? "primary" : "";
-
+const Navbar: React.FC = (): JSX.Element => {
   return (
     <Box
       as="header"
@@ -26,52 +18,14 @@ const Navbar = (): JSX.Element => {
       borderBottom="1px solid #EDF2F7"
     >
       <Container maxW="container.lg" h="3.5rem">
-        <Flex height="100%" width="100%" align="center">
-          <NavDrawer />
-          {router.pathname === "/" && (
-            <NextLink href="/">
-              <Button
-                mx={3}
-                color={"primary.500"}
-                size={buttonSize}
-                variant="ghost"
-              >
-                Home
-              </Button>
-            </NextLink>
-          )}
-
-          {router.pathname === "/shop" && (
-            <NextLink href="/">
-              <Button
-                mx={3}
-                color={activeShop}
-                size={buttonSize}
-                variant="ghost"
-              >
-                Home
-              </Button>
-            </NextLink>
-          )}
-          {router.pathname === "/contact" && (
-            <>
-              <NextLink href="/">
-                <IconButton
-                  size="xs"
-                  variant="ghost"
-                  aria-label="go-back"
-                  icon={<RiArrowLeftLine size="17px" />}
-                />
-              </NextLink>
-              <NextLink href="/contact">
-                <Button color={"primary.500"} size={buttonSize} variant="ghost">
-                  Contact
-                </Button>
-              </NextLink>
-            </>
-          )}
-          <Spacer />
-          <NavLinks />
+        <Flex
+          justify={"space-between"}
+          height="100%"
+          width="100%"
+          align="center"
+        >
+          <NavPrimaryLinks />
+          <NavSecLinks />
         </Flex>
       </Container>
     </Box>

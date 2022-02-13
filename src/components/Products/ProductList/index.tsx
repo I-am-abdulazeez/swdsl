@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Image } from "@chakra-ui/react";
-import ProductBadge from "@components/ProductBadge";
 import NextLink from "next/link";
+
+import ProductBadge from "@components/Products/ProductBadge";
 
 import { ProductListProps } from "src/interfaces";
 
@@ -15,25 +16,28 @@ const ProductList: React.FC<ProductListProps> = ({
       shadow="sm"
       transition={"all 0.3s ease-in-out"}
     >
-      <Box position={"relative"}>
+      <Box position={"relative"} p={{ base: 4, md: 8 }}>
         <Image
           borderRadius={"lg"}
-          width="100%"
-          loading="lazy"
-          height="150px"
+          width="150px"
+          m={"0 auto"}
+          loading="eager"
+          height="100px"
           src={product.url}
           alt={`product-${product?.drinkName}`}
         />
       </Box>
-      <Box p="0.5em">
+      <Box p={{ base: "0.5em", md: "1em" }}>
         <ProductBadge product={product} />
-        <Box mt={2} mb={6}>
-          <Heading size="s">{product?.drinkName}</Heading>
+        <Box mt={0} mb={6}>
+          <Heading mt={1} size={"sm"}>
+            {product?.drinkName}
+          </Heading>
           <Heading
             fontWeight={"semibold"}
             color={"primary.500"}
             mt={2}
-            fontSize="lg"
+            fontSize="xl"
           >
             $ {product?.price}
           </Heading>

@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { ShayoVideos } from "src/data";
 import { SVideos } from "src/interfaces";
 
-const VideoSwipe = (): JSX.Element => {
+const VideoSwipe: React.FC = (): JSX.Element => {
   return (
     <Box mt="4rem">
       <Swiper

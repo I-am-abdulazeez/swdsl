@@ -1,10 +1,13 @@
 import { Badge } from "@chakra-ui/layout";
 import { DocumentData } from "firebase/firestore";
 
-const ProductBadge = ({ product }: DocumentData): JSX.Element => {
+const ProductBadge: React.FC<DocumentData> = ({ product }): JSX.Element => {
   return (
     <Badge
       borderRadius="md"
+      fontSize={"0.7em"}
+      fontWeight={"semibold"}
+      variant="subtle"
       colorScheme={
         product?.category === "Cognac"
           ? "whatsapp"

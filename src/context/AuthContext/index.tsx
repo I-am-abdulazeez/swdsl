@@ -11,15 +11,15 @@ import { useRouter } from "next/router";
 import { AuthContextType } from "src/interfaces";
 import { useToast } from "@chakra-ui/react";
 import { firebaseAuth } from "src/lib/firebase";
-import { authContextDefaultValues } from "src/data";
+import { authContextInitialValues } from "src/data";
 
-const AuthContext = createContext<AuthContextType>(authContextDefaultValues);
+const AuthContext = createContext<AuthContextType>(authContextInitialValues);
 
 export const useAuth = () => {
   return useContext(AuthContext);
 };
 
-export const AuthProvider = ({ children }: { children: any }) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const chakraToast = useToast();
   const urlRedirectMode =

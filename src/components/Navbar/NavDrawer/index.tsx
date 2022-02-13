@@ -20,8 +20,9 @@ import {
 import { RiMenuLine } from "react-icons/ri";
 import { DrinkCategory } from "src/data";
 
-const NavDrawer = (): JSX.Element => {
+const NavDrawer: React.FC = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
   const drawerSize = useBreakpointValue({ base: "full", md: "xs" });
 
   return (
@@ -46,7 +47,7 @@ const NavDrawer = (): JSX.Element => {
         <DrawerContent>
           <DrawerHeader
             borderBottomWidth="1px"
-            color={"primary.500"}
+            color={"secondary.500"}
             fontSize={"md"}
           >
             All category

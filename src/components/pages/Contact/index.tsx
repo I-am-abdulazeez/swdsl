@@ -1,7 +1,7 @@
 import Navbar from "@components/Navbar";
 import Helmet from "@components/Helmet";
 
-import ContactSwipe from "@components/ContactSwipe";
+import ContactSwipe from "@components/SwipeComponent/ContactSwipe";
 
 const Index: React.FC = (): JSX.Element => {
   return (

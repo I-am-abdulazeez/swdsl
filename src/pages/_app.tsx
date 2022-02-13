@@ -15,6 +15,7 @@ import "swiper/css";
 import "swiper/css/autoplay";
 import "swiper/css/effect-flip";
 import { AuthProvider } from "src/context/AuthContext";
+import { ProductProvider } from "src/context/ProductContext";
 
 SwiperCore.use([Navigation, Pagination, EffectFlip, Autoplay]);
 
@@ -25,9 +26,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={customTheme}>
         <AuthProvider>
-          <ClientOnly>
-            <Component {...pageProps} />
-          </ClientOnly>
+          <ProductProvider>
+            <ClientOnly>
+              <Component {...pageProps} />
+            </ClientOnly>
+          </ProductProvider>
         </AuthProvider>
       </ChakraProvider>
     </QueryClientProvider>

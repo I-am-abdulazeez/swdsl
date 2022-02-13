@@ -1,5 +1,12 @@
 import { UserInfo } from "firebase/auth";
-import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
+import {
+  DocumentData,
+  FirestoreError,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+  Timestamp,
+} from "firebase/firestore";
+import { UseQueryResult } from "react-query";
 
 export interface ShayoBanner {
   src: string;
@@ -47,6 +54,12 @@ export interface AuthContextType {
   signOutUser: () => void;
 }
 
+export interface ProductContextType {
+  products: QueryDocumentSnapshot<DocumentData>[];
+  storeQuery: UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>;
+  cart: {}[];
+}
+
 export interface DrinkCategoryInterface {
   drinkName: string;
   drinkNameList: string[];
@@ -55,4 +68,8 @@ export interface DrinkCategoryInterface {
 export interface ProductListProps {
   product: DocumentData;
   docsSnapshot: QueryDocumentSnapshot<DocumentData>;
+}
+
+export interface ProductDetailsParams {
+  productId: string;
 }

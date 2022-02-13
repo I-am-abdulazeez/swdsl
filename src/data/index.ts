@@ -8,6 +8,13 @@ import {
   ShayoBanner,
   SVideos,
 } from "src/interfaces";
+import { UseQueryResult } from "react-query";
+import {
+  DocumentData,
+  FirestoreError,
+  QueryDocumentSnapshot,
+  QuerySnapshot,
+} from "firebase/firestore";
 
 export const ShayoBannerImages: ShayoBanner[] = [
   {
@@ -336,7 +343,7 @@ export const DrinkCategory: DrinkCategoryInterface[] = [
   },
 ];
 
-export const authContextDefaultValues = {
+export const authContextInitialValues = {
   user: null,
   isLoggedIn: false,
   isLoading: false,
@@ -346,4 +353,10 @@ export const authContextDefaultValues = {
   resetPassword: () => {},
   sendPasswordEmailReset: () => {},
   signInUser: () => {},
+};
+
+export const productContextInitialValues = {
+  products: [] as QueryDocumentSnapshot<DocumentData>[],
+  storeQuery: {} as UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>,
+  cart: [] as {}[],
 };
