@@ -22,11 +22,12 @@ import {
   RiLogoutCircleLine,
 } from "react-icons/ri";
 
-const NavLinks = () => {
+const NavSecLinks: React.FC = (): JSX.Element => {
   const { signOutUser, user } = useAuth();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const activeShop = router.pathname === "/shop" ? "primary" : "";
+  const activeShop = router.pathname === "/shop" ? "secondary" : "";
+  const activeCart = router.pathname === "/cart" ? "secondary" : "";
 
   return (
     <HStack>
@@ -66,12 +67,15 @@ const NavLinks = () => {
           />
         </NextLink>
       )}
-      <IconButton
-        aria-label="shopping cart"
-        size={buttonSize}
-        variant="ghost"
-        icon={<RiShoppingCartLine size="17px" />}
-      />
+      <NextLink href="/cart">
+        <IconButton
+          aria-label="shopping cart"
+          size={buttonSize}
+          colorScheme={activeCart}
+          variant="ghost"
+          icon={<RiShoppingCartLine size="17px" />}
+        />
+      </NextLink>
       {user && (
         <Menu closeOnBlur={true}>
           <MenuButton
@@ -101,4 +105,4 @@ const NavLinks = () => {
   );
 };
 
-export default NavLinks;
+export default NavSecLinks;

@@ -1,10 +1,9 @@
 import { IconButton } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
-import { useBreakpointValue } from "@chakra-ui/media-query";
 import React, { useEffect, useState } from "react";
 import { IoIosArrowRoundUp } from "react-icons/io";
 
-export default function ScrollToTop() {
+const ScrollToTop: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const scrollToTop = () => {
     window.scrollTo({
@@ -44,4 +43,6 @@ export default function ScrollToTop() {
       )}
     </Box>
   );
-}
+};
+
+export default ScrollToTop;

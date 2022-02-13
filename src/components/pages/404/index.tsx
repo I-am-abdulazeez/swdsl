@@ -7,8 +7,6 @@ import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Helmet from "@components/Helmet";
 
-import { shadowMd } from "@utils/index";
-
 const Index: React.FC = (): JSX.Element => {
   return (
     <Box>
@@ -22,14 +20,7 @@ const Index: React.FC = (): JSX.Element => {
             <Text>Unfortunately we couldn't find any product.</Text>
           </Box>
           <NextLink href="/">
-            <Button
-              _focus={{
-                boxShadow: shadowMd,
-              }}
-              size="sm"
-              variant="outline"
-              colorScheme="primary"
-            >
+            <Button size="sm" variant="outline" colorScheme="primary">
               Go to Homepage
             </Button>
           </NextLink>

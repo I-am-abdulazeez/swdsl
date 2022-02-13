@@ -1,8 +1,7 @@
 import { Avatar } from "@chakra-ui/avatar";
-import { Box, Stack } from "@chakra-ui/layout";
-import { FC } from "react";
+import { Stack } from "@chakra-ui/layout";
 
-const TeamStack: FC = (): JSX.Element => {
+const TeamStack: React.FC = (): JSX.Element => {
   return (
     <>
       <Stack direction="row" spacing={3} width={{ base: "unset", md: "250px" }}>

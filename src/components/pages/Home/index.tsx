@@ -5,17 +5,16 @@ import NextLink from "next/link";
 import { RiArrowDownLine } from "react-icons/ri";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
-
 import Navbar from "@components/Navbar";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
 import ShowCase from "@components/Showcase";
-import WrappedSwiper from "@components/WrappedSwiper";
 import Helmet from "@components/Helmet";
-import VideoSwipe from "@components/VideoSwipe";
 import DrinkSearch from "@components/DrinkSearch";
+import WrappedSwiper from "@components/SwipeComponent/WrappedSwiper";
+import VideoSwipe from "@components/SwipeComponent/VideoSwipe";
 
-const Index = (): JSX.Element => {
+const Index: React.FC = (): JSX.Element => {
   return (
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />

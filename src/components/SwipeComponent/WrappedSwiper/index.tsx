@@ -1,9 +1,10 @@
 import { Box, Text, VStack } from "@chakra-ui/react";
-import { ShayoQuotes } from "src/data";
-import { QuotesTalks } from "src/interfaces";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const WrappedSwiper = (): JSX.Element => {
+import { ShayoQuotes } from "src/data";
+import { QuotesTalks } from "src/interfaces";
+
+const WrappedSwiper: React.FC = (): JSX.Element => {
   return (
     <Box
       bg={
