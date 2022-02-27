@@ -1,31 +1,20 @@
 import { Box, chakra, Text } from "@chakra-ui/react";
-import { ChakraNextImage } from "@components/ChakraNextImage";
 import NextLink from "next/link";
 
-const AuthHeading = ({
+import LogoLink from "@components/LogoLink";
+
+import { AuthHeadingProps } from "src/interfaces";
+
+const AuthHeading: React.FC<AuthHeadingProps> = ({
   authHeading,
   authText,
   authHref,
   authRoute,
-}: {
-  authHeading: string;
-  authText: string;
-  authHref: string;
-  authRoute: string;
 }): JSX.Element => {
   return (
     <Box textAlign="center">
       <Box mb={2}>
-        <NextLink href="/">
-          <a>
-            <ChakraNextImage
-              width="200px"
-              height="100px"
-              src="/svgs/swdsl-logo.svg"
-              alt="shayo-logo"
-            />
-          </a>
-        </NextLink>
+        <LogoLink width="200px" height="100px" />
       </Box>
       <Text fontWeight="bold" fontSize="24px">
         {authHeading}

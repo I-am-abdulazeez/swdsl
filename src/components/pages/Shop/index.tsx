@@ -8,22 +8,30 @@ import {
 } from "@chakra-ui/react";
 
 import DrinkSearch from "@components/DrinkSearch";
+import Footer from "@components/Footer";
 import Helmet from "@components/Helmet";
 import Navbar from "@components/Navbar";
 import ProductList from "@components/Products/ProductList";
 
-import { useProduct } from "src/context/ProductContext";
+import { useProduct } from "src/hooks/useProduct";
 
 const Index: React.FC = (): JSX.Element => {
-  const { products, storeQuery } = useProduct();
+  const { products, storeQuery, addProduct, cart, removeProduct } =
+    useProduct();
+
   return (
     <Box>
       <Helmet title="Shop Wine | Shayowithdsl" />
       <Navbar />
-      <Box as={"main"} mt={20}>
+      <Box as={"main"} my={{ base: 12, md: 24 }}>
         <Container maxW="container.lg">
-          <DrinkSearch />
-          <Box mt={10}>
+          <Box width={{ base: "auto", md: "700px" }} mx="auto">
+            <DrinkSearch />
+          </Box>
+          <Text my={10} fontSize="sm" color="gray.600">
+            {products.length} products found.
+          </Text>
+          <Box>
             {storeQuery.isLoading && (
               <HStack spacing={2}>
                 <Spinner
@@ -42,12 +50,17 @@ const Index: React.FC = (): JSX.Element => {
               spacing={{ base: 3, md: 4 }}
             >
               {products?.map((docsSnapshot) => {
-                const product = docsSnapshot.data();
+                const doc = docsSnapshot.data();
+                const product = { ...doc, id: docsSnapshot.id };
+                const inCart = Boolean(cart.find((el) => el.id === product.id));
                 return (
                   <ProductList
-                    key={docsSnapshot.id}
+                    key={docsSnapshot?.id}
                     docsSnapshot={docsSnapshot}
                     product={product}
+                    onAddToCart={(product) => addProduct(product)}
+                    onRemoveFromCart={(product) => removeProduct(product)}
+                    inCart={inCart}
                   />
                 );
               })}
@@ -55,6 +68,7 @@ const Index: React.FC = (): JSX.Element => {
           </Box>
         </Container>
       </Box>
+      <Footer />
     </Box>
   );
 };

@@ -1,5 +1,3 @@
-import { useAuth } from "src/context/AuthContext";
-
 import NextLink from "next/link";
 import {
   Button,
@@ -16,37 +14,42 @@ import {
 import router from "next/router";
 import {
   RiStore2Line,
-  RiShoppingCartLine,
   RiUserLine,
   RiArrowDownSLine,
   RiLogoutCircleLine,
 } from "react-icons/ri";
 
+import IconButtonBadge from "@components/IconButtonBadge";
+
+import { useAuth } from "src/hooks/useAuth";
+import { useProduct } from "src/hooks/useProduct";
+
 const NavSecLinks: React.FC = (): JSX.Element => {
   const { signOutUser, user } = useAuth();
+  const { cart } = useProduct();
+
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const activeShop = router.pathname === "/shop" ? "secondary" : "";
-  const activeCart = router.pathname === "/cart" ? "secondary" : "";
+  const activeShop = router.pathname === "/shop" ? "primary" : "";
 
   return (
     <HStack>
       {!user && (
-        <NextLink href="/auth/login">
+        <NextLink href="/auth/login" passHref>
           <Button size={buttonSize} variant="ghost">
             Login
           </Button>
         </NextLink>
       )}
       {!user && (
-        <NextLink href="/auth/register">
+        <NextLink href="/auth/register" passHref>
           <Button size={buttonSize} variant="ghost">
             Signup
           </Button>
         </NextLink>
       )}
       {isMobile ? (
-        <NextLink href="/shop">
+        <NextLink href="/shop" passHref>
           <Button
             size={buttonSize}
             variant="ghost"
@@ -57,7 +60,7 @@ const NavSecLinks: React.FC = (): JSX.Element => {
           </Button>
         </NextLink>
       ) : (
-        <NextLink href="/shop">
+        <NextLink href="/shop" passHref>
           <IconButton
             aria-label="Store"
             size={buttonSize}
@@ -67,15 +70,8 @@ const NavSecLinks: React.FC = (): JSX.Element => {
           />
         </NextLink>
       )}
-      <NextLink href="/cart">
-        <IconButton
-          aria-label="shopping cart"
-          size={buttonSize}
-          colorScheme={activeCart}
-          variant="ghost"
-          icon={<RiShoppingCartLine size="17px" />}
-        />
-      </NextLink>
+
+      <IconButtonBadge badgeContent={cart.length} />
       {user && (
         <Menu closeOnBlur={true}>
           <MenuButton

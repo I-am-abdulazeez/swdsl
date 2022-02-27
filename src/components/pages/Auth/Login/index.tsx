@@ -12,16 +12,20 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from "react-icons/ri";
 import { SubmitHandler, useForm } from "react-hook-form";
+
+import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from "react-icons/ri";
 
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
-import { inputFocus, shadowLightMd } from "@utils/index";
 
-import { withPublic } from "src/hooks/routes";
+import { inputFocus } from "@utils/index";
+import { withPublic } from "src/hooks/useRoutes";
+import { AuthContextType } from "src/interfaces";
 
-const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
+const Index: React.FC<{ userAuth: AuthContextType }> = ({
+  userAuth,
+}): JSX.Element => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const { signInUser, isLoading } = userAuth;
   const { register, handleSubmit } =
@@ -30,13 +34,12 @@ const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
   const handleUserLogin: SubmitHandler<{ email: string; password: string }> = (
     data
   ) => {
-    console.log(data);
     signInUser(data.email, data.password);
   };
 
   return (
     <Box>
-      <Helmet title="Login | ShayoWithDSL" />
+      <Helmet title="Sign in | Login your Account | ShayoWithDSL" />
       <VStack
         as="section"
         align="center"
@@ -65,7 +68,7 @@ const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
                   placeholder="you@example.com"
                 />
                 <InputRightElement>
-                  <RiMailOpenLine />
+                  <RiMailOpenLine size={"12.5px"} />
                 </InputRightElement>
               </InputGroup>
             </FormControl>
@@ -83,7 +86,7 @@ const Index = ({ userAuth }: { userAuth: any }): JSX.Element => {
                 />
                 <InputRightElement>
                   <IconButton
-                    size="sm"
+                    size="xs"
                     variant="ghost"
                     aria-label="password"
                     onClick={() => setShowPassword(!showPassword)}

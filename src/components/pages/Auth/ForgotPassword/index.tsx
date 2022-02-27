@@ -7,13 +7,15 @@ import {
   Input,
   InputRightElement,
   Button,
+  chakra,
 } from "@chakra-ui/react";
-
-import { ChakraNextImage } from "@components/ChakraNextImage";
-import Helmet from "@components/Helmet";
-import { inputFocus } from "@utils/index";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useAuth } from "src/context/AuthContext";
+
+import Helmet from "@components/Helmet";
+import LogoLink from "@components/LogoLink";
+
+import { inputFocus } from "@utils/index";
+import { useAuth } from "src/hooks/useAuth";
 
 const Index = (): JSX.Element => {
   const { sendPasswordEmailReset, isLoading } = useAuth();
@@ -24,7 +26,6 @@ const Index = (): JSX.Element => {
   } = useForm<{ email: string }>();
 
   const passwordResetSubmit: SubmitHandler<{ email: string }> = (data) => {
-    console.log(data);
     sendPasswordEmailReset(data.email);
   };
 
@@ -32,21 +33,12 @@ const Index = (): JSX.Element => {
     <Flex justify={"center"} direction={"column"} align={"center"} h={"100vh"}>
       <Helmet title="Forgot password | ShayoWithDSL" />
       <Box mb={2}>
-        <NextLink href="/">
-          <a>
-            <ChakraNextImage
-              width="200px"
-              height="100px"
-              src="/svgs/swdsl-logo.svg"
-              alt="shayo-logo"
-            />
-          </a>
-        </NextLink>
+        <LogoLink width="200px" height="100px" />
       </Box>
       <Box textAlign={"center"}>
-        <Heading fontSize={"xl"}>We've got you, we all forget things.</Heading>
+        <Heading fontSize={"xl"}>We are humans, we all forget things.</Heading>
         <Text mt={2} fontSize={"sm"}>
-          Please enter e-mail address used for signup.
+          Please enter the e-mail address used for signup.
         </Text>
       </Box>
 
@@ -63,7 +55,7 @@ const Index = (): JSX.Element => {
               placeholder="you@example.com"
             />
             <InputRightElement>
-              <RiMailOpenLine />
+              <RiMailOpenLine size={"12.5px"} />
             </InputRightElement>
           </InputGroup>
           {errors.email?.type === "required" && (
@@ -81,6 +73,18 @@ const Index = (): JSX.Element => {
           Send Reset Email
         </Button>
       </form>
+      <NextLink href={"/auth/login"}>
+        <chakra.a
+          cursor="pointer"
+          fontSize={"sm"}
+          mt={4}
+          textDecor="underline"
+          color="#501815"
+        >
+          {" "}
+          Go back to login
+        </chakra.a>
+      </NextLink>
     </Flex>
   );
 };

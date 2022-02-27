@@ -1,8 +1,12 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "src/context/AuthContext";
+import React, { useEffect, useState } from "react";
+
+import { useAuth } from "src/hooks/useAuth";
 import { firebaseAuth } from "src/lib/firebase";
 
-export default function ClientOnly({ children, ...delegated }: any) {
+const ClientOnly: React.FC<{ children: React.ReactNode }> = ({
+  children,
+  ...delegated
+}) => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const { setUser } = useAuth();
 
@@ -21,9 +25,9 @@ export default function ClientOnly({ children, ...delegated }: any) {
     return () => unsubscribe();
   }, []);
 
-  if (!hasMounted) {
-    return null;
-  }
+  if (!hasMounted) return null;
 
   return <div {...delegated}>{children}</div>;
-}
+};
+
+export default ClientOnly;

@@ -6,6 +6,7 @@ import {
   QuerySnapshot,
   Timestamp,
 } from "firebase/firestore";
+import { Dispatch, SetStateAction } from "react";
 import { UseQueryResult } from "react-query";
 
 export interface ShayoBanner {
@@ -42,13 +43,24 @@ export interface IUserRegister {
   accept: boolean;
 }
 
-export interface AuthContextType {
+export interface AuthHeadingProps {
+  authHeading: string;
+  authText: string;
+  authHref: string;
+  authRoute: string;
+}
+
+export interface UserActionType {
+  isLoading: boolean;
+  setUser: Dispatch<SetStateAction<UserInfo | null>>;
+  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface AuthContextType extends UserActionType {
   user: UserInfo | null;
   isLoggedIn: boolean;
-  isLoading: boolean;
-  setUser: any;
   resetPassword: (oobCode: string, newPassword: string) => void;
-  signUpUser: (email: string, password: string) => void;
   sendPasswordEmailReset: (email: string) => void;
   signInUser: (email: string, password: string) => void;
   signOutUser: () => void;
@@ -57,7 +69,10 @@ export interface AuthContextType {
 export interface ProductContextType {
   products: QueryDocumentSnapshot<DocumentData>[];
   storeQuery: UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>;
-  cart: {}[];
+  cart: any[];
+  addProduct: (product: {}) => void;
+  removeProduct: (product: {}) => void;
+  removeAllProduct: (product: {}) => void;
 }
 
 export interface DrinkCategoryInterface {
@@ -65,11 +80,39 @@ export interface DrinkCategoryInterface {
   drinkNameList: string[];
 }
 
+export interface ProductDetailsParams {
+  productId: string;
+}
+
+export interface CartItem {
+  id: string | string[];
+  url: string;
+  drinkName: string;
+  price: string;
+  quantity: number;
+}
+
+export interface UserData {
+  email: string;
+  firstname: string;
+  lastname: string;
+  phonenumber: string;
+  accept: boolean;
+  createdAt: Timestamp | string;
+  cart?: CartItem[];
+}
+
 export interface ProductListProps {
   product: DocumentData;
   docsSnapshot: QueryDocumentSnapshot<DocumentData>;
+  inCart: boolean;
+  onAddToCart: (product: {}) => void;
+  onRemoveFromCart: (product: {}) => void;
 }
 
-export interface ProductDetailsParams {
-  productId: string;
+export interface CartItemProps {
+  cartItem: any;
+  addProduct: (product: any) => void;
+  removeProduct: (id: any) => void;
+  removeAllProduct: (id: any) => void;
 }
