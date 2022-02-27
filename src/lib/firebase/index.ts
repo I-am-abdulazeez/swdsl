@@ -23,7 +23,7 @@ const firebaseConfigAdmin: FirebaseOptions = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID_ADMIN,
 };
 
-// Initialize Firebase
+// Initialize Firebase Apps
 const app = initializeApp(firebaseConfig);
 const adminApp = initializeApp(firebaseConfigAdmin, "admin-app");
 

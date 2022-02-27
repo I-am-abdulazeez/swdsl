@@ -17,12 +17,13 @@ import {
   Button,
   Flex,
 } from "@chakra-ui/react";
+
 import { RiMenuLine } from "react-icons/ri";
+
 import { DrinkCategory } from "src/data";
 
 const NavDrawer: React.FC = (): JSX.Element => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-
   const drawerSize = useBreakpointValue({ base: "full", md: "xs" });
 
   return (
@@ -47,7 +48,7 @@ const NavDrawer: React.FC = (): JSX.Element => {
         <DrawerContent>
           <DrawerHeader
             borderBottomWidth="1px"
-            color={"secondary.500"}
+            color={"primary.500"}
             fontSize={"md"}
           >
             All category

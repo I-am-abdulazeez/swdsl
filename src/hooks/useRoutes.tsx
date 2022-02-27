@@ -1,17 +1,21 @@
 import { Flex, Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
-import { useAuth } from "src/context/AuthContext";
+import { useAuth } from "src/hooks/useAuth";
+import { AuthContextType } from "src/interfaces";
 
-export const withPublic = (Component: any) => {
-  return function WithPublic(props: any) {
+export const withPublic = (
+  Component: React.FC<{ userAuth: AuthContextType }>
+) => {
+  return function WithPublic(props: AuthContextType) {
     const auth = useAuth();
-    const router = useRouter();
+    const { replace } = useRouter();
 
     if (auth.user) {
       setTimeout(() => {
-        router.replace("/");
+        replace("/");
       }, 2000);
+
       return (
         <Flex align={"center"} h={"100vh"} justify={"center"}>
           <Spinner color="primary.600" />

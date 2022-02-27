@@ -1,12 +1,15 @@
 import { Box, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/layout";
-import NextLink from "next/link";
 import { useBreakpointValue } from "@chakra-ui/media-query";
-import Icon from "@chakra-ui/icon";
 import { RiAddCircleLine } from "react-icons/ri";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import Icon from "@chakra-ui/icon";
+import NextLink from "next/link";
+
+import { ChakraNextImage } from "@components/ChakraNextImage";
+
 import { ShayoBannerImages } from "src/data";
 import { ShayoBanner } from "src/interfaces";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { ChakraNextImage } from "@components/ChakraNextImage";
 
 const ShowCase: React.FC = (): JSX.Element => {
   const headingSize: string | undefined = useBreakpointValue({

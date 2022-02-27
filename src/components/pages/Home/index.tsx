@@ -1,10 +1,8 @@
 import { Heading } from "@chakra-ui/react";
 import { Box, Container, VStack } from "@chakra-ui/layout";
 import { Button } from "@chakra-ui/button";
-import NextLink from "next/link";
 import { RiArrowDownLine } from "react-icons/ri";
 
-import { ChakraNextImage } from "@components/ChakraNextImage";
 import Navbar from "@components/Navbar";
 import ScrollToTop from "@components/ScrollToTop";
 import Footer from "@components/Footer";
@@ -13,6 +11,7 @@ import Helmet from "@components/Helmet";
 import DrinkSearch from "@components/DrinkSearch";
 import WrappedSwiper from "@components/SwipeComponent/WrappedSwiper";
 import VideoSwipe from "@components/SwipeComponent/VideoSwipe";
+import LogoLink from "@components/LogoLink";
 
 const Index: React.FC = (): JSX.Element => {
   return (
@@ -24,16 +23,7 @@ const Index: React.FC = (): JSX.Element => {
           <DrinkSearch />
         </Container>
         <Box textAlign="center" mt={{ base: "3rem", md: "5rem" }}>
-          <NextLink href="/">
-            <a>
-              <ChakraNextImage
-                width="800px"
-                height="230px"
-                src="/svgs/swdsl-logo.svg"
-                alt="shayo-logo"
-              />
-            </a>
-          </NextLink>
+          <LogoLink width="800px" height="230px" />
         </Box>
         <VideoSwipe />
         <ShowCase />
@@ -53,7 +43,7 @@ const Index: React.FC = (): JSX.Element => {
         p={6}
       >
         <Heading fontWeight="semibold" size={"xl"} lineHeight="1.5">
-          QUALITY DRINKS DELIVERED TO YOUR DOORSTEP
+          QUALITY DRINKS DELIVERED TO YOUR DOORSTEP.
         </Heading>
         <Button
           bg="transparent"

@@ -2,7 +2,7 @@ import { Box, InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { shadowSm } from "@utils/index";
 import { RiSearch2Line } from "react-icons/ri";
 
-const DrinkSearch = (): JSX.Element => {
+const DrinkSearch: React.FC = (): JSX.Element => {
   return (
     <Box>
       <InputGroup size="lg">

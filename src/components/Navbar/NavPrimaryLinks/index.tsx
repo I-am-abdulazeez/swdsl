@@ -9,17 +9,17 @@ const NavPrimaryLinks: React.FC = () => {
   const router = useRouter();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
 
-  const activeShop = router.pathname === "/shop" ? "secondary" : "";
-  const activeCart = router.pathname === "/cart" ? "secondary" : "";
+  const activeShop = router.pathname === "/shop" ? "primary" : "";
+  const activeCart = router.pathname === "/cart" ? "primary" : "";
 
   return (
     <Box>
       <NavDrawer />
       {router.pathname === "/" && (
-        <NextLink href="/">
+        <NextLink href="/" passHref>
           <Button
             mx={3}
-            color={"secondary.500"}
+            color={"primary.500"}
             size={buttonSize}
             variant="ghost"
           >
@@ -28,14 +28,14 @@ const NavPrimaryLinks: React.FC = () => {
         </NextLink>
       )}
       {router.pathname === "/shop" && (
-        <NextLink href="/">
+        <NextLink href="/" passHref>
           <Button mx={3} color={activeShop} size={buttonSize} variant="ghost">
             Home
           </Button>
         </NextLink>
       )}
       {router.pathname === "/cart" && (
-        <NextLink href="/">
+        <NextLink href="/" passHref>
           <Button mx={3} color={activeCart} size={buttonSize} variant="ghost">
             Home
           </Button>
@@ -43,7 +43,7 @@ const NavPrimaryLinks: React.FC = () => {
       )}
       {router.pathname === "/contact" && (
         <>
-          <NextLink href="/">
+          <NextLink href="/" passHref>
             <IconButton
               size="xs"
               variant="ghost"
@@ -51,8 +51,8 @@ const NavPrimaryLinks: React.FC = () => {
               icon={<RiArrowLeftLine size="17px" />}
             />
           </NextLink>
-          <NextLink href="/contact">
-            <Button color={"secondary.500"} size={buttonSize} variant="ghost">
+          <NextLink href="/contact" passHref>
+            <Button color={"primary.500"} size={buttonSize} variant="ghost">
               Contact
             </Button>
           </NextLink>

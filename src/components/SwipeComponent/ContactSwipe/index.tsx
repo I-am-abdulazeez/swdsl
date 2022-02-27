@@ -7,6 +7,7 @@ import TeamStack from "@components/TeamStack";
 
 import { DSLFounders } from "src/data";
 import { Founders } from "src/interfaces";
+import LogoLink from "@components/LogoLink";
 
 const ContactSwipe = (): JSX.Element => {
   return (
@@ -43,16 +44,7 @@ const ContactSwipe = (): JSX.Element => {
       <Flex justify="center" align="center" flexDir="column">
         <VStack spacing={2}>
           <Box>
-            <NextLink href="/">
-              <a>
-                <ChakraNextImage
-                  width="300px"
-                  height="90px"
-                  src="/svgs/swdsl-logo.svg"
-                  alt="shayo-logo"
-                />
-              </a>
-            </NextLink>
+            <LogoLink width="300px" height="90px" />
           </Box>
           <Box w={{ base: "20em", md: "25em" }} textAlign="center">
             <Swiper autoplay={{ delay: 5000 }}>

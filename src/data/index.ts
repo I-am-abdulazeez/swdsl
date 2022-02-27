@@ -348,7 +348,8 @@ export const authContextInitialValues = {
   isLoggedIn: false,
   isLoading: false,
   setUser: () => {},
-  signUpUser: () => {},
+  setIsLoggedIn: () => {},
+  setIsLoading: () => {},
   signOutUser: () => {},
   resetPassword: () => {},
   sendPasswordEmailReset: () => {},
@@ -358,5 +359,8 @@ export const authContextInitialValues = {
 export const productContextInitialValues = {
   products: [] as QueryDocumentSnapshot<DocumentData>[],
   storeQuery: {} as UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>,
-  cart: [] as {}[],
+  cart: [] as any[],
+  addProduct: () => {},
+  removeProduct: () => {},
+  removeAllProduct: () => {},
 };

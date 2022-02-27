@@ -1,7 +1,7 @@
 import { Box, Text, VStack } from "@chakra-ui/layout";
 import { Container, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { RiSearchEyeLine } from "react-icons/ri";
+import { RiEyeCloseLine, RiSearchEyeLine } from "react-icons/ri";
 
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
@@ -14,13 +14,13 @@ const Index: React.FC = (): JSX.Element => {
       <Navbar />
       <Container maxW="container.lg">
         <VStack spacing={5} as="main" my="10rem">
-          <RiSearchEyeLine size="90px" color="#E2E8F0" />
+          <RiEyeCloseLine size="90px" color="#E2E8F0" />
           <Box textAlign="center">
-            <Text>No results found!</Text>
-            <Text>Unfortunately we couldn't find any product.</Text>
+            <Text fontWeight={"bold"}>No results found!</Text>
+            <Text>Unfortunately we couldn't find the page.</Text>
           </Box>
           <NextLink href="/">
-            <Button size="sm" variant="outline" colorScheme="primary">
+            <Button size="sm" variant="outline" colorScheme="secondary">
               Go to Homepage
             </Button>
           </NextLink>

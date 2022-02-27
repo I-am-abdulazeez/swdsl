@@ -1,25 +1,25 @@
-import { createContext, useContext, useState } from "react";
+import { useToast } from "@chakra-ui/react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   useAuthConfirmPasswordReset,
-  useAuthCreateUserWithEmailAndPassword,
   useAuthSendPasswordResetEmail,
   useAuthSignInWithEmailAndPassword,
   useAuthSignOut,
 } from "@react-query-firebase/auth";
 import { UserInfo } from "firebase/auth";
 import { useRouter } from "next/router";
+
 import { AuthContextType } from "src/interfaces";
-import { useToast } from "@chakra-ui/react";
 import { firebaseAuth } from "src/lib/firebase";
 import { authContextInitialValues } from "src/data";
 
-const AuthContext = createContext<AuthContextType>(authContextInitialValues);
+export const AuthContext = createContext<AuthContextType>(
+  authContextInitialValues
+);
 
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const router = useRouter();
   const chakraToast = useToast();
   const urlRedirectMode =
@@ -31,37 +31,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const signOutMutation = useAuthSignOut(firebaseAuth);
 
-  // SignUp User Mutation
-  const signUpMutation = useAuthCreateUserWithEmailAndPassword(firebaseAuth, {
-    onError(error) {
-      setUser(null);
-      setIsLoading(false);
-      chakraToast({
-        title: error.message,
-        isClosable: true,
-        status: "error",
-      });
-      setIsLoggedIn(false);
-    },
-    onSuccess(data) {
-      const currentUser = data.user;
-      setUser(currentUser);
-      setIsLoggedIn(true);
-      setIsLoading(false);
-    },
-  });
-
-  // Signup User
-  const signUpUser = (email: string, password: string) => {
-    setIsLoading(true);
-    if (email && password) {
-      signUpMutation.mutate({
-        email,
-        password,
-      });
-    }
-  };
-
   const signInMutation = useAuthSignInWithEmailAndPassword(firebaseAuth, {
     onError(error) {
       console.log(error);
@@ -71,6 +40,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         title: error.message,
         isClosable: true,
         status: "error",
+        variant: "subtle",
+        containerStyle: {
+          fontSize: "12.5px",
+        },
       });
     },
     onSuccess(data) {
@@ -100,7 +73,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         chakraToast({
           title: error.message,
           isClosable: true,
+          variant: "subtle",
           status: "error",
+          containerStyle: {
+            fontSize: "12.5px",
+          },
         });
       },
       onSuccess() {
@@ -109,6 +86,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           title: "Email sent, check your email.",
           isClosable: true,
           status: "success",
+          variant: "subtle",
+          containerStyle: {
+            fontSize: "12.5px",
+          },
         });
         router.push("/auth/login");
       },
@@ -132,7 +113,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       chakraToast({
         title: error.message,
         isClosable: true,
+        variant: "subtle",
         status: "error",
+        containerStyle: {
+          fontSize: "12.5px",
+        },
       });
     },
     onSuccess() {
@@ -141,6 +126,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         title: "Password has been changed. you can now login now!",
         isClosable: true,
         status: "success",
+        variant: "subtle",
+        containerStyle: {
+          fontSize: "12.5px",
+        },
       });
       router.push("/auth/login");
     },
@@ -161,14 +150,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(null);
     setIsLoggedIn(false);
     router.push("/");
+    localStorage.setItem("user", JSON.stringify(user));
   };
+
+  useEffect(() => {
+    localStorage.setItem("user", JSON.stringify(user));
+  });
 
   const value = {
     user,
     isLoggedIn,
     isLoading,
     setUser,
-    signUpUser,
+    setIsLoggedIn,
+    setIsLoading,
     signOutUser,
     signInUser,
     sendPasswordEmailReset,

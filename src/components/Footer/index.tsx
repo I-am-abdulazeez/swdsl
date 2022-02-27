@@ -1,11 +1,11 @@
 import { Box, Container, SimpleGrid, Text, VStack } from "@chakra-ui/layout";
 import { chakra } from "@chakra-ui/system";
-import { ChakraNextImage } from "@components/ChakraNextImage";
-import TeamStack from "@components/TeamStack";
 import NextLink from "next/link";
-import { FC } from "react";
 
-const Footer: FC = (): JSX.Element => {
+import TeamStack from "@components/TeamStack";
+import { ChakraNextImage } from "@components/ChakraNextImage";
+
+const Footer: React.FC = (): JSX.Element => {
   return (
     <Box as="footer" mt="5rem" bg="white">
       <Container maxW="container.lg">
