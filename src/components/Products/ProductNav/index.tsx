@@ -8,9 +8,13 @@ import {
   FirestoreError,
 } from "firebase/firestore";
 
-const ProductNav: React.FC<{
+interface ProductNavProps {
   product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
-}> = ({ product }): JSX.Element => {
+}
+
+const ProductNav: React.FC<ProductNavProps> = (props): JSX.Element => {
+  const { product } = props;
+
   return (
     <Breadcrumb
       mb={10}

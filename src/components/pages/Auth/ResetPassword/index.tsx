@@ -20,9 +20,10 @@ import LogoLink from "@components/LogoLink";
 import FormErrorText from "@components/FormErrorText";
 
 import { useAuth } from "src/hooks/useAuth";
+
 import { inputFocus } from "@utils/index";
 
-const ResetPassword: React.FC = (): JSX.Element => {
+const ResetPassword: React.FC = () => {
   const router = useRouter();
   const { isLoading, resetPassword } = useAuth();
   const [showPassword, setShowPassword] = useState<boolean>(false);

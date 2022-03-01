@@ -24,7 +24,7 @@ import IconButtonBadge from "@components/IconButtonBadge";
 import { useAuth } from "src/hooks/useAuth";
 import { useProduct } from "src/hooks/useProduct";
 
-const NavSecLinks: React.FC = (): JSX.Element => {
+const NavSecLinks: React.FC = () => {
   const { signOutUser, user } = useAuth();
   const { cart } = useProduct();
 

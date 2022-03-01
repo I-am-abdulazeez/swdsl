@@ -17,7 +17,7 @@ import LogoLink from "@components/LogoLink";
 import { inputFocus } from "@utils/index";
 import { useAuth } from "src/hooks/useAuth";
 
-const Index = (): JSX.Element => {
+const Index: React.FC = () => {
   const { sendPasswordEmailReset, isLoading } = useAuth();
   const {
     register,

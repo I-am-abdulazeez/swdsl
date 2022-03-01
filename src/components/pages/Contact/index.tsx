@@ -3,7 +3,7 @@ import Helmet from "@components/Helmet";
 
 import ContactSwipe from "@components/SwipeComponent/ContactSwipe";
 
-const Index: React.FC = (): JSX.Element => {
+const Index: React.FC = () => {
   return (
     <>
       <Helmet title="Contact Shayo Team | ShayoWithDSL.com" />

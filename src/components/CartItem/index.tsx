@@ -23,15 +23,13 @@ import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
 
 import { CartItemProps } from "src/interfaces";
 
-const CartItem: FC<CartItemProps> = ({
-  cartItem,
-  removeProduct,
-  removeAllProduct,
-  addProduct,
-}) => {
+const CartItem: FC<CartItemProps> = (props) => {
+  const { cartItem, removeProduct, removeAllProduct, addProduct } = props;
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef();
+
   return (
     <Box>
       <AlertDialog

@@ -17,12 +17,7 @@ import { doc } from "@firebase/firestore";
 import { useFirestoreDocument } from "@react-query-firebase/firestore";
 import { useRouter } from "next/router";
 
-import {
-  RiAddFill,
-  RiAddLine,
-  RiArrowLeftLine,
-  RiSubtractLine,
-} from "react-icons/ri";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 import Navbar from "@components/Navbar";
 import Helmet from "@components/Helmet";
@@ -32,7 +27,6 @@ import ProductNav from "@components/Products/ProductNav";
 import { firebaseFirestoreAdmin } from "src/lib/firebase";
 import { useProduct } from "src/hooks/useProduct";
 import { numberWithCommas } from "@utils/index";
-import { useState } from "react";
 
 const Index: React.FC = (): JSX.Element => {
   const { query, back } = useRouter();

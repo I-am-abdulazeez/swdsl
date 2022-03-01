@@ -20,7 +20,7 @@ import { numberWithCommas } from "@utils/index";
 
 import { useProduct } from "src/hooks/useProduct";
 
-const Index: React.FC = (): JSX.Element => {
+const Index: React.FC = () => {
   const { cart, removeProduct, addProduct, removeAllProduct } = useProduct();
 
   const cartIsEmpty = cart.length === 0;

@@ -15,13 +15,9 @@ import ProductBadge from "@components/Products/ProductBadge";
 import { ProductListProps } from "src/interfaces";
 import { numberWithCommas } from "@utils/index";
 
-const ProductList: React.FC<ProductListProps> = ({
-  product,
-  docsSnapshot,
-  inCart,
-  onAddToCart,
-  onRemoveFromCart,
-}): JSX.Element => {
+const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
+  const { product, docsSnapshot, inCart, onAddToCart, onRemoveFromCart } =
+    props;
   return (
     <Box
       rounded={"lg"}

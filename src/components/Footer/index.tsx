@@ -5,7 +5,7 @@ import NextLink from "next/link";
 import TeamStack from "@components/TeamStack";
 import { ChakraNextImage } from "@components/ChakraNextImage";
 
-const Footer: React.FC = (): JSX.Element => {
+const Footer: React.FC = () => {
   return (
     <Box as="footer" mt="5rem" bg="white">
       <Container maxW="container.lg">

@@ -7,9 +7,8 @@ import RegisterForm from "./RegisterForm";
 import { withPublic } from "src/hooks/useRoutes";
 import { AuthContextType } from "src/interfaces";
 
-const Index: React.FC<{ userAuth: AuthContextType }> = ({
-  userAuth,
-}): JSX.Element => {
+const Index: React.FC<{ userAuth: AuthContextType }> = (props): JSX.Element => {
+  const { userAuth } = props;
   const { isLoading, setUser, setIsLoggedIn, setIsLoading } = userAuth;
 
   return (

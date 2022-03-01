@@ -3,9 +3,8 @@ import { useRouter } from "next/router";
 import { RiShoppingCartLine } from "react-icons/ri";
 import NextLink from "next/link";
 
-const IconButtonBadge: React.FC<{ badgeContent: number }> = ({
-  badgeContent,
-}): JSX.Element => {
+const IconButtonBadge: React.FC<{ badgeContent: number }> = (props) => {
+  const { badgeContent } = props;
   const { pathname } = useRouter();
 
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });

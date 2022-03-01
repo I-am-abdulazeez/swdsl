@@ -3,7 +3,7 @@ import { chakra } from "@chakra-ui/system";
 import NextImage, { ImageLoaderProps, ImageProps } from "next/image";
 
 const ChakraNextUnwrappedImage = chakra(NextImage, {
-  shouldForwardProp: (prop) =>
+  shouldForwardProp: (props) =>
     [
       "width",
       "height",
@@ -14,7 +14,7 @@ const ChakraNextUnwrappedImage = chakra(NextImage, {
       "placeholder",
       "blurDataURL",
       "loader ",
-    ].includes(prop),
+    ].includes(props),
 });
 
 const myLoader = (resolverProps: ImageLoaderProps): string => {
@@ -40,15 +40,9 @@ const toBase64 = (str: string) =>
     ? Buffer.from(str).toString("base64")
     : window.btoa(str);
 
-export const ChakraNextImage = ({
-  src,
-  alt,
-  width,
-  quality,
-  height,
-  layout,
-  ...rest
-}: ImageProps & BoxProps & {}): JSX.Element => {
+export const ChakraNextImage = (props: ImageProps & BoxProps & {}) => {
+  const { src, alt, width, quality, height, layout, ...rest } = props;
+
   return (
     <Box pos="relative" {...rest}>
       <ChakraNextUnwrappedImage

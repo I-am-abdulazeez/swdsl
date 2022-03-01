@@ -5,12 +5,9 @@ import LogoLink from "@components/LogoLink";
 
 import { AuthHeadingProps } from "src/interfaces";
 
-const AuthHeading: React.FC<AuthHeadingProps> = ({
-  authHeading,
-  authText,
-  authHref,
-  authRoute,
-}): JSX.Element => {
+const AuthHeading: React.FC<AuthHeadingProps> = (props): JSX.Element => {
+  const { authHeading, authText, authHref, authRoute } = props;
+
   return (
     <Box textAlign="center">
       <Box mb={2}>

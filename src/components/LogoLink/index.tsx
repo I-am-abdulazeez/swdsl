@@ -2,10 +2,9 @@ import NextLink from "next/link";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
 
-const LogoLink: React.FC<{ width: string; height: string }> = ({
-  width,
-  height,
-}) => {
+const LogoLink: React.FC<{ width: string; height: string }> = (props) => {
+  const { width, height } = props;
+
   return (
     <NextLink href="/">
       <a>

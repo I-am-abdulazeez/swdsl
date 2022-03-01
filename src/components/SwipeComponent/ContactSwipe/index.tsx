@@ -1,15 +1,13 @@
 import { SimpleGrid, Flex, VStack, Box, chakra, Text } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import NextLink from "next/link";
 
-import { ChakraNextImage } from "@components/ChakraNextImage";
 import TeamStack from "@components/TeamStack";
 
 import { DSLFounders } from "src/data";
 import { Founders } from "src/interfaces";
 import LogoLink from "@components/LogoLink";
 
-const ContactSwipe = (): JSX.Element => {
+const ContactSwipe: React.FC = () => {
   return (
     <SimpleGrid
       id="contact-carousel"

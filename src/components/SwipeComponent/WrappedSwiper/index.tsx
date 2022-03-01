@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { ShayoQuotes } from "src/data";
 import { QuotesTalks } from "src/interfaces";
 
-const WrappedSwiper: React.FC = (): JSX.Element => {
+const WrappedSwiper: React.FC = () => {
   return (
     <Box
       bg={
