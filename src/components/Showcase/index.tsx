@@ -11,7 +11,7 @@ import { ChakraNextImage } from "@components/ChakraNextImage";
 import { ShayoBannerImages } from "src/data";
 import { ShayoBanner } from "src/interfaces";
 
-const ShowCase: React.FC = (): JSX.Element => {
+const ShowCase: React.FC = () => {
   const headingSize: string | undefined = useBreakpointValue({
     base: "md",
     md: "lg",

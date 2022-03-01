@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 
 import { useAuth } from "src/hooks/useAuth";
+import { ReactChildrenProp } from "src/interfaces";
 import { firebaseAuth } from "src/lib/firebase";
 
-const ClientOnly: React.FC<{ children: React.ReactNode }> = ({
-  children,
-  ...delegated
-}) => {
+const ClientOnly: React.FC<ReactChildrenProp> = (props) => {
+  const { children, ...delegated } = props;
+
   const [hasMounted, setHasMounted] = useState<boolean>(false);
   const { setUser } = useAuth();
 

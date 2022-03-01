@@ -15,7 +15,7 @@ import ProductList from "@components/Products/ProductList";
 
 import { useProduct } from "src/hooks/useProduct";
 
-const Index: React.FC = (): JSX.Element => {
+const Index: React.FC = () => {
   const { products, storeQuery, addProduct, cart, removeProduct } =
     useProduct();
 

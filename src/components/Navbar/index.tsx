@@ -3,7 +3,7 @@ import { Box, Flex, Container } from "@chakra-ui/layout";
 import NavSecLinks from "@components/Navbar/NavSecLinks";
 import NavPrimaryLinks from "@components/Navbar/NavPrimaryLinks";
 
-const Navbar: React.FC = (): JSX.Element => {
+const Navbar: React.FC = () => {
   return (
     <Box
       as="header"

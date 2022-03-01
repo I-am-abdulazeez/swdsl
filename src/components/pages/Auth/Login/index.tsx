@@ -20,14 +20,13 @@ import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
 import { inputFocus } from "@utils/index";
-import { withPublic } from "src/hooks/useRoutes";
-import { AuthContextType } from "src/interfaces";
+import { withPublic } from "src/hooks/useRoute";
+import { UserAuthType } from "src/interfaces";
 
-const Index: React.FC<{ userAuth: AuthContextType }> = ({
-  userAuth,
-}): JSX.Element => {
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+const Index: React.FC<UserAuthType> = (props) => {
+  const { userAuth } = props;
   const { signInUser, isLoading } = userAuth;
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const { register, handleSubmit } =
     useForm<{ email: string; password: string }>();
 

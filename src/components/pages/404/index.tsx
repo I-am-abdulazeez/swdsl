@@ -1,13 +1,13 @@
 import { Box, Text, VStack } from "@chakra-ui/layout";
 import { Container, Button } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { RiEyeCloseLine, RiSearchEyeLine } from "react-icons/ri";
+import { RiEyeCloseLine } from "react-icons/ri";
 
 import Navbar from "@components/Navbar";
 import Footer from "@components/Footer";
 import Helmet from "@components/Helmet";
 
-const Index: React.FC = (): JSX.Element => {
+const Index: React.FC = () => {
   return (
     <Box>
       <Helmet title="Error Page | No result found " />

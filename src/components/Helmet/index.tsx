@@ -1,10 +1,9 @@
 import Head from "next/head";
+import { HelmetProps } from "src/interfaces";
 
-const Helmet: React.FC<{ title: string }> = ({
-  title,
-}: {
-  title?: string;
-}): JSX.Element => {
+const Helmet: React.FC<HelmetProps> = (props) => {
+  const { title } = props;
+
   return (
     <Head>
       <title>{title}</title>
