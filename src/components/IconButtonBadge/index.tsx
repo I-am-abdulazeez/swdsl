@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { RiShoppingCartLine } from "react-icons/ri";
 import NextLink from "next/link";
 
-const IconButtonBadge: React.FC<{ badgeContent: number }> = (props) => {
+import { IconButtonBadgeProps } from "src/interfaces";
+
+const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
   const { badgeContent } = props;
   const { pathname } = useRouter();
 

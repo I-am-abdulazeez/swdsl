@@ -1,6 +1,7 @@
 import Head from "next/head";
+import { HelmetProps } from "src/interfaces";
 
-const Helmet: React.FC<{ title?: string }> = (props) => {
+const Helmet: React.FC<HelmetProps> = (props) => {
   const { title } = props;
 
   return (

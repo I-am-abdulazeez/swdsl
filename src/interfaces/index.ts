@@ -1,6 +1,7 @@
 import { UserInfo } from "firebase/auth";
 import {
   DocumentData,
+  DocumentSnapshot,
   FirestoreError,
   QueryDocumentSnapshot,
   QuerySnapshot,
@@ -110,9 +111,34 @@ export interface ProductListProps {
   onRemoveFromCart: (product: {}) => void;
 }
 
+export interface ProductNavProps {
+  product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
+}
+
 export interface CartItemProps {
   cartItem: any;
   addProduct: (product: any) => void;
   removeProduct: (id: any) => void;
   removeAllProduct: (id: any) => void;
+}
+
+export interface UserAuthType {
+  userAuth: AuthContextType;
+}
+
+export interface LogoLinkProps {
+  width: string;
+  height: string;
+}
+
+export interface ReactChildrenProp {
+  children: React.ReactNode;
+}
+
+export interface HelmetProps {
+  title?: string;
+}
+
+export interface IconButtonBadgeProps {
+  badgeContent: number;
 }

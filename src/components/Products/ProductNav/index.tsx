@@ -1,16 +1,8 @@
 import { RiArrowRightSLine } from "react-icons/ri";
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import { UseQueryResult } from "react-query";
-import {
-  DocumentData,
-  DocumentSnapshot,
-  FirestoreError,
-} from "firebase/firestore";
 
-interface ProductNavProps {
-  product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
-}
+import { ProductNavProps } from "src/interfaces";
 
 const ProductNav: React.FC<ProductNavProps> = (props): JSX.Element => {
   const { product } = props;

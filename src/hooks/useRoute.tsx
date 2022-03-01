@@ -2,11 +2,9 @@ import { Flex, Spinner } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 import { useAuth } from "src/hooks/useAuth";
-import { AuthContextType } from "src/interfaces";
+import { AuthContextType, UserAuthType } from "src/interfaces";
 
-export const withPublic = (
-  Component: React.FC<{ userAuth: AuthContextType }>
-) => {
+export const withPublic = (Component: React.FC<UserAuthType>) => {
   return function WithPublic(props: AuthContextType) {
     const auth = useAuth();
     const { replace } = useRouter();
