@@ -21,20 +21,17 @@ import AuthHeading from "@components/AuthHeading";
 
 import { inputFocus } from "@utils/index";
 import { withPublic } from "src/hooks/useRoute";
-import { UserAuthType } from "src/interfaces";
+import { UserAuthType, UserDetails } from "src/interfaces";
 
 const Index: React.FC<UserAuthType> = (props): JSX.Element => {
   const { userAuth } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const { signInUser, isLoading } = userAuth;
-  const { register, handleSubmit } =
-    useForm<{ email: string; password: string }>();
+  const { register, handleSubmit } = useForm<UserDetails>();
 
-  const handleUserLogin: SubmitHandler<{ email: string; password: string }> = (
-    data
-  ) => {
-    signInUser(data.email, data.password);
+  const handleUserLogin: SubmitHandler<UserDetails> = ({ email, password }) => {
+    signInUser(email, password);
   };
 
   return (

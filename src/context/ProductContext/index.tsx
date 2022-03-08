@@ -1,6 +1,7 @@
 import { useToast } from "@chakra-ui/react";
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
 import {
+  arrayUnion,
   collection,
   doc,
   DocumentData,
@@ -8,36 +9,60 @@ import {
   orderBy,
   query,
   QueryDocumentSnapshot,
+  setDoc,
+  where,
 } from "firebase/firestore";
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+
+import { firebaseFirestore } from "src/lib/firebase";
 import { productContextInitialValues } from "src/data";
-import { ProductContextType } from "src/interfaces";
-import { firebaseFirestoreAdmin } from "src/lib/firebase";
+import {
+  CartItem,
+  ProductContextType,
+  ReactChildrenProp,
+} from "src/interfaces";
+import { useAuth } from "src/hooks/useAuth";
 
 export const ProductsContext = createContext<ProductContextType>(
   productContextInitialValues
 );
 
-export const ProductProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+export const ProductProvider = ({ children }: ReactChildrenProp) => {
   const [products, setProducts] = useState<
     QueryDocumentSnapshot<DocumentData>[]
   >([]);
   const chakraToast = useToast();
   const [cart, setCart] = useState<any[]>([]);
+  const { user } = useAuth();
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    JSON.parse(localStorage.getItem("cart")!);
-  });
+  const userId = String(user?.uid);
 
   const ref = query(
-    collection(firebaseFirestoreAdmin, "products"),
+    collection(firebaseFirestore, "products"),
     orderBy("createdAt", "desc"),
     limit(50)
+  );
+
+  const userCartRef = query(
+    collection(firebaseFirestore, "users"),
+    orderBy("createdAt", "asc")
+  );
+
+  const userCartQuery = useFirestoreQuery(
+    ["users"],
+    userCartRef,
+    {
+      includeMetadataChanges: true,
+      subscribe: true,
+    },
+    {
+      onError(error) {
+        console.log(error);
+      },
+      onSuccess(data) {
+        console.log(data?.docs);
+      },
+    }
   );
 
   const storeQuery = useFirestoreQuery(
@@ -51,6 +76,9 @@ export const ProductProvider = ({
           title: `Error fetching data ${err.message}`,
           status: "error",
           variant: "subtle",
+          containerStyle: {
+            fontSize: "12.5px",
+          },
           isClosable: true,
         });
       },
@@ -61,61 +89,168 @@ export const ProductProvider = ({
     }
   );
 
-  // Add Product to cart and save to current user {}
+  useEffect(() => {
+    const cartItemLocal = JSON.parse(localStorage.getItem("cart")!);
+    console.log(cartItemLocal);
+    const userCart = userCartQuery.data?.docs?.find(
+      (cartItem) => cartItem.id === userId
+    );
+    if (user) setCart(userCart?.data()?.cart);
+    setCart(cart);
+    console.log(userCart);
+  }, []);
+
+  // Add Product to cart
   const addProduct = (product: any) => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-    const exist = cart.find((x) => x.id === product.id);
-    if (exist) {
-      setCart(
-        cart.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty + 1 } : x
-        )
+    let cartArray = [...cart];
+    const itemExist = cartArray.find((x) => x.id === product.id);
+    if (itemExist) {
+      cartArray = cartArray.map((x) =>
+        x.id === product.id ? { ...itemExist, qty: itemExist.qty + 1 } : x
       );
-      localStorage.setItem("cart", JSON.stringify(cart));
-      chakraToast({
-        status: "success",
-        title: `Product updated with a new quantity`,
-        isClosable: true,
-        containerStyle: {
-          fontSize: "12.5px",
-        },
-        variant: "subtle",
-        position: "bottom-right",
-      });
+      // If the user Exist in the DB, set the Cart Array in the User's Collection and Local Storage
+      if (user) {
+        setDoc(
+          doc(firebaseFirestore, "users", userId),
+          { cart: cartArray },
+          { merge: true }
+        )
+          .then(() => {
+            console.log("done");
+            setCart([...cartArray]);
+            chakraToast({
+              status: "success",
+              title: `Product updated with a new quantity`,
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          })
+          .catch(() => {
+            chakraToast({
+              status: "error",
+              title: "Something went wrong",
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          });
+      } else {
+        // If the User does not exist set the Cart Array on LocalStorage only.
+        setCart([...cartArray]);
+        localStorage.setItem("cart", JSON.stringify(cartArray));
+        console.log(JSON.parse(localStorage.getItem("cart")!));
+        chakraToast({
+          status: "success",
+          title: `Product updated with a new quantity`,
+          isClosable: true,
+          containerStyle: {
+            fontSize: "12.5px",
+          },
+          variant: "subtle",
+          position: "bottom-right",
+        });
+      }
     } else {
-      setCart([...cart, { ...product, qty: 1 }]);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      chakraToast({
-        status: "success",
-        title: "Product added successfully",
-        isClosable: true,
-        containerStyle: {
-          fontSize: "12.5px",
-        },
-        variant: "subtle",
-        position: "bottom-right",
-      });
+      cartArray = [...cart, { ...product, qty: 1 }];
+      if (user) {
+        setDoc(
+          doc(firebaseFirestore, "users", user?.uid!),
+          { cart: arrayUnion(...cartArray) },
+          { merge: true }
+        )
+          .then(() => {
+            console.log("done");
+            setCart([...cartArray]);
+            chakraToast({
+              status: "success",
+              title: "Product added successfully",
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          })
+          .catch(() => {
+            chakraToast({
+              status: "error",
+              title: "Something went wrong",
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          });
+      } else {
+        // If the User does not exist set the Cart Array on LocalStorage only.
+        setCart([...cartArray]);
+        localStorage.setItem("cart", JSON.stringify(cartArray));
+        console.log(JSON.parse(localStorage.getItem("cart")!));
+        chakraToast({
+          status: "success",
+          title: `Product added successfully`,
+          isClosable: true,
+          containerStyle: {
+            fontSize: "12.5px",
+          },
+          variant: "subtle",
+          position: "bottom-right",
+        });
+      }
     }
   };
 
+  // Remove all Product from cart
   const removeAllProduct = (product: any) => {
-    setCart(cart.filter((x) => x.id !== product.id));
-    chakraToast({
-      status: "success",
-      title: `Product removed from cart`,
-      isClosable: true,
-      containerStyle: {
-        fontSize: "12.5px",
-      },
-      variant: "subtle",
-      position: "bottom-right",
-    });
-  };
-
-  const removeProduct = (product: any) => {
-    const exist = cart.find((x) => x.id === product.id);
-    if (exist.qty === 1) {
-      setCart(cart.filter((x) => x.id !== product.id));
+    let cartArray = [...cart];
+    cartArray.filter((x) => x.id !== product.id);
+    if (user) {
+      setDoc(
+        doc(firebaseFirestore, "users", user?.uid!),
+        { cart: cartArray },
+        { merge: true }
+      )
+        .then(() => {
+          console.log("done");
+          setCart([...cartArray]);
+          chakraToast({
+            status: "success",
+            title: `Product removed from cart`,
+            isClosable: true,
+            containerStyle: {
+              fontSize: "12.5px",
+            },
+            variant: "subtle",
+            position: "bottom-right",
+          });
+        })
+        .catch((error) => {
+          console.log("Error", error);
+          chakraToast({
+            status: "error",
+            title: `Something went wrong`,
+            isClosable: true,
+            containerStyle: {
+              fontSize: "12.5px",
+            },
+            variant: "subtle",
+            position: "bottom-right",
+          });
+        });
+    } else {
+      setCart([...cartArray]);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
+      console.log(JSON.parse(localStorage.getItem("cart")!));
       chakraToast({
         status: "success",
         title: `Product removed from cart`,
@@ -126,22 +261,81 @@ export const ProductProvider = ({
         variant: "subtle",
         position: "bottom-right",
       });
-    } else {
-      setCart(
-        cart.map((x) =>
-          x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
+    }
+  };
+
+  // Remove Product from cart by quantity
+  const removeProduct = (product: any) => {
+    let cartArray = [...cart];
+    const exist = cartArray.find((x) => x.id === product.id);
+    if (exist?.qty === 1) {
+      cartArray = cart.filter((x) => x.id !== product.id);
+      if (user) {
+        setDoc(
+          doc(firebaseFirestore, "users", user?.uid!),
+          { cart: cartArray },
+          { merge: true }
         )
+          .then(() => {
+            console.log("done");
+            setCart([...cartArray]);
+            chakraToast({
+              status: "success",
+              title: `Product removed from cart`,
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          })
+          .catch((error) => console.log("Error", error));
+      } else {
+        setCart([...cartArray]);
+        localStorage.setItem("cart", JSON.stringify(cartArray));
+        console.log(JSON.parse(localStorage.getItem("cart")!));
+      }
+    } else {
+      cartArray = cart.map((x) =>
+        x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
       );
-      chakraToast({
-        status: "success",
-        title: `- 1 quantity of product removed`,
-        isClosable: true,
-        containerStyle: {
-          fontSize: "12.5px",
-        },
-        variant: "subtle",
-        position: "bottom-right",
-      });
+      if (user) {
+        setDoc(
+          doc(firebaseFirestore, "users", user?.uid!),
+          { cart: cartArray },
+          { merge: true }
+        )
+          .then(() => {
+            console.log("done");
+            setCart([...cartArray]);
+            chakraToast({
+              status: "success",
+              title: `- 1 quantity of product removed`,
+              isClosable: true,
+              containerStyle: {
+                fontSize: "12.5px",
+              },
+              variant: "subtle",
+              position: "bottom-right",
+            });
+          })
+          .catch((error) => console.log("Error", error));
+      } else {
+        setCart([...cartArray]);
+        localStorage.setItem("cart", JSON.stringify(cartArray));
+        console.log(JSON.parse(localStorage.getItem("cart")!));
+        chakraToast({
+          status: "success",
+          title: `- 1 quantity of product removed`,
+          isClosable: true,
+          containerStyle: {
+            fontSize: "12.5px",
+          },
+          variant: "subtle",
+          position: "bottom-right",
+        });
+      }
     }
   };
 
