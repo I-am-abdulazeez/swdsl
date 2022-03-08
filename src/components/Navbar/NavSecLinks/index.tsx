@@ -71,7 +71,7 @@ const NavSecLinks: React.FC = () => {
         </NextLink>
       )}
 
-      <IconButtonBadge badgeContent={cart.length} />
+      <IconButtonBadge badgeContent={cart?.length} />
       {user && (
         <Menu closeOnBlur={true}>
           <MenuButton

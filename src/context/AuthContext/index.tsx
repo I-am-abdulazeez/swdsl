@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   useAuthConfirmPasswordReset,
   useAuthSendPasswordResetEmail,
@@ -9,7 +9,7 @@ import {
 import { UserInfo } from "firebase/auth";
 import { useRouter } from "next/router";
 
-import { AuthContextType } from "src/interfaces";
+import { AuthContextType, ReactChildrenProp } from "src/interfaces";
 import { firebaseAuth } from "src/lib/firebase";
 import { authContextInitialValues } from "src/data";
 
@@ -17,9 +17,7 @@ export const AuthContext = createContext<AuthContextType>(
   authContextInitialValues
 );
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider = ({ children }: ReactChildrenProp) => {
   const router = useRouter();
   const chakraToast = useToast();
   const urlRedirectMode =

@@ -35,11 +35,14 @@ export interface SVideos {
   videoId: string;
 }
 
-export interface IUserRegister {
+export interface UserDetails {
   email: string;
+  password: string;
+}
+
+export interface IUserRegister extends UserDetails {
   firstname: string;
   lastname: string;
-  password: string;
   phonenumber: string;
   accept: boolean;
 }
@@ -86,11 +89,11 @@ export interface ProductDetailsParams {
 }
 
 export interface CartItem {
-  id: string | string[];
+  id: string | string[] | undefined;
   url: string;
   drinkName: string;
   price: string;
-  quantity: number;
+  qty: number;
 }
 
 export interface UserData {

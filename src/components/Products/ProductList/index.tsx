@@ -36,7 +36,7 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
           width="200px"
           m={"0 auto"}
           loading="eager"
-          height={{ base: "100px", md: "120px" }}
+          height={{ base: "100px", md: "180px" }}
           src={product?.url}
           alt={`product-${product?.id}`}
         />

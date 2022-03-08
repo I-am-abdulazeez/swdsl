@@ -2,9 +2,10 @@ import { VStack } from "@chakra-ui/layout";
 
 import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
-import RegisterForm from "@components/pages/Auth/Register/RegisterForm";
+import RegisterForm from "@components/RegisterForm";
 
 import { withPublic } from "src/hooks/useRoute";
+
 import { UserAuthType } from "src/interfaces";
 
 const Index: React.FC<UserAuthType> = (props) => {
@@ -23,7 +24,7 @@ const Index: React.FC<UserAuthType> = (props) => {
       >
         <AuthHeading
           authHeading="Create an account"
-          authText="Already have an account?"
+          authText="Already have an account ?"
           authHref="/auth/login"
           authRoute="Signin"
         />

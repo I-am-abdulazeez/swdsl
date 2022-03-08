@@ -1,5 +1,16 @@
-import Index from "@components/pages/Contact";
+import Navbar from "@components/Navbar";
+import Helmet from "@components/Helmet";
 
-export default function Contact() {
-  return <Index />;
-}
+import ContactSwipe from "@components/SwipeComponent/ContactSwipe";
+
+const Index: React.FC = () => {
+  return (
+    <>
+      <Helmet title="Contact Shayo Team | ShayoWithDSL.com" />
+      <Navbar />
+      <ContactSwipe />
+    </>
+  );
+};
+
+export default Index;
