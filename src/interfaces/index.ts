@@ -1,3 +1,4 @@
+import { ModalProps } from "@chakra-ui/react";
 import { UserInfo } from "firebase/auth";
 import {
   DocumentData,
@@ -7,7 +8,7 @@ import {
   QuerySnapshot,
   Timestamp,
 } from "firebase/firestore";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, RefObject, SetStateAction } from "react";
 import { UseQueryResult } from "react-query";
 
 export interface ShayoBanner {
@@ -118,13 +119,6 @@ export interface ProductNavProps {
   product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
 }
 
-export interface CartItemProps {
-  cartItem: any;
-  addProduct: (product: any) => void;
-  removeProduct: (id: any) => void;
-  removeAllProduct: (id: any) => void;
-}
-
 export interface UserAuthType {
   userAuth: AuthContextType;
 }
@@ -144,4 +138,19 @@ export interface HelmetProps {
 
 export interface IconButtonBadgeProps {
   badgeContent: number;
+}
+
+export interface CartItemProps {
+  cartItem: any;
+  addProduct: (product: any) => void;
+  removeProduct: (id: any) => void;
+  removeAllProduct: (id: any) => void;
+}
+
+export interface CartItemAlertProps {
+  cartItem: any;
+  isOpen: boolean;
+  cancelRef: MutableRefObject<undefined>;
+  onClose: () => void;
+  removeAllProduct: (id: any) => void;
 }
