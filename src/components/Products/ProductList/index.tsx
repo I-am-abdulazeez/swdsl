@@ -36,9 +36,9 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
           width="200px"
           m={"0 auto"}
           loading="eager"
-          height={{ base: "100px", md: "180px" }}
+          height={{ base: "100px", md: "200px" }}
           src={product?.url}
-          alt={`product-${product?.id}`}
+          alt={`${product?.drinkName}`}
         />
       </Box>
       <Box p={{ base: "0.5em", md: "1em" }}>

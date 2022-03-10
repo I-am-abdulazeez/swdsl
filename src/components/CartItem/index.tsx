@@ -1,11 +1,5 @@
 import {
   Box,
-  AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogBody,
-  AlertDialogFooter,
   Button,
   HStack,
   VStack,
@@ -22,9 +16,10 @@ import { FC, useRef, useState } from "react";
 import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
 
 import { CartItemProps } from "src/interfaces";
+import CartItemAlert from "./CartItemAlert";
 
 const CartItem: FC<CartItemProps> = (props) => {
-  const { cartItem, removeProduct, removeAllProduct, addProduct } = props;
+  const { cartItem, removeProduct, addProduct, removeAllProduct } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => setIsOpen(false);
@@ -32,38 +27,13 @@ const CartItem: FC<CartItemProps> = (props) => {
 
   return (
     <Box>
-      <AlertDialog
-        motionPreset="slideInBottom"
+      <CartItemAlert
+        cancelRef={cancelRef}
+        cartItem={cartItem}
         isOpen={isOpen}
-        isCentered
-        leastDestructiveRef={cancelRef?.current}
         onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="md" fontWeight="bold">
-              Remove Product?
-            </AlertDialogHeader>
-
-            <AlertDialogBody fontSize={"14px"}>
-              Are you sure? You can't undo this action afterwards.
-            </AlertDialogBody>
-            <AlertDialogFooter>
-              <Button size={"xs"} ref={cancelRef.current} onClick={onClose}>
-                Cancel
-              </Button>
-              <Button
-                colorScheme="red"
-                size={"xs"}
-                onClick={() => removeAllProduct(cartItem)}
-                ml={3}
-              >
-                Remove
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
+        removeAllProduct={removeAllProduct}
+      />
       <Box my={4} p={5} rounded="lg" border="1px solid #EDF2F7">
         <Stack direction={{ base: "column", md: "row" }} spacing={10}>
           <Image
@@ -100,11 +70,11 @@ const CartItem: FC<CartItemProps> = (props) => {
             <Button
               size="xs"
               onClick={() => setIsOpen(true)}
-              leftIcon={<RiDeleteBin2Line />}
+              leftIcon={<RiDeleteBin2Line size={"12.5px"} />}
               colorScheme="error"
               variant={"ghost"}
             >
-              Remove
+              Remove Product
             </Button>
           </Box>
           <Spacer />
@@ -116,7 +86,7 @@ const CartItem: FC<CartItemProps> = (props) => {
               isDisabled={cartItem?.qty === 1}
               icon={<RiSubtractLine size="18px" />}
             />
-            <Text>{cartItem.qty}</Text>
+            <Text>{cartItem?.qty}</Text>
             <IconButton
               size="xs"
               onClick={() => addProduct(cartItem)}

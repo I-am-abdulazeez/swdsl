@@ -49,7 +49,8 @@ const Index: React.FC = () => {
             )}
             <SimpleGrid
               columns={{ base: 2, md: 4 }}
-              spacing={{ base: 3, md: 4 }}
+              spacingX={{ base: 3, md: 4 }}
+              spacingY={{ base: 3, md: 8 }}
             >
               {products?.map((docsSnapshot) => {
                 const doc = docsSnapshot.data();
