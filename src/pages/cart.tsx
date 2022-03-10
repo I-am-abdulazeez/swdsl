@@ -20,7 +20,7 @@ import { numberWithCommas } from "@utils/index";
 import { useProduct } from "src/hooks/useProduct";
 
 const Index: React.FC = () => {
-  const { cart, removeProduct, addProduct, removeAllProduct } = useProduct();
+  const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();
 
   const cartIsEmpty = cart?.length === 0;
   const cartLength = cart?.length;
@@ -53,7 +53,7 @@ const Index: React.FC = () => {
                 cartItem={cartItem}
                 addProduct={addProduct}
                 removeProduct={removeProduct}
-                removeAllProduct={removeAllProduct}
+                removeAllProduct={removeAllProductQty}
               />
             );
           })}

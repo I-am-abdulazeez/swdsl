@@ -24,7 +24,7 @@ import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
 import { CartItemProps } from "src/interfaces";
 
 const CartItem: FC<CartItemProps> = (props) => {
-  const { cartItem, removeProduct, removeAllProduct, addProduct } = props;
+  const { cartItem, removeProduct, addProduct, removeAllProduct } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => setIsOpen(false);
@@ -41,8 +41,10 @@ const CartItem: FC<CartItemProps> = (props) => {
       >
         <AlertDialogOverlay>
           <AlertDialogContent>
-            <AlertDialogHeader fontSize="md" fontWeight="bold">
-              Remove Product?
+            <AlertDialogHeader fontSize="md" fontWeight="semibold">
+              Remove{" "}
+              <span style={{ fontWeight: "bold" }}>{cartItem?.drinkName}</span>{" "}
+              from cart?
             </AlertDialogHeader>
 
             <AlertDialogBody fontSize={"14px"}>
@@ -50,15 +52,18 @@ const CartItem: FC<CartItemProps> = (props) => {
             </AlertDialogBody>
             <AlertDialogFooter>
               <Button size={"xs"} ref={cancelRef.current} onClick={onClose}>
-                Cancel
+                Leave
               </Button>
               <Button
                 colorScheme="red"
                 size={"xs"}
-                onClick={() => removeAllProduct(cartItem)}
+                onClick={() => {
+                  removeAllProduct(cartItem);
+                  onClose();
+                }}
                 ml={3}
               >
-                Remove
+                Remove product
               </Button>
             </AlertDialogFooter>
           </AlertDialogContent>

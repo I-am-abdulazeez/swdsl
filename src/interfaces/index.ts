@@ -76,7 +76,7 @@ export interface ProductContextType {
   cart: any[];
   addProduct: (product: {}) => void;
   removeProduct: (product: {}) => void;
-  removeAllProduct: (product: {}) => void;
+  removeAllProductQty: (product: {}) => void;
 }
 
 export interface DrinkCategoryInterface {
