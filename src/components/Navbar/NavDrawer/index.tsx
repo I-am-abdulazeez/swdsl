@@ -20,11 +20,25 @@ import {
 
 import { RiMenuLine } from "react-icons/ri";
 
-import { DrinkCategory } from "src/data";
+import NavAccordion from "../NavAccordion";
+
+import { useProduct } from "src/hooks/useProduct";
 
 const NavDrawer: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const drawerSize = useBreakpointValue({ base: "full", md: "xs" });
+  const { products } = useProduct();
+  const drawerSize = useBreakpointValue({ base: "full", md: "md" });
+
+  // const items = products?.reduce((prev: any, current) => {
+  //   if (!(current?.data()?.category in prev)) {
+  //     prev[current?.data()?.category] = [];
+  //   }
+  //   prev[current?.data()?.category].push({
+  //     drinkName: current?.data()?.drinkName,
+  //     id: current.id,
+  //   });
+  //   return prev;
+  // }, {});
 
   return (
     <>
@@ -55,33 +69,7 @@ const NavDrawer: React.FC = () => {
           </DrawerHeader>
           <DrawerCloseButton size={"sm"} />
           <DrawerBody>
-            <Accordion allowToggle>
-              {DrinkCategory.map(({ drinkName, drinkNameList }, idx) => (
-                <AccordionItem key={idx}>
-                  <h2>
-                    <AccordionButton fontSize={"sm"} fontWeight={"medium"}>
-                      <Box flex="1" textAlign="left">
-                        {drinkName}
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel px={0} pb={4}>
-                    {drinkNameList.map((list, idx) => (
-                      <Flex key={idx}>
-                        <Button
-                          size={"sm"}
-                          variant={"ghost"}
-                          fontWeight={"light"}
-                        >
-                          {list}
-                        </Button>
-                      </Flex>
-                    ))}
-                  </AccordionPanel>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            <NavAccordion />
           </DrawerBody>
         </DrawerContent>
       </Drawer>
