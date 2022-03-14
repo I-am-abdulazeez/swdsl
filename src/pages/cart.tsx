@@ -29,8 +29,8 @@ const Index: React.FC = () => {
   const cartLength = cart?.length;
 
   const itemsPrice = cart
-    .map((product) => product?.price * product?.qty || 1)
-    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    ?.map((product) => product?.price * product?.qty || 1)
+    ?.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   return (
     <Box>
