@@ -1,4 +1,3 @@
-import { ModalProps } from "@chakra-ui/react";
 import { UserInfo } from "firebase/auth";
 import {
   DocumentData,
@@ -153,4 +152,8 @@ export interface CartItemAlertProps {
   cancelRef: MutableRefObject<undefined>;
   onClose: () => void;
   removeAllProduct: (id: any) => void;
+}
+
+export interface NavCatListProps {
+  category: string;
 }

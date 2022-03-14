@@ -1,8 +1,10 @@
 import { Box, InputGroup, InputLeftElement, Input } from "@chakra-ui/react";
 import { shadowSm } from "@utils/index";
+import { useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 
 const DrinkSearch: React.FC = () => {
+  const [serachTerm, setSearchTerm] = useState("");
   return (
     <Box>
       <InputGroup size="lg">
@@ -10,6 +12,7 @@ const DrinkSearch: React.FC = () => {
           <RiSearch2Line color="#CBD5E0" size="20px" />
         </InputLeftElement>
         <Input
+          onChange={(e) => setSearchTerm(e.target.value)}
           type="text"
           _focus={{
             boxShadow: shadowSm,

@@ -1,23 +1,17 @@
 import { useToast } from "@chakra-ui/react";
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
 import {
-  arrayUnion,
   collection,
-  doc,
   DocumentData,
-  limit,
   orderBy,
   query,
   QueryDocumentSnapshot,
-  setDoc,
-  where,
 } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
 
 import { firebaseFirestore } from "src/lib/firebase";
 import { productContextInitialValues } from "src/data";
 import { ProductContextType, ReactChildrenProp } from "src/interfaces";
-import { useAuth } from "src/hooks/useAuth";
 
 export const ProductsContext = createContext<ProductContextType>(
   productContextInitialValues
@@ -29,14 +23,10 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
   >([]);
   const chakraToast = useToast();
   const [cart, setCart] = useState<any[]>([]);
-  const { user } = useAuth();
-
-  const userId = String(user?.uid);
 
   const ref = query(
     collection(firebaseFirestore, "products"),
-    orderBy("createdAt", "desc"),
-    limit(100)
+    orderBy("createdAt", "desc")
   );
 
   const storeQuery = useFirestoreQuery(
