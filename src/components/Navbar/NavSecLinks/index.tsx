@@ -32,6 +32,8 @@ const NavSecLinks: React.FC = () => {
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
   const activeShop = router.pathname === "/shop" ? "primary" : "";
 
+  console.log(cart?.length);
+
   return (
     <HStack>
       {!user && (
@@ -81,7 +83,7 @@ const NavSecLinks: React.FC = () => {
             leftIcon={<RiUserLine size="14px" />}
             rightIcon={<RiArrowDownSLine size="14px" />}
           >
-            Hi, {user.displayName}
+            Hi, {user?.displayName}
           </MenuButton>
           <MenuList>
             <MenuItem fontSize={{ base: "xs", md: "sm" }}>My Account</MenuItem>
