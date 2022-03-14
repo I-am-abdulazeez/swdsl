@@ -54,11 +54,15 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
   );
 
   useEffect(() => {
-    console.log(cart);
     const cartArrayFromStorage = JSON.parse(
       String(localStorage.getItem("cart"))
     );
-    setCart(cartArrayFromStorage);
+    if (localStorage.getItem("cart") === null) {
+      localStorage.setItem("cart", JSON.stringify([]));
+      setCart([]);
+    } else {
+      setCart(cartArrayFromStorage);
+    }
   }, []);
 
   // Add Product to Cart
