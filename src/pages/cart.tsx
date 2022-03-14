@@ -11,7 +11,6 @@ import {
 } from "@chakra-ui/react";
 
 import NextLink from "next/link";
-
 import { RiStore2Line } from "react-icons/ri";
 
 import CartItem from "@components/CartItem";
@@ -29,8 +28,8 @@ const Index: React.FC = () => {
   const cartLength = cart?.length;
 
   const itemsPrice = cart
-    ?.map((product) => product?.price * product?.qty || 1)
-    ?.reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+    .map((product) => product?.price * product?.qty || 1)
+    .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   return (
     <Box>
@@ -66,51 +65,41 @@ const Index: React.FC = () => {
           )}
           {cart?.map((cartItem, idx) => {
             return (
-              <>
-                <CartItem
-                  key={idx}
-                  cartItem={cartItem}
-                  addProduct={addProduct}
-                  removeProduct={removeProduct}
-                  removeAllProduct={removeAllProductQty}
-                />
-
-                <Box my={8}>
-                  <Heading size="lg" textAlign={"right"}>
-                    Total: {numberWithCommas(itemsPrice.toFixed(2))}
-                  </Heading>
-                  <Text textAlign={"right"} fontSize={"xs"}>
-                    Delivery fee not included yet
-                  </Text>
-                  <HStack
-                    spacing={"6"}
-                    justifyContent={"center"}
-                    mt={20}
-                    mb={6}
-                  >
-                    <NextLink href="/shop">
-                      <Button
-                        as="a"
-                        size="md"
-                        colorScheme={"primary"}
-                        cursor={"pointer"}
-                        variant={"outline"}
-                      >
-                        Continue shopping
-                      </Button>
-                    </NextLink>
-                    <Button
-                      size="md"
-                      colorScheme={"primary"}
-                      cursor={"pointer"}
-                    >
-                      Checkout
-                    </Button>
-                  </HStack>
-                </Box>
-              </>
+              <CartItem
+                key={idx}
+                cartItem={cartItem}
+                addProduct={addProduct}
+                removeProduct={removeProduct}
+                removeAllProduct={removeAllProductQty}
+              />
             );
           })}
+          {!cartIsEmpty && (
+            <Box my={8}>
+              <Heading size="lg" textAlign={"right"}>
+                Total: {numberWithCommas(itemsPrice.toFixed(2))}
+              </Heading>
+              <Text textAlign={"right"} fontSize={"xs"}>
+                Delivery fee not included yet
+              </Text>
+              <HStack spacing={"6"} justifyContent={"center"} mt={20} mb={6}>
+                <NextLink href="/shop">
+                  <Button
+                    as="a"
+                    size="md"
+                    colorScheme={"primary"}
+                    cursor={"pointer"}
+                    variant={"outline"}
+                  >
+                    Continue shopping
+                  </Button>
+                </NextLink>
+                <Button size="md" colorScheme={"primary"} cursor={"pointer"}>
+                  Pay with paystack
+                </Button>
+              </HStack>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>
