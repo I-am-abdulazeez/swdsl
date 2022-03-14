@@ -8,6 +8,9 @@
     "paths": {
       "@components*": ["src/components*"],
       "@pages*": ["src/pages*"],
+      "@hooks*": ["src/hooks*"],
+      "@context*": ["src/context*"],
+      "@interfaces*": ["src/interfaces*"],
       "@styles*": ["src/styles*"],
       "@libs*": ["src/libs*"],
       "@theme*": ["src/theme*"],

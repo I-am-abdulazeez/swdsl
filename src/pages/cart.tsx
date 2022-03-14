@@ -64,52 +64,54 @@ const Index: React.FC = () => {
               </NextLink>
             </VStack>
           )}
-          {cart.map((cartItem, idx) => {
-            return (
-              <>
-                <CartItem
-                  key={idx}
-                  cartItem={cartItem}
-                  addProduct={addProduct}
-                  removeProduct={removeProduct}
-                  removeAllProduct={removeAllProductQty}
-                />
-                <Box my={8}>
-                  <Heading size="lg" textAlign={"right"}>
-                    Total: {numberWithCommas(itemsPrice.toFixed(2))}
-                  </Heading>
-                  <Text textAlign={"right"} fontSize={"xs"}>
-                    Delivery fee not included yet
-                  </Text>
-                  <HStack
-                    spacing={"6"}
-                    justifyContent={"center"}
-                    mt={20}
-                    mb={6}
-                  >
-                    <NextLink href="/shop">
+          {cart &&
+            cart?.map((cartItem, idx) => {
+              return (
+                <>
+                  <CartItem
+                    key={idx}
+                    cartItem={cartItem}
+                    addProduct={addProduct}
+                    removeProduct={removeProduct}
+                    removeAllProduct={removeAllProductQty}
+                  />
+
+                  <Box my={8}>
+                    <Heading size="lg" textAlign={"right"}>
+                      Total: {numberWithCommas(itemsPrice.toFixed(2))}
+                    </Heading>
+                    <Text textAlign={"right"} fontSize={"xs"}>
+                      Delivery fee not included yet
+                    </Text>
+                    <HStack
+                      spacing={"6"}
+                      justifyContent={"center"}
+                      mt={20}
+                      mb={6}
+                    >
+                      <NextLink href="/shop">
+                        <Button
+                          as="a"
+                          size="md"
+                          colorScheme={"primary"}
+                          cursor={"pointer"}
+                          variant={"outline"}
+                        >
+                          Continue shopping
+                        </Button>
+                      </NextLink>
                       <Button
-                        as="a"
                         size="md"
                         colorScheme={"primary"}
                         cursor={"pointer"}
-                        variant={"outline"}
                       >
-                        Continue shopping
+                        Checkout
                       </Button>
-                    </NextLink>
-                    <Button
-                      size="md"
-                      colorScheme={"primary"}
-                      cursor={"pointer"}
-                    >
-                      Checkout
-                    </Button>
-                  </HStack>
-                </Box>
-              </>
-            );
-          })}
+                    </HStack>
+                  </Box>
+                </>
+              );
+            })}
         </Box>
       </Container>
     </Box>
