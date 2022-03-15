@@ -159,4 +159,5 @@ export const productContextInitialValues = {
   addProduct: () => {},
   removeProduct: () => {},
   removeAllProductQty: () => {},
+  cartIsLoading: false,
 };

@@ -23,6 +23,7 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
   >([]);
   const chakraToast = useToast();
   const [cart, setCart] = useState<any[]>([]);
+  const [cartIsLoading, setCartIsLoading] = useState(false);
 
   const ref = query(
     collection(firebaseFirestore, "products"),
@@ -70,6 +71,7 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     let cartArray = [...cart];
     const itemExist = cartArray.find((x) => x.id === product.id);
     if (itemExist) {
+      setCartIsLoading(true);
       cartArray = cartArray.map((x) =>
         x.id === product.id ? { ...itemExist, qty: itemExist.qty + 1 } : x
       );
@@ -85,6 +87,7 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
         variant: "subtle",
         position: "bottom-right",
       });
+      setCartIsLoading(false);
     } else {
       cartArray = [...cart, { ...product, qty: 1 }];
       setCart([...cartArray]);
@@ -99,11 +102,13 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
         variant: "subtle",
         position: "bottom-right",
       });
+      setCartIsLoading(false);
     }
   };
 
   // Remove all product Qty from Cart
   const removeAllProductQty = (product: any) => {
+    setCartIsLoading(true);
     let cartArray = [...cart];
     cartArray = cart.filter((x) => x.id !== product.id);
     setCart(cartArray);
@@ -118,16 +123,29 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
       variant: "subtle",
       position: "bottom-right",
     });
+    setCartIsLoading(false);
   };
 
   // Remove Product from cart by quantity -- only
   const removeProduct = (product: any) => {
+    setCartIsLoading(false);
     let cartArray = [...cart];
     const exist = cartArray.find((x) => x.id === product.id);
     if (exist?.qty === 1) {
       cartArray = cart.filter((x) => x.id !== product.id);
       setCart([...cartArray]);
       localStorage.setItem("cart", JSON.stringify(cartArray));
+      chakraToast({
+        status: "success",
+        title: `Product removed from cart`,
+        isClosable: true,
+        containerStyle: {
+          fontSize: "12.5px",
+        },
+        variant: "subtle",
+        position: "bottom-right",
+      });
+      setCartIsLoading(false);
     } else {
       cartArray = cart.map((x) =>
         x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
@@ -144,6 +162,7 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
         variant: "subtle",
         position: "bottom-right",
       });
+      setCartIsLoading(false);
     }
   };
 
@@ -154,6 +173,7 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     addProduct,
     removeProduct,
     removeAllProductQty,
+    cartIsLoading,
   };
 
   return (

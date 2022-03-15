@@ -12,13 +12,14 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import ProductBadge from "@components/Products/ProductBadge";
-import { FC, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
 
-import { CartItemProps } from "src/interfaces";
 import CartItemAlert from "./CartItemAlert";
 
-const CartItem: FC<CartItemProps> = (props) => {
+import { CartItemProps } from "src/interfaces";
+
+const CartItem: React.FC<CartItemProps> = (props) => {
   const { cartItem, removeProduct, addProduct, removeAllProduct } = props;
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -35,7 +36,11 @@ const CartItem: FC<CartItemProps> = (props) => {
         removeAllProduct={removeAllProduct}
       />
       <Box my={4} p={5} rounded="lg" border="1px solid #EDF2F7">
-        <Stack direction={{ base: "column", md: "row" }} spacing={10}>
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={{ base: 8, md: 10 }}
+          align={{ base: "", md: "center" }}
+        >
           <Image
             borderRadius={"lg"}
             width="140px"
@@ -50,22 +55,21 @@ const CartItem: FC<CartItemProps> = (props) => {
               {cartItem?.description}
             </Text>
           </VStack>
-          <VStack justify={"flex-start"}>
-            <Checkbox defaultChecked colorScheme="primary">
-              12 packs
+          <Stack
+            spacing={{ base: 5, md: 2 }}
+            direction={{ base: "row", md: "column" }}
+          >
+            <Checkbox defaultChecked={false} colorScheme="primary">
+              12 pack
             </Checkbox>
-            <Checkbox defaultChecked colorScheme="primary">
-              6 packs
+            <Checkbox defaultChecked={false} colorScheme="primary">
+              6 pack
             </Checkbox>
-          </VStack>
-          <Box>
-            <Text fontSize={"16px"}>{cartItem?.price.toFixed(2)}</Text>
-          </Box>
-          <Box>
-            <Text fontSize={"16px"}>{cartItem?.price * cartItem?.qty}</Text>
-          </Box>
+          </Stack>
+          <Text fontSize={"16px"}>{cartItem?.price.toFixed(2)}</Text>
+          <Text fontSize={"16px"}>{cartItem?.price * cartItem?.qty}</Text>
         </Stack>
-        <HStack mt={4} justify={{ base: "center", md: "right" }}>
+        <HStack mt={8} justify={{ base: "center", md: "right" }}>
           <Box>
             <Button
               size="xs"

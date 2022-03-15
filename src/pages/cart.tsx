@@ -22,7 +22,13 @@ import { numberWithCommas } from "@utils/index";
 import { useProduct } from "src/hooks/useProduct";
 
 const Index: React.FC = () => {
-  const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();
+  const {
+    cart,
+    cartIsLoading,
+    removeProduct,
+    addProduct,
+    removeAllProductQty,
+  } = useProduct();
 
   const cartIsEmpty = cart?.length === 0;
   const cartLength = cart?.length;
@@ -63,17 +69,19 @@ const Index: React.FC = () => {
               </NextLink>
             </VStack>
           )}
-          {cart?.map((cartItem, idx) => {
-            return (
-              <CartItem
-                key={idx}
-                cartItem={cartItem}
-                addProduct={addProduct}
-                removeProduct={removeProduct}
-                removeAllProduct={removeAllProductQty}
-              />
-            );
-          })}
+          {cart &&
+            cart?.map((cartItem, idx) => {
+              return (
+                <CartItem
+                  key={idx}
+                  cartItem={cartItem}
+                  addProduct={addProduct}
+                  removeProduct={removeProduct}
+                  removeAllProduct={removeAllProductQty}
+                  cartIsLoading={cartIsLoading}
+                />
+              );
+            })}
           {!cartIsEmpty && (
             <Box my={8}>
               <Heading size="lg" textAlign={"right"}>
@@ -95,7 +103,7 @@ const Index: React.FC = () => {
                   </Button>
                 </NextLink>
                 <Button size="md" colorScheme={"primary"} cursor={"pointer"}>
-                  Pay with paystack
+                  Proceed to checkout
                 </Button>
               </HStack>
             </Box>
