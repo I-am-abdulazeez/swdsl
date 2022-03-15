@@ -22,13 +22,7 @@ import { numberWithCommas } from "@utils/index";
 import { useProduct } from "src/hooks/useProduct";
 
 const Index: React.FC = () => {
-  const {
-    cart,
-    cartIsLoading,
-    removeProduct,
-    addProduct,
-    removeAllProductQty,
-  } = useProduct();
+  const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();
 
   const cartIsEmpty = cart?.length === 0;
   const cartLength = cart?.length;
@@ -78,7 +72,6 @@ const Index: React.FC = () => {
                   addProduct={addProduct}
                   removeProduct={removeProduct}
                   removeAllProduct={removeAllProductQty}
-                  cartIsLoading={cartIsLoading}
                 />
               );
             })}

@@ -31,7 +31,7 @@ import { numberWithCommas } from "@utils/index";
 
 const Index: React.FC = (): JSX.Element => {
   const { query, back } = useRouter();
-  const { addProduct, cart, cartIsLoading, removeProduct } = useProduct();
+  const { addProduct, cart, removeProduct } = useProduct();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const { id }: any = query;
 
@@ -89,7 +89,6 @@ const Index: React.FC = (): JSX.Element => {
                 <Button
                   onClick={() => removeProduct(newProduct)}
                   colorScheme={"error"}
-                  isLoading={cartIsLoading}
                   size={buttonSize}
                 >
                   Remove {`${quantity === 1 ? "" : quantity}`} quantity from
@@ -99,7 +98,6 @@ const Index: React.FC = (): JSX.Element => {
                 <Button
                   onClick={() => addProduct(newProduct)}
                   colorScheme={"success"}
-                  isLoading={cartIsLoading}
                   size={buttonSize}
                 >
                   Add to cart

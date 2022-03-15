@@ -77,7 +77,6 @@ export interface ProductContextType {
   addProduct: (product: {}) => void;
   removeProduct: (product: {}) => void;
   removeAllProductQty: (product: {}) => void;
-  cartIsLoading: boolean;
 }
 
 export interface DrinkCategoryInterface {
@@ -113,7 +112,6 @@ export interface ProductListProps {
   inCart: boolean;
   onAddToCart: (product: {}) => void;
   onRemoveFromCart: (product: {}) => void;
-  cartIsLoading: boolean;
 }
 
 export interface ProductNavProps {
@@ -146,7 +144,6 @@ export interface CartItemProps {
   addProduct: (product: any) => void;
   removeProduct: (id: any) => void;
   removeAllProduct: (id: any) => void;
-  cartIsLoading: boolean;
 }
 
 export interface CartItemAlertProps {

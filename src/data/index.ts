@@ -135,6 +135,8 @@ export const DrinkCategory = [
   "Gin",
   "Sparkling wine",
   "Brandy",
+  "Tequila",
+  "Vodka",
   "Juice",
   "Others",
 ];
@@ -159,5 +161,4 @@ export const productContextInitialValues = {
   addProduct: () => {},
   removeProduct: () => {},
   removeAllProductQty: () => {},
-  cartIsLoading: false,
 };

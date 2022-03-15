@@ -16,14 +16,8 @@ import { ProductListProps } from "src/interfaces";
 import { numberWithCommas } from "@utils/index";
 
 const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
-  const {
-    product,
-    docsSnapshot,
-    inCart,
-    onAddToCart,
-    cartIsLoading,
-    onRemoveFromCart,
-  } = props;
+  const { product, docsSnapshot, inCart, onAddToCart, onRemoveFromCart } =
+    props;
   return (
     <Box
       rounded={"lg"}
@@ -72,14 +66,12 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
             <HStack justify={{ base: "center", md: "right" }}>
               <IconButton
                 size="xs"
-                isLoading={cartIsLoading}
                 onClick={() => onRemoveFromCart(product)}
                 aria-label="remove product"
                 icon={<RiSubtractLine size="18px" />}
               />
               <IconButton
                 size="xs"
-                isLoading={cartIsLoading}
                 onClick={() => onAddToCart(product)}
                 aria-label="add product"
                 icon={<RiAddFill size="18px" />}
@@ -91,7 +83,6 @@ const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
               onClick={() => onAddToCart(product)}
               colorScheme="success"
               size={"xs"}
-              isLoading={cartIsLoading}
             >
               Add to cart
             </Button>
