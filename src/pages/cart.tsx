@@ -63,17 +63,18 @@ const Index: React.FC = () => {
               </NextLink>
             </VStack>
           )}
-          {cart?.map((cartItem, idx) => {
-            return (
-              <CartItem
-                key={idx}
-                cartItem={cartItem}
-                addProduct={addProduct}
-                removeProduct={removeProduct}
-                removeAllProduct={removeAllProductQty}
-              />
-            );
-          })}
+          {cart &&
+            cart?.map((cartItem, idx) => {
+              return (
+                <CartItem
+                  key={idx}
+                  cartItem={cartItem}
+                  addProduct={addProduct}
+                  removeProduct={removeProduct}
+                  removeAllProduct={removeAllProductQty}
+                />
+              );
+            })}
           {!cartIsEmpty && (
             <Box my={8}>
               <Heading size="lg" textAlign={"right"}>
@@ -95,7 +96,7 @@ const Index: React.FC = () => {
                   </Button>
                 </NextLink>
                 <Button size="md" colorScheme={"primary"} cursor={"pointer"}>
-                  Pay with paystack
+                  Proceed to checkout
                 </Button>
               </HStack>
             </Box>

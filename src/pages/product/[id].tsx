@@ -24,13 +24,14 @@ import ProductBadge from "@components/Products/ProductBadge";
 import ProductNav from "@components/Products/ProductNav";
 
 import { firebaseFirestore } from "src/lib/firebase";
+
 import { useProduct } from "src/hooks/useProduct";
+
 import { numberWithCommas } from "@utils/index";
 
 const Index: React.FC = (): JSX.Element => {
   const { query, back } = useRouter();
   const { addProduct, cart, removeProduct } = useProduct();
-  let quantity!: number;
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const { id }: any = query;
 
@@ -40,6 +41,8 @@ const Index: React.FC = (): JSX.Element => {
     includeMetadataChanges: true,
   });
   const snapshot = product?.data?.data();
+
+  let quantity!: number;
 
   const newProduct = {
     id: id,
@@ -67,10 +70,11 @@ const Index: React.FC = (): JSX.Element => {
             title={`${snapshot?.drinkName} | ShayoWithDSL | #1 online Wine Shop`}
           />
           <Navbar />
-          {cart?.map((cartItem) => {
-            quantity = cartItem.qty;
-            console.log(quantity);
-          })}
+          {cart &&
+            cart?.map((cartItem) => {
+              quantity = cartItem.qty;
+              console.log(quantity);
+            })}
           <Container maxW={"container.lg"} mt={7}>
             <Flex justify={"space-between"} align={"center"}>
               <IconButton

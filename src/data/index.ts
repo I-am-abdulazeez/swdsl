@@ -135,6 +135,8 @@ export const DrinkCategory = [
   "Gin",
   "Sparkling wine",
   "Brandy",
+  "Tequila",
+  "Vodka",
   "Juice",
   "Others",
 ];

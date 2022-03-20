@@ -128,6 +128,16 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
       cartArray = cart.filter((x) => x.id !== product.id);
       setCart([...cartArray]);
       localStorage.setItem("cart", JSON.stringify(cartArray));
+      chakraToast({
+        status: "success",
+        title: `Product removed from cart`,
+        isClosable: true,
+        containerStyle: {
+          fontSize: "12.5px",
+        },
+        variant: "subtle",
+        position: "bottom-right",
+      });
     } else {
       cartArray = cart.map((x) =>
         x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x

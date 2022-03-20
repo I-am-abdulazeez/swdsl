@@ -36,7 +36,9 @@ const ProductBadge: React.FC<DocumentData> = (props) => {
           : product?.category === "Brandy"
           ? "secondary"
           : product?.category === "Tequila"
-          ? "secondary"
+          ? "messenger"
+          : product?.category === "Vodka"
+          ? "blackAlpha"
           : product?.category === "Others"
           ? "telegram"
           : undefined
