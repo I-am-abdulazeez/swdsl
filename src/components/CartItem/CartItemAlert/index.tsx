@@ -7,7 +7,7 @@ import {
   AlertDialogFooter,
   Button,
 } from "@chakra-ui/react";
-import { CartItemAlertProps } from "src/interfaces";
+import { CartItemAlertProps } from "@interfaces/index";
 
 const CartItemAlert: React.FC<CartItemAlertProps> = (props) => {
   const { cartItem, isOpen, cancelRef, onClose, removeAllProduct } = props;

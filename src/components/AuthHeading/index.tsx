@@ -3,7 +3,7 @@ import NextLink from "next/link";
 
 import LogoLink from "@components/LogoLink";
 
-import { AuthHeadingProps } from "src/interfaces";
+import { AuthHeadingProps } from "@interfaces/index";
 
 const AuthHeading: React.FC<AuthHeadingProps> = (props): JSX.Element => {
   const { authHeading, authText, authHref, authRoute } = props;

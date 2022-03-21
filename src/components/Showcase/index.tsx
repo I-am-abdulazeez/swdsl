@@ -8,11 +8,11 @@ import NextLink from "next/link";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
 
-import { ShayoBannerImages } from "src/data";
-import { ShayoBanner } from "src/interfaces";
+import { ShayoBannerImages } from "@data/index";
+import { ShayoBanner } from "@interfaces/index";
 
 const ShowCase: React.FC = () => {
-  const headingSize: string | undefined = useBreakpointValue({
+  const headingSize = useBreakpointValue({
     base: "md",
     md: "lg",
   });

@@ -33,9 +33,9 @@ import {
 
 import FormErrorText from "@components/FormErrorText";
 
-import { firebaseAuth, firebaseFirestore } from "src/lib/firebase";
+import { firebaseAuth, firebaseFirestore } from "@lib/firebase";
 
-import { IUserRegister, UserActionType, UserData } from "src/interfaces";
+import { IUserRegister, UserActionType, UserData } from "@interfaces/index";
 import {
   emailPattern,
   inputFocus,

@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from "react";
+
 import { IconButton } from "@chakra-ui/button";
 import { Box } from "@chakra-ui/layout";
-import React, { useEffect, useState } from "react";
+
 import { IoIosArrowRoundUp } from "react-icons/io";
 
 const ScrollToTop: React.FC = () => {

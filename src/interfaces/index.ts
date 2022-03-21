@@ -1,3 +1,4 @@
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { UserInfo } from "firebase/auth";
 import {
   DocumentData,
@@ -7,7 +8,6 @@ import {
   QuerySnapshot,
   Timestamp,
 } from "firebase/firestore";
-import { Dispatch, MutableRefObject, RefObject, SetStateAction } from "react";
 import { UseQueryResult } from "react-query";
 
 export interface ShayoBanner {

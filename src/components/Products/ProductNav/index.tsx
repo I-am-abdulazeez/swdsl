@@ -2,7 +2,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
-import { ProductNavProps } from "src/interfaces";
+import { ProductNavProps } from "@interfaces/index";
 
 const ProductNav: React.FC<ProductNavProps> = (props): JSX.Element => {
   const { product } = props;

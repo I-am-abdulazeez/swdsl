@@ -1,3 +1,4 @@
+import { createContext, useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useFirestoreQuery } from "@react-query-firebase/firestore";
 import {
@@ -7,11 +8,10 @@ import {
   query,
   QueryDocumentSnapshot,
 } from "firebase/firestore";
-import { createContext, useEffect, useState } from "react";
 
-import { firebaseFirestore } from "src/lib/firebase";
-import { productContextInitialValues } from "src/data";
-import { ProductContextType, ReactChildrenProp } from "src/interfaces";
+import { firebaseFirestore } from "@lib/firebase/index";
+import { productContextInitialValues } from "@data/index";
+import { ProductContextType, ReactChildrenProp } from "@interfaces/index";
 
 export const ProductsContext = createContext<ProductContextType>(
   productContextInitialValues

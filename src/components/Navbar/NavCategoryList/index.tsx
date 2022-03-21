@@ -1,9 +1,9 @@
 import { Flex, Button } from "@chakra-ui/react";
-import { useProduct } from "src/hooks/useProduct";
-
 import NextLink from "next/link";
 
-import { NavCatListProps } from "src/interfaces";
+import { useProduct } from "@hooks/useProduct";
+
+import { NavCatListProps } from "@interfaces/index";
 
 const NavCategoryList: React.FC<NavCatListProps> = ({ category }) => {
   const { products } = useProduct();

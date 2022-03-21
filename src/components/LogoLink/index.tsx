@@ -1,7 +1,8 @@
 import NextLink from "next/link";
 
 import { ChakraNextImage } from "@components/ChakraNextImage";
-import { LogoLinkProps } from "src/interfaces";
+
+import { LogoLinkProps } from "@interfaces/index";
 
 const LogoLink: React.FC<LogoLinkProps> = (props) => {
   const { width, height } = props;
