@@ -65,14 +65,17 @@ const DrinkSearch: React.FC = () => {
             .map((drinkSnap) => {
               const drinks = drinkSnap?.data();
               return (
-                <NextLink href={`product/${drinkSnap?.id}`} passHref>
+                <NextLink
+                  key={drinkSnap?.id}
+                  href={`product/${drinkSnap?.id}`}
+                  passHref
+                >
                   <HStack
                     cursor={"pointer"}
                     justify={"space-between"}
                     padding={"10px"}
                     borderRadius={"8px"}
                     fontSize={"15px"}
-                    key={drinkSnap?.id}
                     _hover={{
                       bgColor: "#F7FAFC",
                     }}
