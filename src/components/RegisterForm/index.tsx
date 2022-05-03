@@ -64,6 +64,7 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
       accept: data.accept,
       createdAt: Timestamp.fromDate(new Date()).toDate().toDateString(),
       cart: [],
+      orders: [],
     };
 
     console.log(newData, data.password);
