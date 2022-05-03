@@ -130,9 +130,9 @@ export const DrinkCategory = [
   "Gin",
   "Sparkling wine",
   "Brandy",
+  "Juice",
   "Tequila",
   "Vodka",
-  "Juice",
   "Others",
 ];
 
