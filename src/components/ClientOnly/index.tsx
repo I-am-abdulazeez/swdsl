@@ -25,7 +25,7 @@ const ClientOnly: React.FC<ReactChildrenProp> = (props) => {
     });
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, []);
+  }, [setUser]);
 
   if (!hasMounted) return null;
 

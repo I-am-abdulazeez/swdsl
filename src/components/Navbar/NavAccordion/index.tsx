@@ -7,8 +7,8 @@ import NavCategoryList from "../NavCategoryList";
 const NavAccordion: React.FC = () => {
   return (
     <Accordion allowToggle>
-      {DrinkCategory.map((cat) => (
-        <AccordionItem>
+      {DrinkCategory.map((cat, idx) => (
+        <AccordionItem key={idx}>
           <NavAccordionButton>{cat}</NavAccordionButton>
           <AccordionPanel>
             <NavCategoryList category={cat} />
