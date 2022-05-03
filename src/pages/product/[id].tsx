@@ -23,9 +23,9 @@ import Helmet from "@components/Helmet";
 import ProductBadge from "@components/Products/ProductBadge";
 import ProductNav from "@components/Products/ProductNav";
 
-import { firebaseFirestore } from "src/lib/firebase";
+import { firebaseFirestore } from "@lib/firebase";
 
-import { useProduct } from "src/hooks/useProduct";
+import { useProduct } from "@hooks/useProduct";
 
 import { numberWithCommas } from "@utils/index";
 

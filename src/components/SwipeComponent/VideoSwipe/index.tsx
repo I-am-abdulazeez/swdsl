@@ -1,8 +1,8 @@
 import { Box } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { ShayoVideos } from "src/data";
-import { SVideos } from "src/interfaces";
+import { ShayoVideos } from "@data/index";
+import { SVideos } from "@interfaces/index";
 
 const VideoSwipe: React.FC = () => {
   return (

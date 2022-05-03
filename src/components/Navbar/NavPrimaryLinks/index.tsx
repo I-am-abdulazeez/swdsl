@@ -1,7 +1,7 @@
-import { Box, Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import { RiArrowLeftLine } from "react-icons/ri";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
+import { Box, Button, IconButton, useBreakpointValue } from "@chakra-ui/react";
+import { RiArrowLeftLine } from "react-icons/ri";
 
 import NavDrawer from "@components/Navbar/NavDrawer";
 

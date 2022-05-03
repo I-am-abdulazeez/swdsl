@@ -1,3 +1,5 @@
+import { useRef, useState } from "react";
+
 import {
   Box,
   Button,
@@ -11,13 +13,14 @@ import {
   Checkbox,
   Stack,
 } from "@chakra-ui/react";
-import ProductBadge from "@components/Products/ProductBadge";
-import { useRef, useState } from "react";
+
 import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
 
-import CartItemAlert from "./CartItemAlert";
+import { CartItemProps } from "@interfaces/index";
 
-import { CartItemProps } from "src/interfaces";
+import ProductBadge from "@components/Products/ProductBadge";
+
+import CartItemAlert from "./CartItemAlert";
 
 const CartItem: React.FC<CartItemProps> = (props) => {
   const { cartItem, removeProduct, addProduct, removeAllProduct } = props;

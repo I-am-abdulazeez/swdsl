@@ -18,7 +18,7 @@ const Index: React.FC = () => {
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />
       <Navbar />
-      <Box as="main" mt={{ base: "6rem", md: "8rem" }}>
+      <Box as="main" mt={{ base: "4rem", md: "6rem" }}>
         <Container maxW="container.sm">
           <DrinkSearch />
         </Container>

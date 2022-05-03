@@ -2,10 +2,10 @@ import { SimpleGrid, Flex, VStack, Box, chakra, Text } from "@chakra-ui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import TeamStack from "@components/TeamStack";
-
-import { DSLFounders } from "src/data";
-import { Founders } from "src/interfaces";
 import LogoLink from "@components/LogoLink";
+
+import { DSLFounders } from "@data/index";
+import { Founders } from "@interfaces/index";
 
 const ContactSwipe: React.FC = () => {
   return (

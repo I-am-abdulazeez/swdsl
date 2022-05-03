@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 
-import { useAuth } from "src/hooks/useAuth";
-import { ReactChildrenProp } from "src/interfaces";
-import { firebaseAuth } from "src/lib/firebase";
+import { useAuth } from "@hooks/useAuth";
+
+import { ReactChildrenProp } from "@interfaces/index";
+
+import { firebaseAuth } from "@lib/firebase";
 
 const ClientOnly: React.FC<ReactChildrenProp> = (props) => {
   const { children, ...delegated } = props;

@@ -8,21 +8,13 @@ import {
   useDisclosure,
   IconButton,
   useBreakpointValue,
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  Flex,
 } from "@chakra-ui/react";
 
 import { RiMenuLine } from "react-icons/ri";
 
-import NavAccordion from "../NavAccordion";
+import { useProduct } from "@hooks/useProduct";
 
-import { useProduct } from "src/hooks/useProduct";
+import NavAccordion from "../NavAccordion";
 
 const NavDrawer: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -11,8 +11,9 @@
       "@hooks*": ["src/hooks*"],
       "@context*": ["src/context*"],
       "@interfaces*": ["src/interfaces*"],
+      "@data*": ["src/data*"],
       "@styles*": ["src/styles*"],
-      "@libs*": ["src/libs*"],
+      "@lib*": ["src/lib*"],
       "@theme*": ["src/theme*"],
       "@utils*": ["src/utils*"]
     },

@@ -21,8 +21,8 @@ import {
 
 import IconButtonBadge from "@components/IconButtonBadge";
 
-import { useAuth } from "src/hooks/useAuth";
-import { useProduct } from "src/hooks/useProduct";
+import { useAuth } from "@hooks/useAuth";
+import { useProduct } from "@hooks/useProduct";
 
 const NavSecLinks: React.FC = () => {
   const { signOutUser, user } = useAuth();

@@ -1,9 +1,10 @@
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { RiShoppingCartLine } from "react-icons/ri";
 import NextLink from "next/link";
 
-import { IconButtonBadgeProps } from "src/interfaces";
+import { RiShoppingCartLine } from "react-icons/ri";
+
+import { IconButtonBadgeProps } from "@interfaces/index";
 
 const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
   const { badgeContent } = props;

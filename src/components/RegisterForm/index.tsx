@@ -33,9 +33,9 @@ import {
 
 import FormErrorText from "@components/FormErrorText";
 
-import { firebaseAuth, firebaseFirestore } from "src/lib/firebase";
+import { firebaseAuth, firebaseFirestore } from "@lib/firebase";
 
-import { IUserRegister, UserActionType, UserData } from "src/interfaces";
+import { IUserRegister, UserActionType, UserData } from "@interfaces/index";
 import {
   emailPattern,
   inputFocus,
@@ -64,6 +64,7 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
       accept: data.accept,
       createdAt: Timestamp.fromDate(new Date()).toDate().toDateString(),
       cart: [],
+      orders: [],
     };
 
     console.log(newData, data.password);

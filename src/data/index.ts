@@ -1,13 +1,6 @@
 import { nanoid } from "nanoid";
 import ReactParser from "html-react-parser";
 
-import {
-  DrinkCategoryInterface,
-  Founders,
-  QuotesTalks,
-  ShayoBanner,
-  SVideos,
-} from "src/interfaces";
 import { UseQueryResult } from "react-query";
 import {
   DocumentData,
@@ -15,6 +8,8 @@ import {
   QueryDocumentSnapshot,
   QuerySnapshot,
 } from "firebase/firestore";
+
+import { Founders, QuotesTalks, ShayoBanner, SVideos } from "@interfaces/index";
 
 export const ShayoBannerImages: ShayoBanner[] = [
   {
@@ -135,9 +130,9 @@ export const DrinkCategory = [
   "Gin",
   "Sparkling wine",
   "Brandy",
+  "Juice",
   "Tequila",
   "Vodka",
-  "Juice",
   "Others",
 ];
 

@@ -12,7 +12,7 @@ import { RiAddFill, RiSubtractLine } from "react-icons/ri";
 
 import ProductBadge from "@components/Products/ProductBadge";
 
-import { ProductListProps } from "src/interfaces";
+import { ProductListProps } from "@interfaces/index";
 import { numberWithCommas } from "@utils/index";
 
 const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {

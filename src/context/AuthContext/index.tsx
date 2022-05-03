@@ -1,17 +1,21 @@
-import { useToast } from "@chakra-ui/react";
 import { createContext, useEffect, useState } from "react";
+import { useRouter } from "next/router";
+
+import { useToast } from "@chakra-ui/react";
+import { UserInfo } from "firebase/auth";
+
 import {
   useAuthConfirmPasswordReset,
   useAuthSendPasswordResetEmail,
   useAuthSignInWithEmailAndPassword,
   useAuthSignOut,
 } from "@react-query-firebase/auth";
-import { UserInfo } from "firebase/auth";
-import { useRouter } from "next/router";
 
-import { AuthContextType, ReactChildrenProp } from "src/interfaces";
-import { firebaseAuth } from "src/lib/firebase";
-import { authContextInitialValues } from "src/data";
+import { firebaseAuth } from "@lib/firebase";
+
+import { AuthContextType, ReactChildrenProp } from "@interfaces/index";
+
+import { authContextInitialValues } from "@data/index";
 
 export const AuthContext = createContext<AuthContextType>(
   authContextInitialValues
