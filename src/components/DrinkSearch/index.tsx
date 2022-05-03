@@ -3,115 +3,88 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-  Spinner,
   Text,
   HStack,
   Badge,
-  Flex,
 } from "@chakra-ui/react";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 
-import {
-  collection,
-  DocumentData,
-  FirestoreError,
-  getDocs,
-  query,
-  QueryDocumentSnapshot,
-  where,
-} from "firebase/firestore";
+import NextLink from "next/link";
 
-import { shadowSm } from "@utils/index";
+import { useProduct } from "@hooks/useProduct";
 
-import { firebaseFirestore } from "@lib/firebase";
+import ProductBadge from "@components/Products/ProductBadge";
 
 const DrinkSearch: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [drinkSnap, setDrinkSnap] = useState<
-    QueryDocumentSnapshot<DocumentData>[]
-  >([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const drinkRef = collection(firebaseFirestore, "products");
-
-  const drinkQuery = query(drinkRef, where("drinkName", "==", searchTerm));
-  const snapshots = getDocs(drinkQuery);
-  let docsIsEmpty!: boolean;
-
-  const getProductOnChange = () => {
-    setIsLoading(true);
-    snapshots
-      .then((docsSnapshot) => {
-        setIsLoading(false);
-        setDrinkSnap(docsSnapshot?.docs);
-        docsIsEmpty = docsSnapshot?.empty;
-        console.log(docsSnapshot?.docs);
-      })
-      .catch((error: FirestoreError) => {
-        setIsLoading(false);
-        console.log(error.message);
-      });
-  };
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.currentTarget.value);
-
-    getProductOnChange();
-  };
+  const { products } = useProduct();
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
-    console.log(searchTerm);
-  }, [searchTerm]);
+    console.log(products);
+  });
 
   return (
     <Box>
       <InputGroup size="lg">
         <InputLeftElement pointerEvents="none">
-          <RiSearch2Line color="#CBD5E0" size="20px" />
+          <RiSearch2Line color="#b33b32" size="18px" />
         </InputLeftElement>
         <Input
-          onChange={handleChange}
+          onChange={(e) => setSearchTerm(e.target?.value)}
           type="text"
           _focus={{
-            boxShadow: shadowSm,
+            boxShadow: "none",
           }}
-          fontSize="14px"
-          placeholder="Search for drinks"
+          fontSize="13.5px"
+          placeholder="Search any drinks name"
         />
       </InputGroup>
-      <Box
-        padding={5}
-        bgColor="white"
-        height="40px"
-        borderBottomRadius={"8px"}
-        border={"1px solid #EDF2F7"}
-      >
-        {docsIsEmpty && <Text>Drink not found.</Text>}
-        {isLoading && (
-          <Flex height="100%">
-            <Spinner size={"sm"} colorScheme={"primary.500"} />
-          </Flex>
-        )}
-        {drinkSnap &&
-          drinkSnap?.map((drinkSnap) => {
-            const drinks = drinkSnap?.data();
-            return (
-              <HStack
-                cursor={"pointer"}
-                justify={"space-between"}
-                padding={"5px"}
-                _hover={{
-                  bgColor: "#EDF2F7",
-                }}
-                key={drinkSnap?.id}
-              >
-                <Text fontWeight={"semibold"}>{drinks?.drinkName}</Text>
-                <Badge fontSize={"12px"}>{drinks?.category}</Badge>
-              </HStack>
-            );
-          })}
-      </Box>
+      {searchTerm && (
+        <Box
+          padding={searchTerm ? 3 : 0}
+          bgColor={"white"}
+          maxHeight={"180px"}
+          overflowY={"auto"}
+          borderBottomRadius={"8px"}
+          border={"1px solid #EDF2F7"}
+        >
+          {products
+            .filter((drink) => {
+              if (searchTerm === "" || searchTerm === " ") {
+                return drink;
+              } else if (
+                drink
+                  .data()
+                  ?.drinkName?.toLowerCase()
+                  ?.includes(searchTerm?.toLowerCase())
+              ) {
+                return drink;
+              }
+            })
+            .map((drinkSnap) => {
+              const drinks = drinkSnap?.data();
+              return (
+                <NextLink href={`product/${drinkSnap?.id}`} passHref>
+                  <HStack
+                    cursor={"pointer"}
+                    justify={"space-between"}
+                    padding={"10px"}
+                    borderRadius={"8px"}
+                    fontSize={"15px"}
+                    key={drinkSnap?.id}
+                    _hover={{
+                      bgColor: "#F7FAFC",
+                    }}
+                  >
+                    <Text fontWeight={"normal"}>{drinks?.drinkName}</Text>
+                    <ProductBadge product={drinks} />
+                  </HStack>
+                </NextLink>
+              );
+            })}
+        </Box>
+      )}
     </Box>
   );
 };
