@@ -5,7 +5,8 @@ import { useProduct } from "@hooks/useProduct";
 
 import { NavCatListProps } from "@interfaces/index";
 
-const NavCategoryList: React.FC<NavCatListProps> = ({ category }) => {
+const NavCategoryList: React.FC<NavCatListProps> = (props) => {
+  const { category } = props;
   const { products } = useProduct();
 
   const drinksByCategory = (category: string) => {
