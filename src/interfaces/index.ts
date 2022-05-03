@@ -79,11 +79,6 @@ export interface ProductContextType {
   removeAllProductQty: (product: {}) => void;
 }
 
-export interface DrinkCategoryInterface {
-  drinkName: string;
-  drinkNameList: string[];
-}
-
 export interface ProductDetailsParams {
   productId: string;
 }
@@ -104,6 +99,7 @@ export interface UserData {
   accept: boolean;
   createdAt: Timestamp | string;
   cart?: CartItem[];
+  orders: [];
 }
 
 export interface ProductListProps {
