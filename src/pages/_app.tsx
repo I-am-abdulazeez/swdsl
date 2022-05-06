@@ -12,6 +12,7 @@ import { AuthProvider } from "src/context/AuthContext";
 import { ProductProvider } from "src/context/ProductContext";
 
 import ClientOnly from "@components/ClientOnly";
+import QueryClientWrapper from "src/client";
 import customTheme from "@theme/index";
 
 import "@styles/index.css";
@@ -23,11 +24,9 @@ import "swiper/css/effect-flip";
 SwiperCore.use([Navigation, Pagination, EffectFlip, Autoplay]);
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const queryClient = new QueryClient();
-
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={customTheme}>
+    <ChakraProvider theme={customTheme}>
+      <QueryClientWrapper>
         <AuthProvider>
           <ProductProvider>
             <ClientOnly>
@@ -35,8 +34,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             </ClientOnly>
           </ProductProvider>
         </AuthProvider>
-      </ChakraProvider>
-    </QueryClientProvider>
+      </QueryClientWrapper>
+    </ChakraProvider>
   );
 };
 

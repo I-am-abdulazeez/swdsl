@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   Box,
   InputGroup,
@@ -5,16 +7,14 @@ import {
   Input,
   Text,
   HStack,
-  Badge,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { RiSearch2Line } from "react-icons/ri";
 
 import NextLink from "next/link";
 
-import { useProduct } from "@hooks/useProduct";
-
 import ProductBadge from "@components/Products/ProductBadge";
+
+import { useProduct } from "@hooks/useProduct";
 
 const DrinkSearch: React.FC = () => {
   const { products } = useProduct();
