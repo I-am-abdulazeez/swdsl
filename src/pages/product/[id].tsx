@@ -23,7 +23,7 @@ import Helmet from "@components/Helmet";
 import ProductBadge from "@components/Products/ProductBadge";
 import ProductNav from "@components/Products/ProductNav";
 
-import { firebaseFirestore } from "@lib/firebase";
+import { firebaseFirestore } from "@config/firebase";
 
 import { useProduct } from "@hooks/useProduct";
 

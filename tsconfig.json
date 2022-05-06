@@ -10,6 +10,7 @@
       "@pages*": ["src/pages*"],
       "@hooks*": ["src/hooks*"],
       "@context*": ["src/context*"],
+      "@config*": ["src/config*"],
       "@interfaces*": ["src/interfaces*"],
       "@data*": ["src/data*"],
       "@styles*": ["src/styles*"],
