@@ -1,5 +1,4 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { AppProps } from "next/app";
 import SwiperCore, {
   Pagination,
