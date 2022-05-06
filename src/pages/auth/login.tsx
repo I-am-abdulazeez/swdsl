@@ -20,8 +20,8 @@ import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 
 import { inputFocus } from "@utils/index";
-import { withPublic } from "src/hooks/useRoute";
-import { UserAuthType, UserDetails } from "src/interfaces";
+import { withPublic } from "@hooks/useRoute";
+import { UserAuthType, UserDetails } from "@interfaces/index";
 
 const Index: React.FC<UserAuthType> = (props): JSX.Element => {
   const { userAuth } = props;

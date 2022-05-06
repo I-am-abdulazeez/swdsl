@@ -11,7 +11,7 @@ import {
   useAuthSignOut,
 } from "@react-query-firebase/auth";
 
-import { firebaseAuth } from "src/config/firebase";
+import { firebaseAuth } from "@config/firebase";
 
 import { AuthContextType, ReactChildrenProp } from "@interfaces/index";
 
