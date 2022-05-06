@@ -33,7 +33,7 @@ import {
 
 import FormErrorText from "@components/FormErrorText";
 
-import { firebaseAuth, firebaseFirestore } from "@lib/firebase";
+import { firebaseAuth, firebaseFirestore } from "@config/firebase";
 
 import { IUserRegister, UserActionType, UserData } from "@interfaces/index";
 import {

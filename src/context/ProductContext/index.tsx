@@ -9,7 +9,7 @@ import {
   QueryDocumentSnapshot,
 } from "firebase/firestore";
 
-import { firebaseFirestore } from "@lib/firebase/index";
+import { firebaseFirestore } from "@config/firebase";
 import { productContextInitialValues } from "@data/index";
 import { ProductContextType, ReactChildrenProp } from "@interfaces/index";
 
@@ -34,26 +34,14 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     ref,
     { subscribe: true, includeMetadataChanges: true },
     {
-      onError(err) {
-        console.log(err);
-        chakraToast({
-          title: `Error fetching data ${err.message}`,
-          status: "error",
-          variant: "subtle",
-          containerStyle: {
-            fontSize: "12.5px",
-          },
-          isClosable: true,
-        });
-      },
-      onSuccess(data) {
+      onSuccess: (data) => {
         const products = data?.docs;
         setProducts(products);
       },
     }
   );
 
-  useEffect(() => {
+  const doStorageThing = () => {
     const cartArrayFromStorage = JSON.parse(
       String(localStorage.getItem("cart"))
     );
@@ -63,6 +51,10 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     } else {
       setCart(cartArrayFromStorage);
     }
+  };
+
+  useEffect(() => {
+    doStorageThing();
   }, []);
 
   // Add Product to Cart

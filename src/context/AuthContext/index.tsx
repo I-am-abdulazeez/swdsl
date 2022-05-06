@@ -11,7 +11,7 @@ import {
   useAuthSignOut,
 } from "@react-query-firebase/auth";
 
-import { firebaseAuth } from "@lib/firebase";
+import { firebaseAuth } from "src/config/firebase";
 
 import { AuthContextType, ReactChildrenProp } from "@interfaces/index";
 
@@ -34,21 +34,12 @@ export const AuthProvider = ({ children }: ReactChildrenProp) => {
   const signOutMutation = useAuthSignOut(firebaseAuth);
 
   const signInMutation = useAuthSignInWithEmailAndPassword(firebaseAuth, {
-    onError(error) {
+    onError: (error) => {
       console.log(error);
       setUser(null);
       setIsLoading(false);
-      chakraToast({
-        title: error.message,
-        isClosable: true,
-        status: "error",
-        variant: "subtle",
-        containerStyle: {
-          fontSize: "12.5px",
-        },
-      });
     },
-    onSuccess(data) {
+    onSuccess: (data) => {
       const currentUser = data.user;
       setUser(currentUser);
       setIsLoggedIn(true);
@@ -70,19 +61,10 @@ export const AuthProvider = ({ children }: ReactChildrenProp) => {
   const sendPasswordResetEmailMutation = useAuthSendPasswordResetEmail(
     firebaseAuth,
     {
-      onError(error) {
+      onError: () => {
         setIsLoading(false);
-        chakraToast({
-          title: error.message,
-          isClosable: true,
-          variant: "subtle",
-          status: "error",
-          containerStyle: {
-            fontSize: "12.5px",
-          },
-        });
       },
-      onSuccess() {
+      onSuccess: () => {
         setIsLoading(false);
         chakraToast({
           title: "Email sent, check your email.",
@@ -110,19 +92,10 @@ export const AuthProvider = ({ children }: ReactChildrenProp) => {
   };
 
   const passwordResetMutation = useAuthConfirmPasswordReset(firebaseAuth, {
-    onError(error) {
+    onError: (error) => {
       setIsLoading(false);
-      chakraToast({
-        title: error.message,
-        isClosable: true,
-        variant: "subtle",
-        status: "error",
-        containerStyle: {
-          fontSize: "12.5px",
-        },
-      });
     },
-    onSuccess() {
+    onSuccess: () => {
       setIsLoading(false);
       chakraToast({
         title: "Password has been changed. you can now login now!",
