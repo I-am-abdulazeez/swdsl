@@ -42,7 +42,7 @@ import {
   nigeriaPhoneNumberPattern,
 } from "@utils/index";
 
-const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
+const RegisterForm: React.FC<UserActionType> = (props) => {
   const { isLoading, setUser, setIsLoggedIn, setIsLoading } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
