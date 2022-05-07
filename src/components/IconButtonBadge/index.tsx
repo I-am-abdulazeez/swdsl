@@ -1,6 +1,6 @@
+import NextLink from "next/link";
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
 
 import { RiShoppingCartLine } from "react-icons/ri";
 
