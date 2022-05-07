@@ -12,13 +12,10 @@ import {
 
 import { RiMenuLine } from "react-icons/ri";
 
-import { useProduct } from "@hooks/useProduct";
-
 import NavAccordion from "../NavAccordion";
 
 const NavDrawer: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { products } = useProduct();
   const drawerSize = useBreakpointValue({ base: "full", md: "md" });
 
   // const items = products?.reduce((prev: any, current) => {
@@ -59,7 +56,12 @@ const NavDrawer: React.FC = () => {
           >
             All category
           </DrawerHeader>
-          <DrawerCloseButton size={"sm"} />
+          <DrawerCloseButton
+            _focus={{
+              boxShadow: "none",
+            }}
+            size={"sm"}
+          />
           <DrawerBody>
             <NavAccordion />
           </DrawerBody>

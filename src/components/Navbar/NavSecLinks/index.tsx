@@ -26,12 +26,14 @@ import { useAuth } from "@hooks/useAuth";
 import { useProduct } from "@hooks/useProduct";
 
 const NavSecLinks: React.FC = () => {
+  const activeShop = router.pathname === "/shop" ? "primary" : "";
+  const activeProfile = router.pathname === "/profile";
+
   const { signOutUser, user } = useAuth();
   const { cart } = useProduct();
 
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const activeShop = router.pathname === "/shop" ? "primary" : "";
 
   console.log(cart?.length);
 
@@ -73,7 +75,6 @@ const NavSecLinks: React.FC = () => {
           />
         </NextLink>
       )}
-
       <IconButtonBadge badgeContent={cart?.length} />
       {user && (
         <Box>
@@ -88,9 +89,15 @@ const NavSecLinks: React.FC = () => {
               Hi, {user?.displayName}
             </MenuButton>
             <MenuList>
-              <MenuItem fontSize={{ base: "xs", md: "sm" }}>
-                My Account
-              </MenuItem>
+              <NextLink href="/profile" passHref>
+                <MenuItem
+                  borderRight={activeProfile ? "3px solid #b33b32" : ""}
+                  borderRightRadius="2px"
+                  fontSize={{ base: "xs", md: "sm" }}
+                >
+                  My Account
+                </MenuItem>
+              </NextLink>
               <MenuDivider />
               <MenuItem
                 icon={<RiLogoutCircleLine size={"13px"} />}

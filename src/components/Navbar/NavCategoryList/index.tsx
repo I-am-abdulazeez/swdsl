@@ -24,7 +24,7 @@ const NavCategoryList: React.FC<NavCatListProps> = (props) => {
         return (
           <Flex key={productFromCategory?.id}>
             <NextLink href={`product/${productFromCategory?.id}`}>
-              <Button size={"sm"} variant={"ghost"} fontWeight={"light"}>
+              <Button size={"sm"} variant={"ghost"} fontWeight={"normal"}>
                 {productFromCategory?.data?.drinkName}
               </Button>
             </NextLink>
