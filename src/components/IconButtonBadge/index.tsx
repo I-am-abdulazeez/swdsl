@@ -22,7 +22,7 @@ const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
         variant="ghost"
         icon={
           <>
-            <RiShoppingCartLine size="17px" />
+            <RiShoppingCartLine size="19px" />
             <Box
               as={"span"}
               color={"white"}

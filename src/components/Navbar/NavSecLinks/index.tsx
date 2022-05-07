@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import {
+  Box,
   Button,
   HStack,
   IconButton,
@@ -75,29 +76,33 @@ const NavSecLinks: React.FC = () => {
 
       <IconButtonBadge badgeContent={cart?.length} />
       {user && (
-        <Menu closeOnBlur={true}>
-          <MenuButton
-            as={Button}
-            size={buttonSize}
-            variant="ghost"
-            leftIcon={<RiUserLine size="14px" />}
-            rightIcon={<RiArrowDownSLine size="14px" />}
-          >
-            Hi, {user?.displayName}
-          </MenuButton>
-          <MenuList>
-            <MenuItem fontSize={{ base: "xs", md: "sm" }}>My Account</MenuItem>
-            <MenuDivider />
-            <MenuItem
-              icon={<RiLogoutCircleLine size={"13px"} />}
-              fontSize={{ base: "xs", md: "sm" }}
-              color={"red.500"}
-              onClick={() => signOutUser()}
+        <Box>
+          <Menu closeOnBlur={true}>
+            <MenuButton
+              as={Button}
+              size={buttonSize}
+              variant="ghost"
+              leftIcon={<RiUserLine size="14px" />}
+              rightIcon={<RiArrowDownSLine size="14px" />}
             >
-              Logout
-            </MenuItem>
-          </MenuList>
-        </Menu>
+              Hi, {user?.displayName}
+            </MenuButton>
+            <MenuList>
+              <MenuItem fontSize={{ base: "xs", md: "sm" }}>
+                My Account
+              </MenuItem>
+              <MenuDivider />
+              <MenuItem
+                icon={<RiLogoutCircleLine size={"13px"} />}
+                fontSize={{ base: "xs", md: "sm" }}
+                color={"red.500"}
+                onClick={() => signOutUser()}
+              >
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
       )}
     </HStack>
   );
