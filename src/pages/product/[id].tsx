@@ -29,7 +29,7 @@ import { useProduct } from "@hooks/useProduct";
 
 import { numberWithCommas } from "@utils/index";
 
-const Index: React.FC = (): JSX.Element => {
+const Index: React.FC = () => {
   const { query, back } = useRouter();
   const { addProduct, cart, removeProduct } = useProduct();
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });

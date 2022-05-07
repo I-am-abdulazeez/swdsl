@@ -23,7 +23,7 @@ import { inputFocus } from "@utils/index";
 import { withPublic } from "@hooks/useRoute";
 import { UserAuthType, UserDetails } from "@interfaces/index";
 
-const Index: React.FC<UserAuthType> = (props): JSX.Element => {
+const Index: React.FC<UserAuthType> = (props) => {
   const { userAuth } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
