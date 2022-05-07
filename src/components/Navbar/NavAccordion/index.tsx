@@ -8,7 +8,7 @@ const NavAccordion: React.FC = () => {
   return (
     <Accordion allowToggle>
       {DrinkCategory.map((cat, idx) => (
-        <AccordionItem key={idx}>
+        <AccordionItem _focus={{ boxShadow: "none" }} key={idx}>
           <NavAccordionButton>{cat}</NavAccordionButton>
           <AccordionPanel>
             <NavCategoryList category={cat} />
