@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: ReactChildrenProp) => {
     onSuccess: () => {
       setIsLoading(false);
       chakraToast({
-        title: "Password has been changed. you can now login now!",
+        title: "Password has been changed. Welcome, back!",
         isClosable: true,
         status: "success",
         variant: "subtle",
