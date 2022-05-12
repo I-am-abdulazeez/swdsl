@@ -7,11 +7,11 @@ import { AuthContextType, UserAuthType } from "@interfaces/index";
 export const withPublic = (Component: React.FC<UserAuthType>) => {
   return function WithPublic(props: AuthContextType) {
     const auth = useAuth();
-    const { replace } = useRouter();
+    const { back } = useRouter();
 
     if (auth.user) {
       setTimeout(() => {
-        replace("/");
+        back();
       }, 2000);
 
       return (
