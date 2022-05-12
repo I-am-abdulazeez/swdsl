@@ -7,11 +7,11 @@ import { AuthContextType, UserAuthType } from "@interfaces/index";
 export const withPublic = (Component: React.FC<UserAuthType>) => {
   return function WithPublic(props: AuthContextType) {
     const auth = useAuth();
-    const { back } = useRouter();
+    const { replace } = useRouter();
 
     if (auth.user) {
       setTimeout(() => {
-        back();
+        replace("/"); // redirect to home page
       }, 2000);
 
       return (
@@ -32,7 +32,7 @@ export const withPrivate = (Component: React.FC<UserAuthType>) => {
 
     if (!auth.user) {
       setTimeout(() => {
-        replace("/auth/login");
+        replace("/auth/login"); // redirect to login page
       }, 2000);
 
       return (
