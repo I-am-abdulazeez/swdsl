@@ -12,6 +12,7 @@ import Footer from "@components/Footer";
 import Helmet from "@components/Helmet";
 import Navbar from "@components/Navbar";
 import ProductList from "@components/Products/ProductList";
+import ScrollToTop from "@components/ScrollToTop";
 
 import { useProduct } from "@hooks/useProduct";
 
@@ -75,6 +76,7 @@ const Index: React.FC = () => {
         </Container>
       </Box>
       <Footer />
+      <ScrollToTop />
     </Box>
   );
 };
