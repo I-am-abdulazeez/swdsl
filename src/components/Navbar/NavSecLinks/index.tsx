@@ -27,7 +27,7 @@ import { useProduct } from "@hooks/useProduct";
 
 const NavSecLinks: React.FC = () => {
   const activeShop = router.pathname === "/shop" ? "primary" : "";
-  const activeProfile = router.pathname === "/profile";
+  const activeProfile = router.pathname === "/user/profile";
 
   const { signOutUser, user } = useAuth();
   const { cart } = useProduct();
@@ -89,7 +89,7 @@ const NavSecLinks: React.FC = () => {
               Hi, {user?.displayName}
             </MenuButton>
             <MenuList>
-              <NextLink href="/profile" passHref>
+              <NextLink href="/user/profile" passHref>
                 <MenuItem
                   borderRight={activeProfile ? "3px solid #b33b32" : ""}
                   borderRightRadius="2px"
