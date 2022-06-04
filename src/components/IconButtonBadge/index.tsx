@@ -1,6 +1,6 @@
+import NextLink from "next/link";
 import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import NextLink from "next/link";
 
 import { RiShoppingCartLine } from "react-icons/ri";
 
@@ -22,7 +22,7 @@ const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
         variant="ghost"
         icon={
           <>
-            <RiShoppingCartLine size="17px" />
+            <RiShoppingCartLine size="19px" />
             <Box
               as={"span"}
               color={"white"}

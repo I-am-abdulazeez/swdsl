@@ -11,7 +11,7 @@ import {
   useAuthSignOut,
 } from "@react-query-firebase/auth";
 
-import { firebaseAuth } from "src/config/firebase";
+import { firebaseAuth } from "@config/firebase";
 
 import { AuthContextType, ReactChildrenProp } from "@interfaces/index";
 
@@ -98,7 +98,7 @@ export const AuthProvider = ({ children }: ReactChildrenProp) => {
     onSuccess: () => {
       setIsLoading(false);
       chakraToast({
-        title: "Password has been changed. you can now login now!",
+        title: "Password has been changed. Welcome, back!",
         isClosable: true,
         status: "success",
         variant: "subtle",

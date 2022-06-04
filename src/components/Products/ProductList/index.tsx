@@ -15,7 +15,7 @@ import ProductBadge from "@components/Products/ProductBadge";
 import { ProductListProps } from "@interfaces/index";
 import { numberWithCommas } from "@utils/index";
 
-const ProductList: React.FC<ProductListProps> = (props): JSX.Element => {
+const ProductList: React.FC<ProductListProps> = (props) => {
   const { product, docsSnapshot, inCart, onAddToCart, onRemoveFromCart } =
     props;
   return (

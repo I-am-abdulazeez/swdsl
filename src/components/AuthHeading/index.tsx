@@ -5,7 +5,7 @@ import LogoLink from "@components/LogoLink";
 
 import { AuthHeadingProps } from "@interfaces/index";
 
-const AuthHeading: React.FC<AuthHeadingProps> = (props): JSX.Element => {
+const AuthHeading: React.FC<AuthHeadingProps> = (props) => {
   const { authHeading, authText, authHref, authRoute } = props;
 
   return (

@@ -13,6 +13,7 @@ import WrappedSwiper from "@components/SwipeComponent/WrappedSwiper";
 import VideoSwipe from "@components/SwipeComponent/VideoSwipe";
 import LogoLink from "@components/LogoLink";
 
+
 const Index: React.FC = () => {
   return (
     <>

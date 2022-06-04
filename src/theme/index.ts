@@ -2,11 +2,14 @@ import { extendTheme } from "@chakra-ui/react";
 
 const FontFamily: string = "Poppins";
 
-const customTheme: object = extendTheme({
+const customTheme = extendTheme({
   fonts: {
     body: FontFamily,
     heading: FontFamily,
     mono: FontFamily,
+  },
+  components: {
+    Button: { baseStyle: { _focus: { boxShadow: "none" } } },
   },
   styles: {
     global: {

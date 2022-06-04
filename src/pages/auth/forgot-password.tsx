@@ -15,7 +15,7 @@ import Helmet from "@components/Helmet";
 import LogoLink from "@components/LogoLink";
 
 import { inputFocus } from "@utils/index";
-import { useAuth } from "src/hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 
 const Index: React.FC = () => {
   const { sendPasswordEmailReset, isLoading } = useAuth();
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
               <RiMailOpenLine size={"12.5px"} />
             </InputRightElement>
           </InputGroup>
-          {errors.email?.type === "required" && (
+          {errors?.email && errors.email?.type === "required" && (
             <Text fontSize={"xs"} mt={1} color={"red.500"}>
               Email is required!
             </Text>

@@ -19,7 +19,7 @@ import Navbar from "@components/Navbar";
 
 import { numberWithCommas } from "@utils/index";
 
-import { useProduct } from "src/hooks/useProduct";
+import { useProduct } from "@hooks/useProduct";
 
 const Index: React.FC = () => {
   const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();

@@ -4,7 +4,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
 
 import { ProductNavProps } from "@interfaces/index";
 
-const ProductNav: React.FC<ProductNavProps> = (props): JSX.Element => {
+const ProductNav: React.FC<ProductNavProps> = (props) => {
   const { product } = props;
 
   return (

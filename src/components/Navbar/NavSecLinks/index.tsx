@@ -1,5 +1,6 @@
 import NextLink from "next/link";
 import {
+  Box,
   Button,
   HStack,
   IconButton,
@@ -25,12 +26,14 @@ import { useAuth } from "@hooks/useAuth";
 import { useProduct } from "@hooks/useProduct";
 
 const NavSecLinks: React.FC = () => {
+  const activeShop = router.pathname === "/shop" ? "primary" : "";
+  const activeProfile = router.pathname === "/user/profile";
+
   const { signOutUser, user } = useAuth();
   const { cart } = useProduct();
 
   const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-  const activeShop = router.pathname === "/shop" ? "primary" : "";
 
   console.log(cart?.length);
 
@@ -72,32 +75,41 @@ const NavSecLinks: React.FC = () => {
           />
         </NextLink>
       )}
-
       <IconButtonBadge badgeContent={cart?.length} />
       {user && (
-        <Menu closeOnBlur={true}>
-          <MenuButton
-            as={Button}
-            size={buttonSize}
-            variant="ghost"
-            leftIcon={<RiUserLine size="14px" />}
-            rightIcon={<RiArrowDownSLine size="14px" />}
-          >
-            Hi, {user?.displayName}
-          </MenuButton>
-          <MenuList>
-            <MenuItem fontSize={{ base: "xs", md: "sm" }}>My Account</MenuItem>
-            <MenuDivider />
-            <MenuItem
-              icon={<RiLogoutCircleLine size={"13px"} />}
-              fontSize={{ base: "xs", md: "sm" }}
-              color={"red.500"}
-              onClick={() => signOutUser()}
+        <Box>
+          <Menu closeOnBlur={true}>
+            <MenuButton
+              as={Button}
+              size={buttonSize}
+              variant="ghost"
+              leftIcon={<RiUserLine size="14px" />}
+              rightIcon={<RiArrowDownSLine size="14px" />}
             >
-              Logout
-            </MenuItem>
-          </MenuList>
-        </Menu>
+              Hi, {user?.displayName}
+            </MenuButton>
+            <MenuList>
+              <NextLink href="/user/profile" passHref>
+                <MenuItem
+                  borderRight={activeProfile ? "3px solid #b33b32" : ""}
+                  borderRightRadius="2px"
+                  fontSize={{ base: "xs", md: "sm" }}
+                >
+                  My Account
+                </MenuItem>
+              </NextLink>
+              <MenuDivider />
+              <MenuItem
+                icon={<RiLogoutCircleLine size={"13px"} />}
+                fontSize={{ base: "xs", md: "sm" }}
+                color={"red.500"}
+                onClick={() => signOutUser()}
+              >
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
       )}
     </HStack>
   );
