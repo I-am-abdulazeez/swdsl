@@ -58,7 +58,7 @@ const Index: React.FC = () => {
               <RiMailOpenLine size={"12.5px"} />
             </InputRightElement>
           </InputGroup>
-          {errors.email?.type === "required" && (
+          {errors?.email && errors.email?.type === "required" && (
             <Text fontSize={"xs"} mt={1} color={"red.500"}>
               Email is required!
             </Text>

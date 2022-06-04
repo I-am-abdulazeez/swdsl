@@ -75,7 +75,7 @@ const ResetPassword: React.FC = () => {
               />
             </InputRightElement>
           </InputGroup>
-          {errors.password?.type === "minLength" && (
+          {errors?.password && errors.password?.type === "minLength" && (
             <FormErrorText>Minimum characters of 6</FormErrorText>
           )}
         </FormControl>
