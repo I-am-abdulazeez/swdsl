@@ -1,5 +1,4 @@
 import { ChakraProvider } from "@chakra-ui/react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { AppProps } from "next/app";
 import SwiperCore, {
   Pagination,
@@ -8,8 +7,8 @@ import SwiperCore, {
   Navigation,
 } from "swiper";
 
-import { AuthProvider } from "src/context/AuthContext";
-import { ProductProvider } from "src/context/ProductContext";
+import { AuthProvider } from "@context/AuthContext";
+import { ProductProvider } from "@context/ProductContext";
 
 import ClientOnly from "@components/ClientOnly";
 import QueryClientWrapper from "src/client";

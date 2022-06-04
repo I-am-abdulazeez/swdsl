@@ -42,7 +42,7 @@ import {
   nigeriaPhoneNumberPattern,
 } from "@utils/index";
 
-const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
+const RegisterForm: React.FC<UserActionType> = (props) => {
   const { isLoading, setUser, setIsLoggedIn, setIsLoading } = props;
 
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -155,7 +155,7 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
                 <RiUserLine size={"12.5px"} />
               </InputRightElement>
             </InputGroup>
-            {errors.firstname?.type === "required" && (
+            {errors?.firstname && errors.firstname?.type === "required" && (
               <FormErrorText>Field is required!</FormErrorText>
             )}
           </FormControl>
@@ -177,7 +177,7 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
                 <RiUserLine size={"12.5px"} />
               </InputRightElement>
             </InputGroup>
-            {errors.lastname?.type === "required" && (
+            {errors?.lastname && errors.lastname?.type === "required" && (
               <FormErrorText>Field is required!</FormErrorText>
             )}
           </FormControl>
@@ -209,10 +209,10 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
                 />
               </InputRightElement>
             </InputGroup>
-            {errors.password?.type === "required" && (
+            {errors?.password && errors.password?.type === "required" && (
               <FormErrorText>Password is required.</FormErrorText>
             )}
-            {errors.password?.type === "minLength" && (
+            {errors?.password && errors.password?.type === "minLength" && (
               <FormErrorText>Minimum of 6 characters.</FormErrorText>
             )}
           </FormControl>
@@ -234,15 +234,17 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
                 <RiPhoneLine size={"12.5px"} />
               </InputRightElement>
             </InputGroup>
-            {errors.phonenumber?.type === "pattern" ||
-              (errors.phonenumber?.type === "required" && (
-                <FormErrorText>
-                  Please, enter a valid nigeria phonenumber.
-                </FormErrorText>
-              ))}
-            {errors.phonenumber?.type === "maxLength" && (
-              <FormErrorText>Maximum of 10 characters.</FormErrorText>
-            )}
+            {(errors?.phonenumber && errors.phonenumber?.type === "pattern") ||
+              (errors?.phonenumber &&
+                errors.phonenumber?.type === "required" && (
+                  <FormErrorText>
+                    Please, enter a valid nigeria phonenumber.
+                  </FormErrorText>
+                ))}
+            {errors?.phonenumber &&
+              errors.phonenumber?.type === "maxLength" && (
+                <FormErrorText>Maximum of 10 characters.</FormErrorText>
+              )}
           </FormControl>
         </Stack>
         <FormControl id="accept">
@@ -252,7 +254,7 @@ const RegisterForm: React.FC<UserActionType> = (props): JSX.Element => {
           >
             I’m 18 years or older.
           </Checkbox>
-          {errors.accept?.type === "required" && (
+          {errors?.accept && errors.accept?.type === "required" && (
             <FormErrorText>
               Please, accept the terms and condition.
             </FormErrorText>

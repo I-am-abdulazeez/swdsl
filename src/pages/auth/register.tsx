@@ -4,9 +4,9 @@ import Helmet from "@components/Helmet";
 import AuthHeading from "@components/AuthHeading";
 import RegisterForm from "@components/RegisterForm";
 
-import { withPublic } from "src/hooks/useRoute";
+import { withPublic } from "@hooks/useRoute";
 
-import { UserAuthType } from "src/interfaces";
+import { UserAuthType } from "@interfaces/index";
 
 const Index: React.FC<UserAuthType> = (props) => {
   const { userAuth } = props;

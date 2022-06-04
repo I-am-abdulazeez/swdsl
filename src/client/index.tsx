@@ -17,7 +17,7 @@ const QueryClientWrapper: React.FC = (props) => {
           onError: (err) => {
             const error = err as AuthError | FirestoreError;
             chakraToast({
-              title: error.message,
+              title: error?.message,
               isClosable: true,
               status: "error",
               variant: "subtle",

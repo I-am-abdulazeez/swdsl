@@ -19,7 +19,7 @@ import Helmet from "@components/Helmet";
 import LogoLink from "@components/LogoLink";
 import FormErrorText from "@components/FormErrorText";
 
-import { useAuth } from "src/hooks/useAuth";
+import { useAuth } from "@hooks/useAuth";
 
 import { inputFocus } from "@utils/index";
 
@@ -75,7 +75,7 @@ const ResetPassword: React.FC = () => {
               />
             </InputRightElement>
           </InputGroup>
-          {errors.password?.type === "minLength" && (
+          {errors?.password && errors.password?.type === "minLength" && (
             <FormErrorText>Minimum characters of 6</FormErrorText>
           )}
         </FormControl>
