@@ -47,6 +47,12 @@ export interface IUserRegister extends UserDetails {
   accept: boolean;
 }
 
+export interface UserPasswordUpdate {
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
+}
+
 export interface AuthHeadingProps {
   authHeading: string;
   authText: string;
