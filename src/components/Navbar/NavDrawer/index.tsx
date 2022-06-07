@@ -54,7 +54,7 @@ const NavDrawer: React.FC = () => {
             color={"primary.500"}
             fontSize={"md"}
           >
-            All category
+            Categories
           </DrawerHeader>
           <DrawerCloseButton
             _focus={{
