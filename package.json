@@ -24,7 +24,8 @@
     "react-hook-form": "^7.25.1",
     "react-icons": "^4.3.1",
     "react-query": "^3.34.12",
-    "swiper": "^7.4.1"
+    "swiper": "^7.4.1",
+    "zustand": "^4.0.0"
   },
   "devDependencies": {
     "@types/react": "17.0.38",
