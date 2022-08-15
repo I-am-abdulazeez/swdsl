@@ -1,24 +1,24 @@
-import { ChakraProvider } from "@chakra-ui/react";
-import { AppProps } from "next/app";
+import { ChakraProvider } from '@chakra-ui/react';
+import { AppProps } from 'next/app';
 import SwiperCore, {
   Pagination,
   EffectFlip,
   Autoplay,
   Navigation,
-} from "swiper";
+} from 'swiper';
 
-import { AuthProvider } from "@context/AuthContext";
-import { ProductProvider } from "@context/ProductContext";
+import { AuthProvider } from '@context/AuthContext';
+import { ProductProvider } from '@context/ProductContext';
 
-import ClientOnly from "@components/ClientOnly";
-import QueryClientWrapper from "src/client";
-import customTheme from "@theme/index";
+import ClientOnly from '@components/ClientOnly';
+import QueryClientWrapper from 'src/client';
+import customTheme from '@theme/index';
 
-import "@styles/index.css";
+import '@styles/index.css';
 
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/effect-flip";
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/effect-flip';
 
 SwiperCore.use([Navigation, Pagination, EffectFlip, Autoplay]);
 
