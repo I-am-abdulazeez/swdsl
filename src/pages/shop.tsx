@@ -5,16 +5,16 @@ import {
   SimpleGrid,
   Spinner,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import DrinkSearch from "@components/DrinkSearch";
-import Footer from "@components/Footer";
-import Helmet from "@components/Helmet";
-import Navbar from "@components/Navbar";
-import ProductList from "@components/Products/ProductList";
-import ScrollToTop from "@components/ScrollToTop";
+import DrinkSearch from '@components/DrinkSearch';
+import Footer from '@components/Footer';
+import Helmet from '@components/Helmet';
+import Navbar from '@components/Navbar';
+import ProductList from '@components/Products/ProductList';
+import BackToTop from '@components/BackToTop';
 
-import { useProduct } from "@hooks/useProduct";
+import { useProduct } from '@hooks/useProduct';
 
 const Index: React.FC = () => {
   const { products, storeQuery, addProduct, cart, removeProduct } =
@@ -24,9 +24,9 @@ const Index: React.FC = () => {
     <Box>
       <Helmet title="Shop Wine | Shayowithdsl" />
       <Navbar />
-      <Box as={"main"} my={{ base: 12, md: 24 }}>
+      <Box as={'main'} my={{ base: 12, md: 24 }}>
         <Container maxW="container.lg">
-          <Box width={{ base: "auto", md: "700px" }} mx="auto">
+          <Box width={{ base: 'auto', md: '700px' }} mx="auto">
             <DrinkSearch />
           </Box>
           <Text my={10} fontSize="sm" color="gray.600">
@@ -46,7 +46,7 @@ const Index: React.FC = () => {
               </HStack>
             )}
             {storeQuery.isLoadingError && (
-              <Text fontSize={"14px"}>Cannot fetch products.</Text>
+              <Text fontSize={'14px'}>Cannot fetch products.</Text>
             )}
             <SimpleGrid
               columns={{ base: 2, md: 4 }}
@@ -76,7 +76,7 @@ const Index: React.FC = () => {
         </Container>
       </Box>
       <Footer />
-      <ScrollToTop />
+      <BackToTop />
     </Box>
   );
 };
