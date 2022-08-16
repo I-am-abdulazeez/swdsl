@@ -1,6 +1,6 @@
 import { User } from 'firebase/auth';
 
-import { IUserRegister, UserDetails } from '@interfaces/index';
+import { IUserRegister, UserData, UserDetails } from '@interfaces/index';
 
 export type AuthState = {
   user: User | null;
@@ -9,7 +9,7 @@ export type AuthState = {
 };
 
 export type AuthActions = {
-  signUpUser: (user: IUserRegister) => void;
+  signUpUser: (user: IUserRegister, newUserDetails: UserData) => void;
   signInUser: (user: UserDetails) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (oobCode: string, password: string) => void;
