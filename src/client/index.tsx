@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 
 import { AuthError } from 'firebase/auth';
 import { FirestoreError } from 'firebase/firestore';
@@ -6,7 +6,7 @@ import { MutationCache, QueryClient, QueryClientProvider } from 'react-query';
 
 import { useToast } from '@chakra-ui/react';
 
-const QueryClientWrapper: React.FC = (props) => {
+const QueryClientWrapper: React.FC<PropsWithChildren<{}>> = (props) => {
   const chakraToast = useToast();
   const { children } = props;
 
@@ -29,6 +29,7 @@ const QueryClientWrapper: React.FC = (props) => {
           },
         }),
       }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
