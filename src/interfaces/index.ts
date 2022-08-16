@@ -60,22 +60,6 @@ export interface AuthHeadingProps {
   authRoute: string;
 }
 
-export interface UserActionType {
-  isLoading: boolean;
-  setUser: Dispatch<SetStateAction<UserInfo | null>>;
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
-}
-
-export interface AuthContextType extends UserActionType {
-  user: UserInfo | null;
-  isLoggedIn: boolean;
-  resetPassword: (oobCode: string, newPassword: string) => void;
-  sendPasswordEmailReset: (email: string) => void;
-  signInUser: (email: string, password: string) => void;
-  signOutUser: () => void;
-}
-
 export interface ProductContextType {
   products: QueryDocumentSnapshot<DocumentData>[];
   storeQuery: UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>;
@@ -120,17 +104,9 @@ export interface ProductNavProps {
   product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
 }
 
-export interface UserAuthType {
-  userAuth: AuthContextType;
-}
-
 export interface LogoLinkProps {
   width: string;
   height: string;
-}
-
-export interface ReactChildrenProp {
-  children: React.ReactNode;
 }
 
 export interface HelmetProps {
