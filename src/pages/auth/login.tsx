@@ -24,7 +24,7 @@ import { withPublic } from '@hooks/useRoute';
 import { UserDetails } from '@interfaces/index';
 import { useAuthStore } from '@store/hooks/useAuthStore';
 
-const Index: React.FC = () => {
+const Login: React.FC = () => {
   const signInUser = useAuthStore((state) => state.signInUser);
   const isLoading = useAuthStore((state) => state.isLoading);
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -123,4 +123,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default withPublic(Index);
+export default withPublic(Login);
