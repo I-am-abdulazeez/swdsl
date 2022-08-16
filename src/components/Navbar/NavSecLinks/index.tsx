@@ -1,4 +1,4 @@
-import NextLink from "next/link";
+import NextLink from 'next/link';
 import {
   Box,
   Button,
@@ -11,28 +11,30 @@ import {
   MenuList,
   useBreakpointValue,
   useMediaQuery,
-} from "@chakra-ui/react";
-import router from "next/router";
+} from '@chakra-ui/react';
+import router from 'next/router';
 import {
   RiStore2Line,
   RiUserLine,
   RiArrowDownSLine,
   RiLogoutCircleLine,
-} from "react-icons/ri";
+} from 'react-icons/ri';
 
-import IconButtonBadge from "@components/IconButtonBadge";
+import IconButtonBadge from '@components/IconButtonBadge';
 
-import { useAuth } from "@hooks/useAuth";
-import { useProduct } from "@hooks/useProduct";
+import { useAuth } from '@hooks/useAuth';
+import { useProduct } from '@hooks/useProduct';
+import { useAuthStore } from '@store/hooks/useAuthStore';
 
 const NavSecLinks: React.FC = () => {
-  const activeShop = router.pathname === "/shop" ? "primary" : "";
-  const activeProfile = router.pathname === "/user/profile";
+  const activeShop = router.pathname === '/shop' ? 'primary' : '';
+  const activeProfile = router.pathname === '/user/profile';
 
-  const { signOutUser, user } = useAuth();
+  const user = useAuthStore((state) => state.user);
+  const signOutUser = useAuthStore((state) => state.signOutUser);
   const { cart } = useProduct();
 
-  const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
+  const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
 
   console.log(cart?.length);
@@ -91,18 +93,18 @@ const NavSecLinks: React.FC = () => {
             <MenuList>
               <NextLink href="/user/profile" passHref>
                 <MenuItem
-                  borderRight={activeProfile ? "3px solid #b33b32" : ""}
+                  borderRight={activeProfile ? '3px solid #b33b32' : ''}
                   borderRightRadius="2px"
-                  fontSize={{ base: "xs", md: "sm" }}
+                  fontSize={{ base: 'xs', md: 'sm' }}
                 >
                   My Account
                 </MenuItem>
               </NextLink>
               <MenuDivider />
               <MenuItem
-                icon={<RiLogoutCircleLine size={"13px"} />}
-                fontSize={{ base: "xs", md: "sm" }}
-                color={"red.500"}
+                icon={<RiLogoutCircleLine size={'13px'} />}
+                fontSize={{ base: 'xs', md: 'sm' }}
+                color={'red.500'}
                 onClick={() => signOutUser()}
               >
                 Logout

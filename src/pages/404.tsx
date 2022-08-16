@@ -1,13 +1,13 @@
-import { Box, Text, VStack } from "@chakra-ui/layout";
-import { Container, Button } from "@chakra-ui/react";
-import { RiEyeCloseLine } from "react-icons/ri";
-import NextLink from "next/link";
+import { Box, Text, VStack } from '@chakra-ui/layout';
+import { Container, Button } from '@chakra-ui/react';
+import { RiEyeCloseLine } from 'react-icons/ri';
+import NextLink from 'next/link';
 
-import Navbar from "@components/Navbar";
-import Footer from "@components/Footer";
-import Helmet from "@components/Helmet";
+import Navbar from '@components/Navbar';
+import Footer from '@components/Footer';
+import Helmet from '@components/Helmet';
 
-const Index: React.FC = () => {
+const Error404: React.FC = () => {
   return (
     <Box>
       <Helmet title="Error Page | No result found " />
@@ -16,7 +16,7 @@ const Index: React.FC = () => {
         <VStack spacing={5} as="main" my="10rem">
           <RiEyeCloseLine size="90px" color="#E2E8F0" />
           <Box textAlign="center">
-            <Text fontWeight={"bold"}>No results found!</Text>
+            <Text fontWeight={'bold'}>No results found!</Text>
             <Text>Unfortunately we couldn't find the page.</Text>
           </Box>
           <NextLink href="/">
@@ -32,4 +32,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default Error404;

@@ -58,7 +58,7 @@ const ProductList: React.FC<ProductListProps> = (props) => {
         </Box>
         <Stack direction={{ base: "column", md: "row" }} spacing={3}>
           <NextLink href={`product/${docsSnapshot?.id}`} passHref>
-            <Button isFullWidth size={"xs"} as="a">
+            <Button width={'full'} size={"xs"} as="a">
               View product
             </Button>
           </NextLink>
@@ -79,7 +79,7 @@ const ProductList: React.FC<ProductListProps> = (props) => {
             </HStack>
           ) : (
             <Button
-              isFullWidth
+              width={'full'}
               onClick={() => onAddToCart(product)}
               colorScheme="success"
               size={"xs"}

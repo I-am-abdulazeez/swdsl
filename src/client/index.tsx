@@ -1,10 +1,10 @@
-import { useMemo } from "react";
+import { useMemo } from 'react';
 
-import { AuthError } from "firebase/auth";
-import { FirestoreError } from "firebase/firestore";
-import { MutationCache, QueryClient, QueryClientProvider } from "react-query";
+import { AuthError } from 'firebase/auth';
+import { FirestoreError } from 'firebase/firestore';
+import { MutationCache, QueryClient, QueryClientProvider } from 'react-query';
 
-import { useToast } from "@chakra-ui/react";
+import { useToast } from '@chakra-ui/react';
 
 const QueryClientWrapper: React.FC = (props) => {
   const chakraToast = useToast();
@@ -19,11 +19,11 @@ const QueryClientWrapper: React.FC = (props) => {
             chakraToast({
               title: error?.message,
               isClosable: true,
-              status: "error",
-              variant: "subtle",
+              status: 'error',
+              variant: 'subtle',
               duration: 6000,
               containerStyle: {
-                fontSize: "12.5px",
+                fontSize: '12.5px',
               },
             });
           },

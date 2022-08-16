@@ -1,29 +1,28 @@
-import { Box, Container, VStack } from "@chakra-ui/layout";
-import { RiArrowDownLine } from "react-icons/ri";
-import { Heading } from "@chakra-ui/react";
-import { Button } from "@chakra-ui/button";
+import { Box, Container, VStack } from '@chakra-ui/layout';
+import { RiArrowDownLine } from 'react-icons/ri';
+import { Heading } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/button';
 
-import Navbar from "@components/Navbar";
-import ScrollToTop from "@components/ScrollToTop";
-import Footer from "@components/Footer";
-import ShowCase from "@components/Showcase";
-import Helmet from "@components/Helmet";
-import DrinkSearch from "@components/DrinkSearch";
-import WrappedSwiper from "@components/SwipeComponent/WrappedSwiper";
-import VideoSwipe from "@components/SwipeComponent/VideoSwipe";
-import LogoLink from "@components/LogoLink";
-
+import Navbar from '@components/Navbar';
+import BackToTop from '@components/BackToTop';
+import Footer from '@components/Footer';
+import ShowCase from '@components/Showcase';
+import Helmet from '@components/Helmet';
+import DrinkSearch from '@components/DrinkSearch';
+import WrappedSwiper from '@components/SwipeComponent/WrappedSwiper';
+import VideoSwipe from '@components/SwipeComponent/VideoSwipe';
+import LogoLink from '@components/LogoLink';
 
 const Index: React.FC = () => {
   return (
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />
       <Navbar />
-      <Box as="main" mt={{ base: "4rem", md: "6rem" }}>
+      <Box as="main" mt={{ base: '4rem', md: '6rem' }}>
         <Container maxW="container.sm">
           <DrinkSearch />
         </Container>
-        <Box textAlign="center" mt={{ base: "3rem", md: "5rem" }}>
+        <Box textAlign="center" mt={{ base: '3rem', md: '5rem' }}>
           <LogoLink width="800px" height="230px" />
         </Box>
         <VideoSwipe />
@@ -43,17 +42,17 @@ const Index: React.FC = () => {
         textAlign="center"
         p={6}
       >
-        <Heading fontWeight="semibold" size={"xl"} lineHeight="1.5">
+        <Heading fontWeight="semibold" size={'xl'} lineHeight="1.5">
           QUALITY DRINKS DELIVERED TO YOUR DOORSTEP.
         </Heading>
         <Button
           bg="transparent"
           _hover={{
-            bg: "transparent",
+            bg: 'transparent',
           }}
           size="lg"
           _active={{
-            backgroundColor: "transparent",
+            backgroundColor: 'transparent',
           }}
           textTransform="uppercase"
           rightIcon={<RiArrowDownLine className="fade-in-down" size="25px" />}
@@ -62,7 +61,7 @@ const Index: React.FC = () => {
         </Button>
       </VStack>
       <Footer />
-      <ScrollToTop />
+      <BackToTop />
     </>
   );
 };

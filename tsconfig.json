@@ -16,7 +16,8 @@
       "@styles*": ["src/styles*"],
       "@lib*": ["src/lib*"],
       "@theme*": ["src/theme*"],
-      "@utils*": ["src/utils*"]
+      "@utils*": ["src/utils*"],
+      "@store*": ["src/store*"]
     },
     "strict": true,
     "forceConsistentCasingInFileNames": true,

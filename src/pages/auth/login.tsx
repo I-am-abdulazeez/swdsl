@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   VStack,
   Box,
@@ -10,28 +10,31 @@ import {
   InputRightElement,
   FormLabel,
   IconButton,
-} from "@chakra-ui/react";
-import NextLink from "next/link";
-import { SubmitHandler, useForm } from "react-hook-form";
+} from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { SubmitHandler, useForm } from 'react-hook-form';
 
-import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from "react-icons/ri";
+import { RiEyeLine, RiEyeOffLine, RiMailOpenLine } from 'react-icons/ri';
 
-import Helmet from "@components/Helmet";
-import AuthHeading from "@components/AuthHeading";
+import Helmet from '@components/Helmet';
+import AuthHeading from '@components/AuthHeading';
 
-import { inputFocus } from "@utils/index";
-import { withPublic } from "@hooks/useRoute";
-import { UserAuthType, UserDetails } from "@interfaces/index";
+import { inputFocus } from '@utils/index';
+import { withPublic } from '@hooks/useRoute';
+import { UserDetails } from '@interfaces/index';
+import { useAuthStore } from '@store/hooks/useAuthStore';
 
-const Index: React.FC<UserAuthType> = (props) => {
-  const { userAuth } = props;
-
+const Login: React.FC = () => {
+  const signInUser = useAuthStore((state) => state.signInUser);
+  const isLoading = useAuthStore((state) => state.isLoading);
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { signInUser, isLoading } = userAuth;
   const { register, handleSubmit } = useForm<UserDetails>();
 
   const handleUserLogin: SubmitHandler<UserDetails> = ({ email, password }) => {
-    signInUser(email, password);
+    signInUser({
+      email,
+      password,
+    });
   };
 
   return (
@@ -51,21 +54,21 @@ const Index: React.FC<UserAuthType> = (props) => {
           authHref="/auth/register"
         />
         <form onSubmit={handleSubmit(handleUserLogin)}>
-          <VStack spacing={3} width={{ base: "20em", md: "23em" }}>
+          <VStack spacing={3} width={{ base: '20em', md: '23em' }}>
             <FormControl id="email">
               <FormLabel>Email Address</FormLabel>
               <InputGroup>
                 <Input
                   _focus={inputFocus}
                   type="email"
-                  {...register("email", {
+                  {...register('email', {
                     required: true,
                     pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   })}
                   placeholder="you@example.com"
                 />
                 <InputRightElement>
-                  <RiMailOpenLine size={"12.5px"} />
+                  <RiMailOpenLine size={'12.5px'} />
                 </InputRightElement>
               </InputGroup>
             </FormControl>
@@ -74,9 +77,9 @@ const Index: React.FC<UserAuthType> = (props) => {
               <InputGroup>
                 <Input
                   _focus={inputFocus}
-                  type={showPassword ? "text" : "password"}
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="********"
-                  {...register("password", {
+                  {...register('password', {
                     required: true,
                     minLength: 6,
                   })}
@@ -86,7 +89,7 @@ const Index: React.FC<UserAuthType> = (props) => {
                     size="xs"
                     variant="ghost"
                     aria-label="password"
-                    onClick={() => setShowPassword(!showPassword)}
+                    onClick={() => setShowPassword((prev) => !prev)}
                     icon={showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
                   />
                 </InputRightElement>
@@ -109,7 +112,7 @@ const Index: React.FC<UserAuthType> = (props) => {
               type="submit"
               colorScheme="primary"
               isLoading={isLoading}
-              isFullWidth
+              width={'full'}
             >
               Sign in
             </Button>
@@ -120,4 +123,4 @@ const Index: React.FC<UserAuthType> = (props) => {
   );
 };
 
-export default withPublic(Index);
+export default withPublic(Login);
