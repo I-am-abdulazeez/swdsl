@@ -8,20 +8,20 @@ import {
   HStack,
   Text,
   VStack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import NextLink from "next/link";
-import { RiStore2Line } from "react-icons/ri";
+import NextLink from 'next/link';
+import { RiStore2Line } from 'react-icons/ri';
 
-import CartItem from "@components/CartItem";
-import Helmet from "@components/Helmet";
-import Navbar from "@components/Navbar";
+import CartItem from '@components/CartItem';
+import Helmet from '@components/Helmet';
+import Navbar from '@components/Navbar';
 
-import { numberWithCommas } from "@utils/index";
+import { numberWithCommas } from '@utils/index';
 
-import { useProduct } from "@hooks/useProduct";
+import { useProduct } from '@hooks/useProduct';
 
-const Index: React.FC = () => {
+const Cart: React.FC = () => {
   const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();
 
   const cartIsEmpty = cart?.length === 0;
@@ -36,28 +36,28 @@ const Index: React.FC = () => {
       <Helmet title="My Cart | ShayoWithDSL" />
       <Navbar />
 
-      <Container mt={10} maxW={"container.lg"}>
-        <Flex justify={"space-between"}>
-          <Text fontSize={"sm"} fontWeight="semibold">
+      <Container mt={10} maxW={'container.lg'}>
+        <Flex justify={'space-between'}>
+          <Text fontSize={'sm'} fontWeight="semibold">
             My Cart
           </Text>
-          <Text fontSize={"sm"}>{cartLength} item(s)</Text>
+          <Text fontSize={'sm'}>{cartLength} item(s)</Text>
         </Flex>
         <Divider mt={4} />
         <Box my={8}>
           {cartIsEmpty && (
             <VStack
               spacing={5}
-              align={"center"}
+              align={'center'}
               justify="center"
-              height={"50vh"}
+              height={'50vh'}
             >
-              <RiStore2Line size={"4rem"} color="#e3e3e3" />
-              <Text fontSize={"sm"}>
+              <RiStore2Line size={'4rem'} color="#e3e3e3" />
+              <Text fontSize={'sm'}>
                 No item found, add one from shop page.
               </Text>
               <NextLink href="/shop" passHref>
-                <Button colorScheme={"primary"} size={"sm"}>
+                <Button colorScheme={'primary'} size={'sm'}>
                   Shop
                 </Button>
               </NextLink>
@@ -77,25 +77,25 @@ const Index: React.FC = () => {
             })}
           {!cartIsEmpty && (
             <Box my={8}>
-              <Heading size="lg" textAlign={"right"}>
+              <Heading size="lg" textAlign={'right'}>
                 Total: {numberWithCommas(itemsPrice.toFixed(2))}
               </Heading>
-              <Text textAlign={"right"} fontSize={"xs"}>
+              <Text textAlign={'right'} fontSize={'xs'}>
                 Delivery fee not included yet
               </Text>
-              <HStack spacing={"6"} justifyContent={"center"} mt={20} mb={6}>
+              <HStack spacing={'6'} justifyContent={'center'} mt={20} mb={6}>
                 <NextLink href="/shop">
                   <Button
                     as="a"
                     size="md"
-                    colorScheme={"primary"}
-                    cursor={"pointer"}
-                    variant={"outline"}
+                    colorScheme={'primary'}
+                    cursor={'pointer'}
+                    variant={'outline'}
                   >
                     Continue shopping
                   </Button>
                 </NextLink>
-                <Button size="md" colorScheme={"primary"} cursor={"pointer"}>
+                <Button size="md" colorScheme={'primary'} cursor={'pointer'}>
                   Proceed to checkout
                 </Button>
               </HStack>
@@ -107,4 +107,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default Cart;
