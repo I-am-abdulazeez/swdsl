@@ -6,7 +6,7 @@ import RegisterForm from '@components/RegisterForm';
 
 import { withPublic } from '@hooks/useRoute';
 
-const Index: React.FC = () => {
+const Register: React.FC = () => {
   return (
     <>
       <Helmet title="Sign up | Create an Account | ShayoWithDSL.com" />
@@ -29,4 +29,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default withPublic(Index);
+export default withPublic(Register);
