@@ -1,5 +1,5 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
-import { UserInfo } from "firebase/auth";
+import { Dispatch, MutableRefObject, SetStateAction } from 'react';
+import { UserInfo } from 'firebase/auth';
 import {
   DocumentData,
   DocumentSnapshot,
@@ -7,8 +7,8 @@ import {
   QueryDocumentSnapshot,
   QuerySnapshot,
   Timestamp,
-} from "firebase/firestore";
-import { UseQueryResult } from "react-query";
+} from 'firebase/firestore';
+import { UseQueryResult } from 'react-query';
 
 export interface ShayoBanner {
   src: string;
@@ -105,7 +105,7 @@ export interface UserData {
   accept: boolean;
   createdAt: Timestamp | string;
   cart?: CartItem[];
-  orders: [];
+  orders?: any[];
 }
 
 export interface ProductListProps {
