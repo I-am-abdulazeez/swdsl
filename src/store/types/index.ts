@@ -9,9 +9,11 @@ export type AuthState = {
 };
 
 export type AuthActions = {
-  signUpuser: (user: IUserRegister) => void;
+  signUpUser: (user: IUserRegister) => void;
   signInUser: (user: UserDetails) => void;
   forgotPassword: (email: string) => void;
   resetPassword: (oobCode: string, password: string) => void;
   signOutUser: () => void;
 };
+
+export type AuthStore = AuthState & AuthActions;
