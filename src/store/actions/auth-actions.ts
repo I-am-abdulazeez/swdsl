@@ -5,6 +5,7 @@ import {
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  updateProfile,
 } from 'firebase/auth';
 
 import Router from 'next/router';
@@ -12,9 +13,9 @@ import Router from 'next/router';
 import { useAuthStore } from '../hooks/useAuthStore';
 import { AuthActions } from '../types';
 
-import { UserDetails } from '@interfaces/index';
-import { firebaseAuth } from '@config/firebase';
+import { firebaseAuth, firebaseFirestore } from '@config/firebase';
 import { customToast } from '@utils/index';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 const urlRedirectMode =
   process.env.NODE_ENV === 'development'
@@ -22,8 +23,8 @@ const urlRedirectMode =
     : 'https://www.shayowithdsl.com/auth/login';
 
 export const authActions: AuthActions = {
-  signUpUser: (user: UserDetails) => {
-    const { email, password } = user;
+  signUpUser: (user, newUserDetails) => {
+    const { email, password, firstname } = user;
     useAuthStore.setState((state) => ({
       ...state,
       isLoading: true,
@@ -36,6 +37,21 @@ export const authActions: AuthActions = {
           user: currentUser?.user,
           isAuthenticated: true,
         }));
+        updateProfile(currentUser?.user, {
+          displayName: firstname,
+        }).catch((error) => {
+          console.log(error);
+        });
+        const userId = currentUser?.user?.uid;
+        const collectionRef = collection(firebaseFirestore, 'users');
+        const ref = doc(collectionRef, userId);
+        setDoc(ref, newUserDetails)
+          .then(() => {
+            console.log('done, saved to DB');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
         customToast({
           status: 'success',
           title: 'Account created successfully',
