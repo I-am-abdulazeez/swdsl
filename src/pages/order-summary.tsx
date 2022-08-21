@@ -1,6 +1,6 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text } from '@chakra-ui/react';
 
-const Index: React.FC = () => {
+const OrderSummary: React.FC = () => {
   return (
     <Box>
       <Text>Summary Page</Text>
@@ -8,4 +8,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default OrderSummary;

@@ -1,9 +1,9 @@
-import Navbar from "@components/Navbar";
-import Helmet from "@components/Helmet";
+import Navbar from '@components/Navbar';
+import Helmet from '@components/Helmet';
 
-import ContactSwipe from "@components/SwipeComponent/ContactSwipe";
+import ContactSwipe from '@components/SwipeComponent/ContactSwipe';
 
-const Index: React.FC = () => {
+const Contact: React.FC = () => {
   return (
     <>
       <Helmet title="Contact Shayo Team | ShayoWithDSL.com" />
@@ -13,4 +13,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default Contact;

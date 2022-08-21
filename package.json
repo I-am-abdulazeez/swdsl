@@ -9,27 +9,28 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@chakra-ui/react": "^1.8.1",
-    "@emotion/react": "11.7.1",
-    "@emotion/styled": "11.6.0",
-    "@react-query-firebase/auth": "^0.3.4",
-    "@react-query-firebase/firestore": "^0.4.2",
+    "@chakra-ui/react": "^2.2.8",
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
+    "@react-query-firebase/auth": "^1.0.0-dev.2",
+    "@react-query-firebase/firestore": "^1.0.0-dev.7",
     "firebase": "^9.6.4",
-    "framer-motion": "6.2.3",
-    "html-react-parser": "^1.4.5",
-    "nanoid": "^3.2.0",
-    "next": "12.0.8",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
-    "react-hook-form": "^7.25.1",
+    "framer-motion": "7.1.1",
+    "html-react-parser": "^3.0.1",
+    "nanoid": "^4.0.0",
+    "next": "12.2.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.34.2",
     "react-icons": "^4.3.1",
     "react-query": "^3.34.12",
-    "swiper": "^7.4.1"
+    "swiper": "^8.3.2",
+    "zustand": "^4.0.0"
   },
   "devDependencies": {
-    "@types/react": "17.0.38",
-    "eslint": "8.7.0",
-    "eslint-config-next": "12.0.8",
-    "typescript": "4.5.5"
+    "@types/react": "18.0.17",
+    "eslint": "8.22.0",
+    "eslint-config-next": "12.2.5",
+    "typescript": "4.7.4"
   }
 }

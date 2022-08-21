@@ -16,7 +16,7 @@ import BackToTop from '@components/BackToTop';
 
 import { useProduct } from '@hooks/useProduct';
 
-const Index: React.FC = () => {
+const Shop: React.FC = () => {
   const { products, storeQuery, addProduct, cart, removeProduct } =
     useProduct();
 
@@ -81,4 +81,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default Shop;

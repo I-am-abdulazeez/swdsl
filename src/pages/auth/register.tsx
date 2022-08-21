@@ -1,17 +1,12 @@
-import { VStack } from "@chakra-ui/layout";
+import { VStack } from '@chakra-ui/layout';
 
-import Helmet from "@components/Helmet";
-import AuthHeading from "@components/AuthHeading";
-import RegisterForm from "@components/RegisterForm";
+import Helmet from '@components/Helmet';
+import AuthHeading from '@components/AuthHeading';
+import RegisterForm from '@components/RegisterForm';
 
-import { withPublic } from "@hooks/useRoute";
+import { withPublic } from '@hooks/useRoute';
 
-import { UserAuthType } from "@interfaces/index";
-
-const Index: React.FC<UserAuthType> = (props) => {
-  const { userAuth } = props;
-  const { isLoading, setUser, setIsLoggedIn, setIsLoading } = userAuth;
-
+const Register: React.FC = () => {
   return (
     <>
       <Helmet title="Sign up | Create an Account | ShayoWithDSL.com" />
@@ -28,15 +23,10 @@ const Index: React.FC<UserAuthType> = (props) => {
           authHref="/auth/login"
           authRoute="Signin"
         />
-        <RegisterForm
-          isLoading={isLoading}
-          setUser={setUser}
-          setIsLoading={setIsLoading}
-          setIsLoggedIn={setIsLoggedIn}
-        />
+        <RegisterForm />
       </VStack>
     </>
   );
 };
 
-export default withPublic(Index);
+export default withPublic(Register);

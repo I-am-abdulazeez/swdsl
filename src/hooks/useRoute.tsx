@@ -1,47 +1,46 @@
-import { Flex, Spinner } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { Flex, Spinner } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-import { useAuth } from "@hooks/useAuth";
-import { AuthContextType, UserAuthType } from "@interfaces/index";
+import { useAuthStore } from '@store/hooks/useAuthStore';
 
-export const withPublic = (Component: React.FC<UserAuthType>) => {
-  return function WithPublic(props: AuthContextType) {
-    const auth = useAuth();
+export const withPublic = (Component: React.FC) => {
+  return function WithPublic() {
+    const user = useAuthStore((state) => state.user);
     const { replace } = useRouter();
 
-    if (auth.user) {
+    if (user) {
       setTimeout(() => {
-        replace("/"); // redirect to home page
+        replace('/'); // redirect to home page
       }, 2000);
 
       return (
-        <Flex align={"center"} h={"100vh"} justify={"center"}>
+        <Flex align={'center'} h={'100vh'} justify={'center'}>
           <Spinner color="primary.600" />
         </Flex>
       );
     }
 
-    return <Component userAuth={auth} {...props} />;
+    return <Component />;
   };
 };
 
-export const withPrivate = (Component: React.FC<UserAuthType>) => {
-  return function WithPrivate(props: AuthContextType) {
-    const auth = useAuth();
+export const withPrivate = (Component: React.FC) => {
+  return function WithPrivate() {
+    const user = useAuthStore((state) => state.user);
     const { replace } = useRouter();
 
-    if (!auth.user) {
+    if (!user) {
       setTimeout(() => {
-        replace("/auth/login"); // redirect to login page
+        replace('/auth/login'); // redirect to login page
       }, 2000);
 
       return (
-        <Flex align={"center"} h={"100vh"} justify={"center"}>
+        <Flex align={'center'} h={'100vh'} justify={'center'}>
           <Spinner color="primary.600" />
         </Flex>
       );
     }
 
-    return <Component userAuth={auth} {...props} />;
+    return <Component />;
   };
 };

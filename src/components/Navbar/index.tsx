@@ -1,7 +1,7 @@
-import { Box, Flex, Container } from "@chakra-ui/layout";
+import { Box, Flex, Container } from '@chakra-ui/layout';
 
-import NavSecLinks from "@components/Navbar/NavSecLinks";
-import NavPrimaryLinks from "@components/Navbar/NavPrimaryLinks";
+import NavSecLinks from '@components/Navbar/NavSecLinks';
+import NavPrimaryLinks from '@components/Navbar/NavPrimaryLinks';
 
 const Navbar: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
     >
       <Container maxW="container.lg" h="3.5rem">
         <Flex
-          justify={"space-between"}
+          justify={'space-between'}
           height="100%"
           width="100%"
           align="center"
