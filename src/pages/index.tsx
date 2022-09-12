@@ -12,12 +12,14 @@ import DrinkSearch from '@components/DrinkSearch';
 import WrappedSwiper from '@components/SwipeComponent/WrappedSwiper';
 import VideoSwipe from '@components/SwipeComponent/VideoSwipe';
 import LogoLink from '@components/LogoLink';
+import WelcomeModal from '@components/WelcomeModal';
 
-const Index: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <>
       <Helmet title="ShayoWithDSL | #1 Online wine store" />
       <Navbar />
+      <WelcomeModal />
       <Box as="main" mt={{ base: '4rem', md: '6rem' }}>
         <Container maxW="container.sm">
           <DrinkSearch />
@@ -66,4 +68,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default Home;
