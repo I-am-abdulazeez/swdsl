@@ -21,13 +21,13 @@ import AuthHeading from '@components/AuthHeading';
 
 import { inputFocus } from '@utils/index';
 import { withPublic } from '@hooks/useRoute';
-import { UserDetails } from '@interfaces/index';
 import { useAuthStore } from '@store/hooks/useAuthStore';
+import { UserDetails } from 'src/types';
 
 const Login: React.FC = () => {
   const signInUser = useAuthStore((state) => state.signInUser);
   const isLoading = useAuthStore((state) => state.isLoading);
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const { register, handleSubmit } = useForm<UserDetails>();
 
   const handleUserLogin: SubmitHandler<UserDetails> = ({ email, password }) => {
