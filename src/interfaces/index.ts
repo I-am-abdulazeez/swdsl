@@ -1,5 +1,4 @@
-import { Dispatch, MutableRefObject, SetStateAction } from 'react';
-import { UserInfo } from 'firebase/auth';
+import { MutableRefObject, RefObject } from 'react';
 import {
   DocumentData,
   DocumentSnapshot,
@@ -9,6 +8,7 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { UseQueryResult } from 'react-query';
+import { Cart, Product } from 'src/types';
 
 export interface ShayoBanner {
   src: string;
@@ -35,24 +35,6 @@ export interface SVideos {
   videoId: string;
 }
 
-export interface UserDetails {
-  email: string;
-  password: string;
-}
-
-export interface IUserRegister extends UserDetails {
-  firstname: string;
-  lastname: string;
-  phonenumber: string;
-  accept: boolean;
-}
-
-export interface UserPasswordUpdate {
-  oldPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
-}
-
 export interface AuthHeadingProps {
   authHeading: string;
   authText: string;
@@ -69,40 +51,22 @@ export interface ProductContextType {
   removeAllProductQty: (product: {}) => void;
 }
 
-export interface ProductDetailsParams {
-  productId: string;
-}
-
-export interface CartItem {
-  id: string | string[] | undefined;
-  url: string;
-  drinkName: string;
-  price: string;
-  qty: number;
-}
-
-export interface UserData {
-  email: string;
-  firstname: string;
-  lastname: string;
-  phonenumber: string;
-  accept: boolean;
-  createdAt: Timestamp | string;
-  cart?: CartItem[];
-  orders?: any[];
-}
-
 export interface ProductListProps {
-  product: DocumentData;
-  docsSnapshot: QueryDocumentSnapshot<DocumentData>;
+  product: DocumentData | Product;
   inCart: boolean;
-  onAddToCart: (product: {}) => void;
-  onRemoveFromCart: (product: {}) => void;
+  onAddToCart: (cartItem: Cart) => void;
+  onRemoveFromCart: (cartItem: Cart) => void;
 }
 
 export interface ProductNavProps {
-  product: UseQueryResult<DocumentSnapshot<DocumentData>, FirestoreError>;
+  product: DocumentData | null;
 }
+
+export interface NavCategoryListProps {
+  category: string;
+}
+
+export interface NavAccordionButtonProps extends NavCategoryListProps {}
 
 export interface LogoLinkProps {
   width: string;
@@ -118,20 +82,16 @@ export interface IconButtonBadgeProps {
 }
 
 export interface CartItemProps {
-  cartItem: any;
-  addProduct: (product: any) => void;
-  removeProduct: (id: any) => void;
-  removeAllProduct: (id: any) => void;
+  cartItem: Cart;
+  addProduct: (product: Cart) => void;
+  removeProduct: (cartItem: Cart) => void;
+  removeAllProduct: (cartItem: Cart) => void;
 }
 
 export interface CartItemAlertProps {
   cartItem: any;
   isOpen: boolean;
-  cancelRef: MutableRefObject<undefined>;
+  cancelRef: RefObject<HTMLButtonElement>;
   onClose: () => void;
   removeAllProduct: (id: any) => void;
-}
-
-export interface NavCatListProps {
-  category: string;
 }
