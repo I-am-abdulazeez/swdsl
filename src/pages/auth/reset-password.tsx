@@ -21,6 +21,7 @@ import FormErrorText from '@components/FormErrorText';
 
 import { inputFocus } from '@utils/index';
 import { useAuthStore } from '@store/hooks/useAuthStore';
+import { UserDetails } from 'src/types';
 
 const ResetPassword: React.FC = () => {
   const router = useRouter();
@@ -28,14 +29,14 @@ const ResetPassword: React.FC = () => {
   const resetPassword = useAuthStore((state) => state.resetPassword);
   const isLoading = useAuthStore((state) => state.isLoading);
 
-  const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ password: string }>();
+  } = useForm<UserDetails>();
 
-  const passwordReset: SubmitHandler<{ password: string }> = ({ password }) => {
+  const passwordReset: SubmitHandler<UserDetails> = ({ password }) => {
     const location = router.query;
     const firebaseoobCode = String(location.oobCode);
 
@@ -71,7 +72,7 @@ const ResetPassword: React.FC = () => {
                 size="xs"
                 variant="ghost"
                 aria-label="password"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() => setShowPassword((prev) => !prev)}
                 icon={showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
               />
             </InputRightElement>
