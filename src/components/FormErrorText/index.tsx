@@ -1,12 +1,9 @@
-import { Text } from "@chakra-ui/react";
+import type { PropsWithChildren } from 'react';
+import { Text } from '@chakra-ui/react';
 
-import { ReactChildrenProp } from "@interfaces/index";
-
-const FormErrorText: React.FC<ReactChildrenProp> = (props) => {
-  const { children } = props;
-
+const FormErrorText: React.FC<PropsWithChildren> = ({ children }) => {
   return (
-    <Text fontSize={"xs"} mt={1} color={"red.500"}>
+    <Text fontSize={'xs'} mt={1} color={'red.500'}>
       {children}
     </Text>
   );

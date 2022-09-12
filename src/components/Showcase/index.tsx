@@ -1,20 +1,20 @@
-import { Box, Heading, SimpleGrid, Text, VStack } from "@chakra-ui/layout";
-import { useBreakpointValue } from "@chakra-ui/media-query";
-import { RiAddCircleLine } from "react-icons/ri";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Box, Heading, SimpleGrid, Text, VStack } from '@chakra-ui/layout';
+import { useBreakpointValue } from '@chakra-ui/media-query';
+import { RiAddCircleLine } from 'react-icons/ri';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import Icon from "@chakra-ui/icon";
-import NextLink from "next/link";
+import Icon from '@chakra-ui/icon';
+import NextLink from 'next/link';
 
-import { ChakraNextImage } from "@components/ChakraNextImage";
+import { ChakraNextImage } from '@components/ChakraNextImage';
 
-import { ShayoBannerImages } from "@data/index";
-import { ShayoBanner } from "@interfaces/index";
+import { ShayoBannerImages } from '@data/index';
+import { ShayoBanner } from '@interfaces/index';
 
 const ShowCase: React.FC = () => {
   const headingSize = useBreakpointValue({
-    base: "md",
-    md: "lg",
+    base: 'md',
+    md: 'lg',
   });
 
   return (
@@ -31,17 +31,17 @@ const ShowCase: React.FC = () => {
             <Heading
               size={headingSize}
               fontWeight="semibold"
-              textAlign={{ base: "center", md: "unset" }}
+              textAlign={{ base: 'center', md: 'unset' }}
             >
               Looking to sell something
             </Heading>
             <Icon
               as={RiAddCircleLine}
               color="#501815"
-              w={{ base: "70px", md: "90px" }}
-              h={{ base: "70px", md: "90px" }}
+              w={{ base: '70px', md: '90px' }}
+              h={{ base: '70px', md: '90px' }}
             />
-            <Text fontWeight="semibold" fontSize={{ base: "md", md: "2xl" }}>
+            <Text fontWeight="semibold" fontSize={{ base: 'md', md: '2xl' }}>
               Postup an ad...
             </Text>
           </VStack>
@@ -53,7 +53,7 @@ const ShowCase: React.FC = () => {
           pagination={{
             clickable: true,
             dynamicBullets: true,
-            type: "bullets",
+            type: 'bullets',
           }}
           slidesPerView={1}
           autoplay={{

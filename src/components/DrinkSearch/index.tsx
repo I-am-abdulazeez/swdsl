@@ -1,4 +1,4 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState } from 'react';
 
 import {
   Box,
@@ -7,23 +7,24 @@ import {
   Input,
   Text,
   HStack,
-} from "@chakra-ui/react";
-import { RiSearch2Line } from "react-icons/ri";
+} from '@chakra-ui/react';
+import { RiSearch2Line } from 'react-icons/ri';
 
-import NextLink from "next/link";
+import NextLink from 'next/link';
 
-import ProductBadge from "@components/Products/ProductBadge";
+import ProductBadge from '@components/Products/ProductBadge';
 
-import { useProduct } from "@hooks/useProduct";
+import { useProductStore } from '@store/hooks/useProductStore';
+import { inputFocus } from '@utils/index';
 
 const DrinkSearch: React.FC = () => {
-  const { products } = useProduct();
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  const products = useProductStore((state) => state.products);
+  const [searchTerm, setSearchTerm] = useState('');
 
   const displaySearchedProducts = (): ReactNode => {
     return products
-      .filter((drink) => {
-        if (searchTerm === "") {
+      ?.filter((drink) => {
+        if (searchTerm === '') {
           return drink;
         } else if (
           drink
@@ -38,21 +39,21 @@ const DrinkSearch: React.FC = () => {
         const drinks = drinkSnap?.data();
         return (
           <NextLink
-            key={drinkSnap?.id}
-            href={`product/${drinkSnap?.id}`}
+            key={drinkSnap?.productId}
+            href={`/product/${drinkSnap?.productId}`}
             passHref
           >
             <HStack
-              cursor={"pointer"}
-              justify={"space-between"}
-              padding={"10px"}
-              borderRadius={"8px"}
-              fontSize={"15px"}
+              cursor={'pointer'}
+              justify={'space-between'}
+              padding={'10px'}
+              borderRadius={'8px'}
+              fontSize={'15px'}
               _hover={{
-                bgColor: "#F7FAFC",
+                bgColor: '#F7FAFC',
               }}
             >
-              <Text fontWeight={"normal"}>{drinks?.drinkName}</Text>
+              <Text fontWeight={'normal'}>{drinks?.drinkName}</Text>
               <ProductBadge product={drinks} />
             </HStack>
           </NextLink>
@@ -69,20 +70,18 @@ const DrinkSearch: React.FC = () => {
         <Input
           onChange={(e) => setSearchTerm(e.target?.value)}
           type="text"
-          _focus={{
-            boxShadow: "none",
-          }}
-          fontSize="13.5px"
-          placeholder="Search any drinks name"
+          placeholder="Search for a drink"
+          fontSize="13px"
+          _focus={inputFocus}
         />
       </InputGroup>
       {searchTerm && (
         <Box
-          bgColor={"white"}
-          maxHeight={"180px"}
-          overflowY={"auto"}
-          borderBottomRadius={"8px"}
-          border={searchTerm ? "1px solid #EDF2F7" : "none"}
+          bgColor={'white'}
+          maxHeight={'180px'}
+          overflowY={'auto'}
+          borderBottomRadius={'8px'}
+          border={searchTerm ? '1px solid #EDF2F7' : 'none'}
         >
           {displaySearchedProducts()}
         </Box>
