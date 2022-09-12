@@ -19,16 +19,19 @@ import Navbar from '@components/Navbar';
 
 import { numberWithCommas } from '@utils/index';
 
-import { useProduct } from '@hooks/useProduct';
+import { useCartStore } from '@store/hooks/useCartStore';
 
 const Cart: React.FC = () => {
-  const { cart, removeProduct, addProduct, removeAllProductQty } = useProduct();
+  const cart = useCartStore((state) => state.cart);
+  const addProduct = useCartStore((state) => state.addProduct);
+  const removeProduct = useCartStore((state) => state.removeProduct);
+  const removeAllProduct = useCartStore((state) => state.removeAllProduct);
 
   const cartIsEmpty = cart?.length === 0;
   const cartLength = cart?.length;
 
   const itemsPrice = cart
-    .map((product) => product?.price * product?.qty || 1)
+    .map((cartItem) => cartItem?.price * cartItem?.qty! || 1)
     .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   return (
@@ -71,7 +74,7 @@ const Cart: React.FC = () => {
                   cartItem={cartItem}
                   addProduct={addProduct}
                   removeProduct={removeProduct}
-                  removeAllProduct={removeAllProductQty}
+                  removeAllProduct={removeAllProduct}
                 />
               );
             })}
