@@ -26,13 +26,11 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
       <QueryClientWrapper>
-        <AuthProvider>
-          <ProductProvider>
-            <ClientOnly>
-              <Component {...pageProps} />
-            </ClientOnly>
-          </ProductProvider>
-        </AuthProvider>
+        <ProductProvider>
+          <ClientOnly>
+            <Component {...pageProps} />
+          </ClientOnly>
+        </ProductProvider>
       </QueryClientWrapper>
     </ChakraProvider>
   );
