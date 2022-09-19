@@ -1,13 +1,5 @@
-import { MutableRefObject, RefObject } from 'react';
-import {
-  DocumentData,
-  DocumentSnapshot,
-  FirestoreError,
-  QueryDocumentSnapshot,
-  QuerySnapshot,
-  Timestamp,
-} from 'firebase/firestore';
-import { UseQueryResult } from 'react-query';
+import { RefObject } from 'react';
+import { DocumentData } from 'firebase/firestore';
 import { Cart, Product } from 'src/types';
 
 export interface ShayoBanner {
@@ -40,15 +32,6 @@ export interface AuthHeadingProps {
   authText: string;
   authHref: string;
   authRoute: string;
-}
-
-export interface ProductContextType {
-  products: QueryDocumentSnapshot<DocumentData>[];
-  storeQuery: UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>;
-  cart: any[];
-  addProduct: (product: {}) => void;
-  removeProduct: (product: {}) => void;
-  removeAllProductQty: (product: {}) => void;
 }
 
 export interface ProductListProps {
