@@ -7,9 +7,6 @@ import SwiperCore, {
   Navigation,
 } from 'swiper';
 
-import { AuthProvider } from '@context/AuthContext';
-import { ProductProvider } from '@context/ProductContext';
-
 import ClientOnly from '@components/ClientOnly';
 import QueryClientWrapper from 'src/client';
 import customTheme from '@theme/index';
@@ -26,11 +23,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
       <QueryClientWrapper>
-        <ProductProvider>
-          <ClientOnly>
-            <Component {...pageProps} />
-          </ClientOnly>
-        </ProductProvider>
+        <ClientOnly>
+          <Component {...pageProps} />
+        </ClientOnly>
       </QueryClientWrapper>
     </ChakraProvider>
   );
