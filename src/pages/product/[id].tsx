@@ -21,15 +21,19 @@ import Helmet from '@components/Helmet';
 import ProductBadge from '@components/Products/ProductBadge';
 import ProductNav from '@components/Products/ProductNav';
 
-import { useProduct } from '@hooks/useProduct';
 import { useProductStore } from '@store/hooks/useProductStore';
 
 import { numberWithCommas } from '@utils/index';
 import { useEffect } from 'react';
+import { useCartStore } from '@store/hooks/useCartStore';
 
 const ProductDetails: React.FC = () => {
   const { query, back } = useRouter();
-  const { addProduct, cart, removeProduct } = useProduct();
+
+  const cart = useCartStore((state) => state.cart);
+  const addProduct = useCartStore((state) => state.addProduct);
+  const removeProduct = useCartStore((state) => state.removeProduct);
+
   const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
   const id = String(query.id);
 
@@ -46,9 +50,8 @@ const ProductDetails: React.FC = () => {
     url: product?.url,
     price: product?.price,
     category: product?.category,
+    qty: 0,
   };
-
-  console.log(newProduct);
 
   const inCart = Boolean(cart.find((el) => el.id === id));
 
