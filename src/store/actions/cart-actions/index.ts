@@ -3,19 +3,18 @@ import { useCartStore } from '@store/hooks/useCartStore';
 import { CartActions } from '@store/types';
 import { customToast } from '@utils/index';
 
-const cart = useCartStore.getState().cart;
-
 export const cartActions: CartActions = {
   addProduct: (cartItem) => {
+    const cart = useCartStore.getState().cart;
     let cartArray = [...cart];
     useCartStore.setState((state) => ({
       ...state,
       isLoading: true,
     }));
-    const itemExist = cartArray?.find((x) => x.id === cartItem.id);
-    if (itemExist) {
+    const exist = cartArray?.find((x) => x.id === cartItem.id);
+    if (exist) {
       cartArray = cart?.map((x) =>
-        x.id === cartItem.id ? { ...itemExist, qty: itemExist.qty! + 1 } : x
+        x?.id === cartItem.id ? { ...exist, qty: exist?.qty + 1 } : x
       );
       useCartStore.setState((state) => ({
         ...state,
@@ -40,13 +39,14 @@ export const cartActions: CartActions = {
     }
   },
   removeProduct: (cartItem) => {
+    const cart = useCartStore.getState().cart;
     let cartArray = [...cart];
     useCartStore.setState((state) => ({
       ...state,
       isLoading: true,
     }));
-    const itemExist = cartArray.find((x) => x.id === cartItem.id);
-    if (itemExist?.qty) {
+    const exist = cartArray.find((x) => x.id === cartItem.id);
+    if (exist?.qty === 1) {
       cartArray = cart.filter((x) => x.id === cartItem.id);
       useCartStore.setState((state) => ({
         ...state,
@@ -58,10 +58,11 @@ export const cartActions: CartActions = {
         title: `Product removed from cart`,
       });
     } else {
-      if (itemExist)
+      if (exist) {
         cartArray = cart?.map((x) =>
-          x.id === cartItem.id ? { ...itemExist, qty: itemExist?.qty! + 1 } : x
+          x.id === cartItem.id ? { ...exist, qty: exist?.qty - 1 } : x
         );
+      }
       useCartStore.setState((state) => ({
         ...state,
         isLoading: false,
@@ -74,7 +75,8 @@ export const cartActions: CartActions = {
     }
   },
   removeAllProduct: (cartItems) => {
-    let cartArray = [...cart];
+    const cart = useCartStore.getState().cart;
+    let cartArray = cart;
     useCartStore.setState((state) => ({
       ...state,
       isLoading: true,
