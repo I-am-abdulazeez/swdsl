@@ -22,7 +22,7 @@ export type Cart = {
   url: string;
   drinkName: string;
   price: number;
-  qty?: number;
+  qty: number;
   category: string;
   description?: string;
 };
