@@ -30,6 +30,7 @@ const ProductList: React.FC<ProductListProps> = ({
     drinkName: product?.drinkName,
     price: product?.price,
     url: product?.url,
+    qty: 0,
   };
   return (
     <VStack
@@ -72,6 +73,11 @@ const ProductList: React.FC<ProductListProps> = ({
               justifyContent={{ base: 'center', md: 'right' }}
               width={'full'}
             >
+              <NextLink href={`/product/${product.productId}`} passHref>
+                <Button width={'full'} size={'sm'}>
+                  View Product
+                </Button>
+              </NextLink>
               <IconButton
                 size="xs"
                 onClick={() => onRemoveFromCart(cartItem)}
@@ -87,11 +93,6 @@ const ProductList: React.FC<ProductListProps> = ({
             </HStack>
           ) : (
             <HStack mt={3} width={'full'}>
-              <NextLink href={`/product/${product.productId}`} passHref>
-                <Button width={'full'} size={'sm'}>
-                  View Product
-                </Button>
-              </NextLink>
               <Button
                 width={'full'}
                 onClick={() => onAddToCart(cartItem)}
