@@ -2,25 +2,28 @@ import {
   AuthError,
   confirmPasswordReset,
   createUserWithEmailAndPassword,
+  getAuth,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
 } from 'firebase/auth';
+import { collection, doc, setDoc } from 'firebase/firestore';
 
 import Router from 'next/router';
 
-import { useAuthStore } from '../hooks/useAuthStore';
-import { AuthActions } from '../types';
+import { useAuthStore } from '../../hooks/useAuthStore';
+import { AuthActions } from '../../types';
 
 import { firebaseAuth, firebaseFirestore } from '@config/firebase';
 import { customToast } from '@utils/index';
-import { collection, doc, setDoc } from 'firebase/firestore';
 
 const urlRedirectMode =
   process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/auth/login'
     : 'https://www.shayowithdsl.com/auth/login';
+
+const currentUser = getAuth().currentUser;
 
 export const authActions: AuthActions = {
   signUpUser: (user, newUserDetails) => {
@@ -43,8 +46,7 @@ export const authActions: AuthActions = {
           console.log(error);
         });
         const userId = currentUser?.user?.uid;
-        const collectionRef = collection(firebaseFirestore, 'users');
-        const ref = doc(collectionRef, userId);
+        const ref = doc(collection(firebaseFirestore, 'users'), userId);
         setDoc(ref, newUserDetails)
           .then(() => {
             console.log('done, saved to DB');
@@ -66,7 +68,8 @@ export const authActions: AuthActions = {
         }));
         customToast({
           status: 'error',
-          title: error.message,
+          title: 'Error',
+          description: error?.message,
         });
       });
   },
@@ -98,7 +101,8 @@ export const authActions: AuthActions = {
         }));
         customToast({
           status: 'error',
-          title: error.message,
+          title: 'Error',
+          description: error?.message,
         });
       });
   },
@@ -126,7 +130,8 @@ export const authActions: AuthActions = {
         }));
         customToast({
           status: 'error',
-          title: error.message,
+          title: 'Error',
+          description: error?.message,
         });
       });
   },
@@ -147,6 +152,70 @@ export const authActions: AuthActions = {
       Router.push('/auth/login');
     });
   },
+  updateDisplayName: (displayName) => {
+    useAuthStore.setState((state) => ({
+      ...state,
+      isLoading: true,
+    }));
+    if (currentUser) {
+      updateProfile(currentUser, { displayName })
+        .then(() => {
+          useAuthStore.setState((state) => ({
+            ...state,
+            isLoading: false,
+            user: { ...state?.user!, displayName },
+          }));
+          customToast({
+            status: 'success',
+            title: 'Success',
+            description: 'Display name updated successfully',
+          });
+        })
+        .catch((error: AuthError) => {
+          useAuthStore.setState((state) => ({
+            ...state,
+            isLoading: false,
+          }));
+          customToast({
+            status: 'error',
+            title: 'Error',
+            description: error?.message,
+          });
+        });
+    }
+  },
+  // updatePassword: (newPassword) => {
+  //   useAuthStore.setState((state) => ({
+  //     ...state,
+  //     isLoadingPassword: true,
+  //   }));
+  //   if (currentUser) {
+
+  //     updatePassword(currentUser, newPassword)
+  //       .then(() => {
+  //         useAuthStore.setState((state) => ({
+  //           ...state,
+  //           isLoadingPassword: false,
+  //         }));
+  //         customToast({
+  //           status: 'success',
+  //           title: 'Success',
+  //           description: 'Password updated successfully',
+  //         });
+  //       })
+  //       .catch((error: AuthError) => {
+  //         useAuthStore.setState((state) => ({
+  //           ...state,
+  //           isLoadingPassword: false,
+  //         }));
+  //         customToast({
+  //           status: 'error',
+  //           title: 'Error',
+  //           description: error?.message,
+  //         });
+  //       });
+  //   }
+  // },
   signOutUser: () => {
     signOut(firebaseAuth).then(() => {
       useAuthStore.setState((state) => ({

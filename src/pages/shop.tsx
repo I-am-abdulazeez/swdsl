@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import {
   Box,
   Container,
@@ -14,11 +15,31 @@ import Navbar from '@components/Navbar';
 import ProductList from '@components/Products/ProductList';
 import BackToTop from '@components/BackToTop';
 
-import { useProduct } from '@hooks/useProduct';
+import { useProductStore } from '@store/hooks/useProductStore';
+import { useCartStore } from '@store/hooks/useCartStore';
 
 const Shop: React.FC = () => {
-  const { products, storeQuery, addProduct, cart, removeProduct } =
-    useProduct();
+  const products = useProductStore((state) => state.products);
+
+  const isLoading = useProductStore((state) => state.isLoading);
+  const isLoadingError = useProductStore((state) => state.isLoadingError);
+
+  const getProducts = useProductStore((state) => state.getProducts);
+
+  const cart = useCartStore((state) => state.cart);
+  const addProduct = useCartStore((state) => state.addProduct);
+  const removeProduct = useCartStore((state) => state.removeProduct);
+
+  useEffect(() => {
+    let subscribe = true;
+    if (subscribe) {
+      getProducts();
+    }
+    return () => {
+      subscribe = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Box>
@@ -29,48 +50,44 @@ const Shop: React.FC = () => {
           <Box width={{ base: 'auto', md: '700px' }} mx="auto">
             <DrinkSearch />
           </Box>
-          <Text my={10} fontSize="sm" color="gray.600">
-            {products.length} products found.
+          <Text my={10} fontWeight={'medium'} fontSize="md" color="gray.600">
+            There are {products?.length} products available.
           </Text>
           <Box>
-            {storeQuery.isLoading && (
-              <HStack spacing={2}>
+            {isLoading && (
+              <HStack spacing={2} mb={3}>
                 <Spinner
                   thickness="2px"
                   speed="0.65s"
                   emptyColor="gray.200"
                   size="sm"
-                  color="primary.500"
+                  color="primary.300"
                 />
                 <Text>Fetching Products</Text>
               </HStack>
             )}
-            {storeQuery.isLoadingError && (
+            {isLoadingError && (
               <Text fontSize={'14px'}>Cannot fetch products.</Text>
             )}
             <SimpleGrid
-              columns={{ base: 2, md: 4 }}
+              columns={{ base: 1, sm: 2, md: 4 }}
               spacingX={{ base: 3, md: 4 }}
               spacingY={{ base: 3, md: 8 }}
             >
-              {products &&
-                products?.map((docsSnapshot) => {
-                  const doc = docsSnapshot.data();
-                  const product = { ...doc, id: docsSnapshot.id };
-                  const inCart = Boolean(
-                    cart?.find((el) => el?.id === product?.id)
-                  );
-                  return (
-                    <ProductList
-                      key={docsSnapshot?.id}
-                      docsSnapshot={docsSnapshot}
-                      product={product}
-                      onAddToCart={(product) => addProduct(product)}
-                      onRemoveFromCart={(product) => removeProduct(product)}
-                      inCart={inCart}
-                    />
-                  );
-                })}
+              {products?.map((product) => {
+                const inCart = Boolean(
+                  cart?.find((el) => el?.id === product?.productId)
+                );
+                return (
+                  <ProductList
+                    key={product?.productId}
+                    product={product}
+                    onAddToCart={(product) => addProduct(product)}
+                    onRemoveFromCart={(product) => removeProduct(product)}
+                    inCart={inCart}
+                  />
+                );
+              })}
             </SimpleGrid>
           </Box>
         </Container>

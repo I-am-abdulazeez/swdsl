@@ -1,19 +1,10 @@
-import { RiArrowRightSLine } from "react-icons/ri";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
 
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { ProductNavProps } from '@interfaces/index';
 
-import { ProductNavProps } from "@interfaces/index";
-
-const ProductNav: React.FC<ProductNavProps> = (props) => {
-  const { product } = props;
-
+const ProductNav: React.FC<ProductNavProps> = ({ product }) => {
   return (
-    <Breadcrumb
-      mb={10}
-      spacing="5px"
-      fontSize={"sm"}
-      separator={<RiArrowRightSLine color="gray.500" />}
-    >
+    <Breadcrumb mb={10} spacing="5px" fontSize={'sm'} separator="-">
       <BreadcrumbItem>
         <BreadcrumbLink href="/">Home</BreadcrumbLink>
       </BreadcrumbItem>
@@ -21,8 +12,8 @@ const ProductNav: React.FC<ProductNavProps> = (props) => {
         <BreadcrumbLink href="/shop">shop</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href={`product/${product?.data?.id}`}>
-          product/{product?.data?.id}
+        <BreadcrumbLink href={`/product/${product?.productId}`}>
+          product/{product?.productId}
         </BreadcrumbLink>
       </BreadcrumbItem>
     </Breadcrumb>

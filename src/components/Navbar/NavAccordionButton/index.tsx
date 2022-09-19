@@ -1,11 +1,15 @@
-import { AccordionButton, Box, AccordionIcon } from "@chakra-ui/react";
+import { AccordionButton, Box, AccordionIcon } from '@chakra-ui/react';
 
-const NavAccordionButton: React.FC = ({ children }) => {
+import { NavAccordionButtonProps } from '@interfaces/index';
+
+const NavAccordionButton: React.FC<NavAccordionButtonProps> = ({
+  category,
+}) => {
   return (
     <h2>
-      <AccordionButton fontSize={"sm"} fontWeight={"medium"}>
+      <AccordionButton fontSize={'sm'} fontWeight={'medium'}>
         <Box flex="1" textAlign="left">
-          {children}
+          {category}
         </Box>
         <AccordionIcon />
       </AccordionButton>

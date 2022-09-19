@@ -12,7 +12,6 @@ import {
   InputLeftAddon,
   InputRightElement,
   Stack,
-  useToast,
   VStack,
 } from '@chakra-ui/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
@@ -27,13 +26,13 @@ import {
 
 import FormErrorText from '@components/FormErrorText';
 
-import { IUserRegister, UserData } from '@interfaces/index';
 import {
   emailPattern,
   inputFocus,
   nigeriaPhoneNumberPattern,
 } from '@utils/index';
 import { useAuthStore } from '@store/hooks/useAuthStore';
+import { IUserRegister, UserData } from 'src/types';
 
 const RegisterForm: React.FC = () => {
   const signUpUser = useAuthStore((state) => state.signUpUser);
@@ -149,7 +148,7 @@ const RegisterForm: React.FC = () => {
                   size="xs"
                   variant="ghost"
                   aria-label="password"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                   icon={showPassword ? <RiEyeLine /> : <RiEyeOffLine />}
                 />
               </InputRightElement>

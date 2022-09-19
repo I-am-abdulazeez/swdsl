@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react';
 
 import {
   Box,
@@ -12,22 +12,25 @@ import {
   Spacer,
   Checkbox,
   Stack,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from "react-icons/ri";
+import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from 'react-icons/ri';
 
-import { CartItemProps } from "@interfaces/index";
+import { CartItemProps } from '@interfaces/index';
 
-import ProductBadge from "@components/Products/ProductBadge";
+import ProductBadge from '@components/Products/ProductBadge';
 
-import CartItemAlert from "./CartItemAlert";
+import CartItemAlert from './CartItemAlert';
 
-const CartItem: React.FC<CartItemProps> = (props) => {
-  const { cartItem, removeProduct, addProduct, removeAllProduct } = props;
-
+const CartItem: React.FC<CartItemProps> = ({
+  cartItem,
+  removeProduct,
+  addProduct,
+  removeAllProduct,
+}) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => setIsOpen(false);
-  const cancelRef = useRef();
+  const cancelRef = useRef<HTMLButtonElement | null>(null);
 
   return (
     <Box>
@@ -40,27 +43,27 @@ const CartItem: React.FC<CartItemProps> = (props) => {
       />
       <Box my={4} p={5} rounded="lg" border="1px solid #EDF2F7">
         <Stack
-          direction={{ base: "column", md: "row" }}
+          direction={{ base: 'column', md: 'row' }}
           spacing={{ base: 8, md: 10 }}
-          align={{ base: "", md: "center" }}
+          align={{ base: '', md: 'center' }}
         >
           <Image
-            borderRadius={"lg"}
+            borderRadius={'lg'}
             width="140px"
             loading="eager"
             src={cartItem?.url}
             alt={`product-${cartItem?.id}`}
           />
-          <VStack spacing={2} align={"flex-start"}>
+          <VStack spacing={2} align={'flex-start'}>
             <ProductBadge product={cartItem} />
             <Heading size="md">{cartItem?.drinkName}</Heading>
-            <Text fontSize="xs" width={{ base: "initial", md: "350px" }}>
+            <Text fontSize="xs" width={{ base: 'initial', md: '350px' }}>
               {cartItem?.description}
             </Text>
           </VStack>
           <Stack
             spacing={{ base: 5, md: 2 }}
-            direction={{ base: "row", md: "column" }}
+            direction={{ base: 'row', md: 'column' }}
           >
             <Checkbox defaultChecked={false} colorScheme="primary">
               12 pack
@@ -69,17 +72,17 @@ const CartItem: React.FC<CartItemProps> = (props) => {
               6 pack
             </Checkbox>
           </Stack>
-          <Text fontSize={"16px"}>{cartItem?.price.toFixed(2)}</Text>
-          <Text fontSize={"16px"}>{cartItem?.price * cartItem?.qty}</Text>
+          <Text fontSize={'16px'}>{cartItem?.price.toFixed(2)}</Text>
+          <Text fontSize={'16px'}>{cartItem?.price * cartItem?.qty!}</Text>
         </Stack>
-        <HStack mt={8} justify={{ base: "center", md: "right" }}>
+        <HStack mt={8} justify={{ base: 'center', md: 'right' }}>
           <Box>
             <Button
               size="xs"
               onClick={() => setIsOpen(true)}
-              leftIcon={<RiDeleteBin2Line size={"12.5px"} />}
+              leftIcon={<RiDeleteBin2Line size={'12.5px'} />}
               colorScheme="error"
-              variant={"ghost"}
+              variant={'ghost'}
             >
               Remove Product
             </Button>
@@ -98,7 +101,7 @@ const CartItem: React.FC<CartItemProps> = (props) => {
               size="xs"
               onClick={() => addProduct(cartItem)}
               aria-label="add product"
-              colorScheme={"primary"}
+              colorScheme={'primary'}
               icon={<RiAddFill size="18px" />}
             />
           </HStack>
