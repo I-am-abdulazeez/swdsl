@@ -89,7 +89,7 @@ export interface CartItemProps {
 }
 
 export interface CartItemAlertProps {
-  cartItem: any;
+  cartItem: Cart;
   isOpen: boolean;
   cancelRef: RefObject<HTMLButtonElement>;
   onClose: () => void;
