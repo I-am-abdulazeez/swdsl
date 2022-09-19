@@ -1,13 +1,5 @@
 import ReactParser from 'html-react-parser';
 
-import { UseQueryResult } from 'react-query';
-import {
-  DocumentData,
-  FirestoreError,
-  QueryDocumentSnapshot,
-  QuerySnapshot,
-} from 'firebase/firestore';
-
 import { Founders, QuotesTalks, ShayoBanner, SVideos } from '@interfaces/index';
 
 export const ShayoBannerImages: ShayoBanner[] = [
@@ -134,25 +126,3 @@ export const DrinkCategory = [
   'Vodka',
   'Others',
 ];
-
-export const authContextInitialValues = {
-  user: null,
-  isLoggedIn: false,
-  isLoading: false,
-  setUser: () => {},
-  setIsLoggedIn: () => {},
-  setIsLoading: () => {},
-  signOutUser: () => {},
-  resetPassword: () => {},
-  sendPasswordEmailReset: () => {},
-  signInUser: () => {},
-};
-
-export const productContextInitialValues = {
-  products: [] as QueryDocumentSnapshot<DocumentData>[],
-  storeQuery: {} as UseQueryResult<QuerySnapshot<DocumentData>, FirestoreError>,
-  cart: [] as any[],
-  addProduct: () => {},
-  removeProduct: () => {},
-  removeAllProductQty: () => {},
-};
