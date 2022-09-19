@@ -22,7 +22,6 @@ import {
 
 import IconButtonBadge from '@components/IconButtonBadge';
 
-import { useProduct } from '@hooks/useProduct';
 import { useAuthStore } from '@store/hooks/useAuthStore';
 import { useCartStore } from '@store/hooks/useCartStore';
 
