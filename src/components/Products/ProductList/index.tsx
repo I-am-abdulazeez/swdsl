@@ -67,32 +67,30 @@ const ProductList: React.FC<ProductListProps> = ({
           </Heading>
         </Box>
         <Stack direction={{ base: 'column', md: 'row' }} spacing={3}>
-          {inCart ? (
-            <HStack
-              mt={3}
-              justifyContent={{ base: 'center', md: 'right' }}
-              width={'full'}
-            >
-              <NextLink href={`/product/${product.productId}`} passHref>
-                <Button width={'full'} size={'sm'}>
-                  View Product
-                </Button>
-              </NextLink>
-              <IconButton
-                size="xs"
-                onClick={() => onRemoveFromCart(cartItem)}
-                aria-label="remove product"
-                icon={<RiSubtractLine size="18px" />}
-              />
-              <IconButton
-                size="xs"
-                onClick={() => onAddToCart(cartItem)}
-                aria-label="add product"
-                icon={<RiAddFill size="18px" />}
-              />
-            </HStack>
-          ) : (
-            <HStack mt={3} width={'full'}>
+          <HStack mt={3} width={'full'}>
+            <NextLink href={`/product/${product.productId}`} passHref>
+              <Button width={'full'} size={'sm'}>
+                View Product
+              </Button>
+            </NextLink>
+            {inCart ? (
+              <>
+                <IconButton
+                  size="sm"
+                  onClick={() => onRemoveFromCart(cartItem)}
+                  aria-label="remove product"
+                  icon={<RiSubtractLine size="18px" />}
+                  colorScheme={'error'}
+                />
+                <IconButton
+                  size="sm"
+                  onClick={() => onAddToCart(cartItem)}
+                  aria-label="add product"
+                  icon={<RiAddFill size="18px" />}
+                  colorScheme={'success'}
+                />
+              </>
+            ) : (
               <Button
                 width={'full'}
                 onClick={() => onAddToCart(cartItem)}
@@ -101,8 +99,8 @@ const ProductList: React.FC<ProductListProps> = ({
               >
                 Add to cart
               </Button>
-            </HStack>
-          )}
+            )}
+          </HStack>
         </Stack>
       </Stack>
     </VStack>
