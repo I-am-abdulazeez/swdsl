@@ -1,17 +1,16 @@
-import NextLink from "next/link";
-import { Box, IconButton, useBreakpointValue } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import NextLink from 'next/link';
+import { Box, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
 
-import { RiShoppingCartLine } from "react-icons/ri";
+import { RiShoppingCartLine } from 'react-icons/ri';
 
-import { IconButtonBadgeProps } from "@interfaces/index";
+import { IconButtonBadgeProps } from '@interfaces/index';
 
-const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
-  const { badgeContent } = props;
+const IconButtonBadge: React.FC<IconButtonBadgeProps> = ({ badgeContent }) => {
   const { pathname } = useRouter();
 
-  const buttonSize = useBreakpointValue({ base: "xs", md: "sm" });
-  const activeCart = pathname === "/cart" ? "secondary" : "";
+  const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
+  const activeCart = pathname === '/cart' ? 'secondary' : '';
 
   return (
     <NextLink href="/cart" passHref>
@@ -24,18 +23,18 @@ const IconButtonBadge: React.FC<IconButtonBadgeProps> = (props) => {
           <>
             <RiShoppingCartLine size="19px" />
             <Box
-              as={"span"}
-              color={"white"}
-              position={"absolute"}
-              top={"-2px"}
+              as={'span'}
+              color={'white'}
+              position={'absolute'}
+              top={'-2px'}
               width="15px"
               height="15px"
-              display={"flex"}
+              display={'flex'}
               alignItems="center"
-              fontSize={"10px"}
-              justifyContent={"center"}
-              right={"-2px"}
-              bgColor={"red.600"}
+              fontSize={'10px'}
+              justifyContent={'center'}
+              right={'-2px'}
+              bgColor={'red.600'}
               rounded="full"
             >
               {badgeContent}

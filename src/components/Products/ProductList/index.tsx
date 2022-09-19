@@ -6,90 +6,104 @@ import {
   IconButton,
   Image,
   Stack,
-} from "@chakra-ui/react";
-import NextLink from "next/link";
-import { RiAddFill, RiSubtractLine } from "react-icons/ri";
+  Text,
+  VStack,
+} from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
 
-import ProductBadge from "@components/Products/ProductBadge";
+import ProductBadge from '@components/Products/ProductBadge';
 
-import { ProductListProps } from "@interfaces/index";
-import { numberWithCommas } from "@utils/index";
+import { ProductListProps } from '@interfaces/index';
+import { numberWithCommas } from '@utils/index';
+import { Cart } from 'src/types';
 
-const ProductList: React.FC<ProductListProps> = (props) => {
-  const { product, docsSnapshot, inCart, onAddToCart, onRemoveFromCart } =
-    props;
+const ProductList: React.FC<ProductListProps> = ({
+  product,
+  inCart,
+  onAddToCart,
+  onRemoveFromCart,
+}) => {
+  const cartItem: Cart = {
+    id: product?.productId,
+    category: product?.category,
+    drinkName: product?.drinkName,
+    price: product?.price,
+    url: product?.url,
+    qty: 0,
+  };
   return (
-    <Box
-      rounded={"lg"}
+    <VStack
+      rounded={'lg'}
       border="1px solid #EDF2F7"
-      shadow="sm"
-      transition={"all 0.3s ease-in-out"}
+      shadow={'sm'}
+      spacing={1}
+      transition={'all 0.3s ease-in-out'}
     >
-      <Box
-        position={"relative"}
-        px={{ base: 4, md: 6 }}
-        pt={{ base: 4, md: 6 }}
-        pb={2}
-      >
-        <Image
-          borderRadius={"lg"}
-          width="200px"
-          m={"0 auto"}
-          loading="eager"
-          height={{ base: "100px", md: "200px" }}
-          src={product?.url}
-          alt={`${product?.drinkName}`}
-        />
-      </Box>
-      <Box p={{ base: "0.5em", md: "1em" }}>
-        <ProductBadge product={product} />
+      <Image
+        p={6}
+        height={'200px'}
+        src={product?.url}
+        alt={`${product?.drinkName}`}
+      />
+      <Stack spacing={1} p={4} width={'full'}>
+        <Box>
+          <ProductBadge product={product} />
+        </Box>
         <Box mt={0} mb={4}>
-          <Heading mt={1} size={"sm"}>
+          <Heading mt={1} size={'sm'}>
             {product?.drinkName}
           </Heading>
+          <Text fontWeight={'medium'} fontSize={'sm'}>
+            {product?.description}
+          </Text>
           <Heading
-            fontWeight={"semibold"}
-            color={"primary.500"}
+            fontWeight={'semibold'}
+            color={'primary.400'}
             mt={2}
             fontSize="xl"
           >
-            $ {numberWithCommas(product?.price)}
+            ${numberWithCommas(product?.price)}
           </Heading>
         </Box>
-        <Stack direction={{ base: "column", md: "row" }} spacing={3}>
-          <NextLink href={`product/${docsSnapshot?.id}`} passHref>
-            <Button width={'full'} size={"xs"} as="a">
-              View product
-            </Button>
-          </NextLink>
-          {inCart ? (
-            <HStack justify={{ base: "center", md: "right" }}>
-              <IconButton
-                size="xs"
-                onClick={() => onRemoveFromCart(product)}
-                aria-label="remove product"
-                icon={<RiSubtractLine size="18px" />}
-              />
-              <IconButton
-                size="xs"
-                onClick={() => onAddToCart(product)}
-                aria-label="add product"
-                icon={<RiAddFill size="18px" />}
-              />
-            </HStack>
-          ) : (
-            <Button
-              width={'full'}
-              onClick={() => onAddToCart(product)}
-              colorScheme="success"
-              size={"xs"}
-            >
-              Add to cart
-            </Button>
-          )}
+        <Stack direction={{ base: 'column', md: 'row' }} spacing={3}>
+          <HStack mt={3} width={'full'}>
+            <NextLink href={`/product/${product.productId}`} passHref>
+              <Button width={'full'} size={'sm'}>
+                View Product
+              </Button>
+            </NextLink>
+            {inCart ? (
+              <>
+                <IconButton
+                  size="sm"
+                  onClick={() => onRemoveFromCart(cartItem)}
+                  aria-label="remove product"
+                  icon={<RiSubtractLine size="18px" />}
+                  colorScheme={'error'}
+                />
+                <IconButton
+                  size="sm"
+                  onClick={() => onAddToCart(cartItem)}
+                  aria-label="add product"
+                  icon={<RiAddFill size="18px" />}
+                  colorScheme={'success'}
+                />
+              </>
+            ) : (
+              <Button
+                width={'full'}
+                onClick={() => onAddToCart(cartItem)}
+                colorScheme="success"
+                size={'sm'}
+              >
+                Add to cart
+              </Button>
+            )}
+          </HStack>
         </Stack>
-      </Box>
-    </Box>
+      </Stack>
+    </VStack>
   );
 };
 

@@ -1,31 +1,25 @@
-import { Flex, Button } from "@chakra-ui/react";
-import NextLink from "next/link";
+import NextLink from 'next/link';
 
-import { useProduct } from "@hooks/useProduct";
+import { Flex, Button } from '@chakra-ui/react';
 
-import { NavCatListProps } from "@interfaces/index";
+import { useProductStore } from '@store/hooks/useProductStore';
+import { NavCategoryListProps } from '@interfaces/index';
 
-const NavCategoryList: React.FC<NavCatListProps> = (props) => {
-  const { category } = props;
-  const { products } = useProduct();
+const NavCategoryList: React.FC<NavCategoryListProps> = ({ category }) => {
+  const products = useProductStore((state) => state.products);
 
   const drinksByCategory = (category: string) => {
-    return products?.filter((product) => product?.data().category === category);
+    return products?.filter((product) => product?.category === category);
   };
 
   return (
     <>
-      {drinksByCategory(category).map((docsSnapshot) => {
-        const docs = docsSnapshot?.data();
-        const productFromCategory = {
-          data: { ...docs },
-          id: docsSnapshot?.id,
-        };
+      {drinksByCategory(category)?.map((product) => {
         return (
-          <Flex key={productFromCategory?.id}>
-            <NextLink href={`product/${productFromCategory?.id}`}>
-              <Button size={"sm"} variant={"ghost"} fontWeight={"normal"}>
-                {productFromCategory?.data?.drinkName}
+          <Flex key={product?.productId}>
+            <NextLink href={`product/${product?.productId}`}>
+              <Button size={'sm'} variant={'ghost'} fontWeight={'normal'}>
+                {product?.drinkName}
               </Button>
             </NextLink>
           </Flex>

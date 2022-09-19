@@ -8,15 +8,14 @@ import {
   useDisclosure,
   IconButton,
   useBreakpointValue,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react';
 
-import { RiMenuLine } from "react-icons/ri";
+import { RiMenuLine } from 'react-icons/ri';
 
-import NavAccordion from "../NavAccordion";
+import NavAccordion from '../NavAccordion';
 
 const NavDrawer: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const drawerSize = useBreakpointValue({ base: "full", md: "md" });
 
   // const items = products?.reduce((prev: any, current) => {
   //   if (!(current?.data()?.category in prev)) {
@@ -44,24 +43,19 @@ const NavDrawer: React.FC = () => {
         closeOnOverlayClick={false}
         placement="left"
         onClose={onClose}
-        size={drawerSize}
+        size={'xs'}
         isOpen={isOpen}
       >
-        <DrawerOverlay backdropFilter={"saturate(50%) blur(1px)"} />
+        <DrawerOverlay backdropFilter={'blur(10px)'} />
         <DrawerContent>
           <DrawerHeader
             borderBottomWidth="1px"
-            color={"primary.500"}
-            fontSize={"md"}
+            color={'primary.500'}
+            fontSize={'md'}
           >
             All category
           </DrawerHeader>
-          <DrawerCloseButton
-            _focus={{
-              boxShadow: "none",
-            }}
-            size={"sm"}
-          />
+          <DrawerCloseButton size={'sm'} />
           <DrawerBody>
             <NavAccordion />
           </DrawerBody>

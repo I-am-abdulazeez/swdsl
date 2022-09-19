@@ -8,6 +8,7 @@ const initialState: AuthState = {
   user: null,
   isLoading: false,
   isAuthenticated: false,
+  // isLoadingPassword: false,
 };
 
 export const useAuthStore = create<AuthStore>()(

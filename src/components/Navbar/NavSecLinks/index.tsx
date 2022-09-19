@@ -22,9 +22,8 @@ import {
 
 import IconButtonBadge from '@components/IconButtonBadge';
 
-import { useAuth } from '@hooks/useAuth';
-import { useProduct } from '@hooks/useProduct';
 import { useAuthStore } from '@store/hooks/useAuthStore';
+import { useCartStore } from '@store/hooks/useCartStore';
 
 const NavSecLinks: React.FC = () => {
   const activeShop = router.pathname === '/shop' ? 'primary' : '';
@@ -32,12 +31,10 @@ const NavSecLinks: React.FC = () => {
 
   const user = useAuthStore((state) => state.user);
   const signOutUser = useAuthStore((state) => state.signOutUser);
-  const { cart } = useProduct();
+  const cart = useCartStore((state) => state.cart);
 
   const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
   const [isMobile] = useMediaQuery(`(min-width: 40em)`);
-
-  console.log(cart?.length);
 
   return (
     <HStack>
@@ -77,6 +74,7 @@ const NavSecLinks: React.FC = () => {
           />
         </NextLink>
       )}
+
       <IconButtonBadge badgeContent={cart?.length} />
       {user && (
         <Box>

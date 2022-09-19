@@ -16,6 +16,7 @@ import LogoLink from '@components/LogoLink';
 
 import { inputFocus } from '@utils/index';
 import { useAuthStore } from '@store/hooks/useAuthStore';
+import { UserDetails } from 'src/types';
 
 const ForgotPassword: React.FC = () => {
   const sendPasswordEmailReset = useAuthStore((state) => state.forgotPassword);
@@ -24,9 +25,9 @@ const ForgotPassword: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ email: string }>();
+  } = useForm<UserDetails>();
 
-  const passwordResetSubmit: SubmitHandler<{ email: string }> = ({ email }) => {
+  const passwordResetSubmit: SubmitHandler<UserDetails> = ({ email }) => {
     sendPasswordEmailReset(email);
   };
 
