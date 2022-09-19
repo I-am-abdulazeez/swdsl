@@ -1,23 +1,23 @@
-import { createContext, useEffect, useState } from "react";
-import { useToast } from "@chakra-ui/react";
-import { useFirestoreQuery } from "@react-query-firebase/firestore";
+import { createContext, PropsWithChildren, useEffect, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
+import { useFirestoreQuery } from '@react-query-firebase/firestore';
 import {
   collection,
   DocumentData,
   orderBy,
   query,
   QueryDocumentSnapshot,
-} from "firebase/firestore";
+} from 'firebase/firestore';
 
-import { firebaseFirestore } from "@config/firebase";
-import { productContextInitialValues } from "@data/index";
-import { ProductContextType, ReactChildrenProp } from "@interfaces/index";
+import { firebaseFirestore } from '@config/firebase';
+import { productContextInitialValues } from '@data/index';
+import { ProductContextType } from '@interfaces/index';
 
 export const ProductsContext = createContext<ProductContextType>(
   productContextInitialValues
 );
 
-export const ProductProvider = ({ children }: ReactChildrenProp) => {
+export const ProductProvider = ({ children }: PropsWithChildren) => {
   const [products, setProducts] = useState<
     QueryDocumentSnapshot<DocumentData>[]
   >([]);
@@ -25,12 +25,12 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
   const [cart, setCart] = useState<any[]>([]);
 
   const ref = query(
-    collection(firebaseFirestore, "products"),
-    orderBy("createdAt", "desc")
+    collection(firebaseFirestore, 'products'),
+    orderBy('createdAt', 'desc')
   );
 
   const storeQuery = useFirestoreQuery(
-    ["products"],
+    ['products'],
     ref,
     { subscribe: true, includeMetadataChanges: true },
     {
@@ -43,10 +43,10 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
 
   const doStorageThing = () => {
     const cartArrayFromStorage = JSON.parse(
-      String(localStorage.getItem("cart"))
+      String(localStorage.getItem('cart'))
     );
-    if (localStorage.getItem("cart") === null) {
-      localStorage.setItem("cart", JSON.stringify([]));
+    if (localStorage.getItem('cart') === null) {
+      localStorage.setItem('cart', JSON.stringify([]));
       setCart([]);
     } else {
       setCart(cartArrayFromStorage);
@@ -66,30 +66,30 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
         x.id === product.id ? { ...itemExist, qty: itemExist.qty + 1 } : x
       );
       setCart([...cartArray]);
-      localStorage.setItem("cart", JSON.stringify(cartArray));
+      localStorage.setItem('cart', JSON.stringify(cartArray));
       chakraToast({
-        status: "success",
+        status: 'success',
         title: `Product updated with a new quantity`,
         isClosable: true,
         containerStyle: {
-          fontSize: "12.5px",
+          fontSize: '12.5px',
         },
-        variant: "subtle",
-        position: "bottom-right",
+        variant: 'subtle',
+        position: 'bottom-right',
       });
     } else {
       cartArray = [...cart, { ...product, qty: 1 }];
       setCart([...cartArray]);
-      localStorage.setItem("cart", JSON.stringify(cartArray));
+      localStorage.setItem('cart', JSON.stringify(cartArray));
       chakraToast({
-        status: "success",
+        status: 'success',
         title: `Product added successfully`,
         isClosable: true,
         containerStyle: {
-          fontSize: "12.5px",
+          fontSize: '12.5px',
         },
-        variant: "subtle",
-        position: "bottom-right",
+        variant: 'subtle',
+        position: 'bottom-right',
       });
     }
   };
@@ -99,16 +99,16 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     let cartArray = [...cart];
     cartArray = cart.filter((x) => x.id !== product.id);
     setCart(cartArray);
-    localStorage.setItem("cart", JSON.stringify(cartArray));
+    localStorage.setItem('cart', JSON.stringify(cartArray));
     chakraToast({
-      status: "success",
+      status: 'success',
       title: `Product removed from cart`,
       isClosable: true,
       containerStyle: {
-        fontSize: "12.5px",
+        fontSize: '12.5px',
       },
-      variant: "subtle",
-      position: "bottom-right",
+      variant: 'subtle',
+      position: 'bottom-right',
     });
   };
 
@@ -119,32 +119,32 @@ export const ProductProvider = ({ children }: ReactChildrenProp) => {
     if (exist?.qty === 1) {
       cartArray = cart.filter((x) => x.id !== product.id);
       setCart([...cartArray]);
-      localStorage.setItem("cart", JSON.stringify(cartArray));
+      localStorage.setItem('cart', JSON.stringify(cartArray));
       chakraToast({
-        status: "success",
+        status: 'success',
         title: `Product removed from cart`,
         isClosable: true,
         containerStyle: {
-          fontSize: "12.5px",
+          fontSize: '12.5px',
         },
-        variant: "subtle",
-        position: "bottom-right",
+        variant: 'subtle',
+        position: 'bottom-right',
       });
     } else {
       cartArray = cart.map((x) =>
         x.id === product.id ? { ...exist, qty: exist.qty - 1 } : x
       );
       setCart([...cartArray]);
-      localStorage.setItem("cart", JSON.stringify(cartArray));
+      localStorage.setItem('cart', JSON.stringify(cartArray));
       chakraToast({
-        status: "success",
+        status: 'success',
         title: `- 1 quantity of product removed`,
         isClosable: true,
         containerStyle: {
-          fontSize: "12.5px",
+          fontSize: '12.5px',
         },
-        variant: "subtle",
-        position: "bottom-right",
+        variant: 'subtle',
+        position: 'bottom-right',
       });
     }
   };
