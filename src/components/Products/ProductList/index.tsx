@@ -9,6 +9,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 import NextLink from 'next/link';
 import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
 
@@ -17,6 +18,7 @@ import ProductBadge from '@components/Products/ProductBadge';
 import { ProductListProps } from '@interfaces/index';
 import { numberWithCommas } from '@utils/index';
 import { Cart } from 'src/types';
+import { useCartStore } from '@store/hooks/useCartStore';
 
 const ProductList: React.FC<ProductListProps> = ({
   product,
@@ -24,6 +26,10 @@ const ProductList: React.FC<ProductListProps> = ({
   onAddToCart,
   onRemoveFromCart,
 }) => {
+  const cart = useCartStore((state) => state.cart);
+  const isLoadingCart = useCartStore((state) => state.isLoading);
+  let quantity = 0;
+
   const cartItem: Cart = {
     id: product?.productId,
     category: product?.category,
@@ -32,6 +38,11 @@ const ProductList: React.FC<ProductListProps> = ({
     url: product?.url,
     qty: 0,
   };
+
+  useEffect(() => {
+    console.log(isLoadingCart);
+  }, []);
+
   return (
     <VStack
       rounded={'lg'}
@@ -40,6 +51,12 @@ const ProductList: React.FC<ProductListProps> = ({
       spacing={1}
       transition={'all 0.3s ease-in-out'}
     >
+      <>
+        {cart &&
+          cart?.map((cartItem) => {
+            quantity = cartItem.qty;
+          })}
+      </>
       <Image
         p={6}
         height={'200px'}
@@ -74,22 +91,23 @@ const ProductList: React.FC<ProductListProps> = ({
               </Button>
             </NextLink>
             {inCart ? (
-              <>
+              <HStack>
                 <IconButton
                   size="sm"
                   onClick={() => onRemoveFromCart(cartItem)}
                   aria-label="remove product"
                   icon={<RiSubtractLine size="18px" />}
-                  colorScheme={'error'}
+                  isLoading={isLoadingCart}
                 />
+                <Text fontSize={'md'}> {quantity}</Text>
                 <IconButton
                   size="sm"
                   onClick={() => onAddToCart(cartItem)}
                   aria-label="add product"
                   icon={<RiAddFill size="18px" />}
-                  colorScheme={'success'}
+                  isLoading={isLoadingCart}
                 />
-              </>
+              </HStack>
             ) : (
               <Button
                 width={'full'}
