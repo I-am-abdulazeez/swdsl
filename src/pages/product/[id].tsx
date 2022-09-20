@@ -26,6 +26,7 @@ import { useProductStore } from '@store/hooks/useProductStore';
 import { numberWithCommas } from '@utils/index';
 import { useEffect } from 'react';
 import { useCartStore } from '@store/hooks/useCartStore';
+import { Cart } from 'src/types';
 
 const ProductDetails: React.FC = () => {
   const { query, back } = useRouter();
@@ -41,10 +42,10 @@ const ProductDetails: React.FC = () => {
   const getProduct = useProductStore((state) => state.getProduct);
   const isLoading = useProductStore((state) => state.isLoading);
 
-  let quantity!: number;
+  let quantity = 0;
 
-  const newProduct = {
-    id: id,
+  const newProduct: Cart = {
+    id: product?.productId,
     drinkName: product?.drinkName,
     description: product?.description,
     url: product?.url,
@@ -82,7 +83,6 @@ const ProductDetails: React.FC = () => {
           {cart &&
             cart?.map((cartItem) => {
               quantity = cartItem.qty;
-              console.log(quantity);
             })}
           <Container maxW={'container.lg'} mt={7}>
             <Flex justify={'space-between'} align={'center'}>
