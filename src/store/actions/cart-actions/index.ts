@@ -46,17 +46,13 @@ export const cartActions: CartActions = {
       isLoading: true,
     }));
     const exist = cartArray.find((x) => x.id === cartItem.id);
-    console.log(exist?.qty);
     if (exist?.qty === 1) {
-      cartArray = cart.filter((x) => {
-        x.id === cartItem.id;
-      });
+      cartArray = cart.filter((x) => x.id !== cartItem.id);
       useCartStore.setState((state) => ({
         ...state,
         isLoading: false,
-        cart: [...cartArray],
+        cart: cartArray,
       }));
-      console.log(cartArray);
       customToast({
         status: 'success',
         title: `Product removed from cart`,
