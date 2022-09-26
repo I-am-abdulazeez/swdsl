@@ -47,7 +47,7 @@ export const productActions: ProductActions = {
   },
   getProduct: (productId) => {
     useProductStore.setState((state) => ({ ...state, isLoading: true }));
-    const productRef = doc(firebaseFirestore, 'products', productId);
+    const productRef = doc(firebaseFirestore, 'products', String(productId));
     onSnapshot(
       productRef,
       (snapshot) => {
@@ -58,6 +58,7 @@ export const productActions: ProductActions = {
         }));
       },
       (error) => {
+        console.log(error);
         useProductStore.setState((state) => ({
           ...state,
           isLoading: false,
