@@ -22,11 +22,9 @@ SwiperCore.use([Navigation, Pagination, EffectFlip, Autoplay]);
 const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
-      <QueryClientWrapper>
-        <ClientOnly>
-          <Component {...pageProps} />
-        </ClientOnly>
-      </QueryClientWrapper>
+      <ClientOnly>
+        <Component {...pageProps} />
+      </ClientOnly>
     </ChakraProvider>
   );
 };
