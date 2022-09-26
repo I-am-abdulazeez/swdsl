@@ -9,7 +9,6 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { useEffect } from 'react';
 import NextLink from 'next/link';
 import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
 
@@ -27,7 +26,6 @@ const ProductList: React.FC<ProductListProps> = ({
   onRemoveFromCart,
 }) => {
   const cart = useCartStore((state) => state.cart);
-  const isLoadingCart = useCartStore((state) => state.isLoading);
   let quantity = 0;
 
   const cartItem: Cart = {
@@ -38,10 +36,6 @@ const ProductList: React.FC<ProductListProps> = ({
     url: product?.url,
     qty: 0,
   };
-
-  useEffect(() => {
-    console.log(isLoadingCart);
-  }, []);
 
   return (
     <VStack
@@ -97,7 +91,6 @@ const ProductList: React.FC<ProductListProps> = ({
                   onClick={() => onRemoveFromCart(cartItem)}
                   aria-label="remove product"
                   icon={<RiSubtractLine size="18px" />}
-                  isLoading={isLoadingCart}
                 />
                 <Text fontSize={'md'}> {quantity}</Text>
                 <IconButton
@@ -105,7 +98,6 @@ const ProductList: React.FC<ProductListProps> = ({
                   onClick={() => onAddToCart(cartItem)}
                   aria-label="add product"
                   icon={<RiAddFill size="18px" />}
-                  isLoading={isLoadingCart}
                 />
               </HStack>
             ) : (
