@@ -8,7 +8,8 @@ import SwiperCore, {
 } from 'swiper';
 
 import ClientOnly from '@components/ClientOnly';
-import QueryClientWrapper from 'src/client';
+import WelcomeModal from '@components/WelcomeModal';
+
 import customTheme from '@theme/index';
 
 import '@styles/index.css';
@@ -23,6 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={customTheme}>
       <ClientOnly>
+        <WelcomeModal />
         <Component {...pageProps} />
       </ClientOnly>
     </ChakraProvider>
