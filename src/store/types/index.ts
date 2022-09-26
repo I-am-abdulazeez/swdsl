@@ -35,7 +35,7 @@ export type ProductState = {
 
 export type ProductActions = {
   getProducts: () => void;
-  getProduct: (productId: string) => void;
+  getProduct: (productId: string | string[] | undefined) => void;
 };
 
 export type ProductStore = ProductState & ProductActions;
