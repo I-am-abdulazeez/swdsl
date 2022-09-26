@@ -27,16 +27,12 @@ const DrinkSearch: React.FC = () => {
         if (searchTerm === '') {
           return drink;
         } else if (
-          drink
-            .data()
-            ?.drinkName?.toLowerCase()
-            ?.includes(searchTerm?.toLowerCase())
+          drink?.drinkName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
         ) {
           return drink;
         }
       })
       .map((drinkSnap) => {
-        const drinks = drinkSnap?.data();
         return (
           <NextLink
             key={drinkSnap?.productId}
@@ -53,8 +49,8 @@ const DrinkSearch: React.FC = () => {
                 bgColor: '#F7FAFC',
               }}
             >
-              <Text fontWeight={'normal'}>{drinks?.drinkName}</Text>
-              <ProductBadge product={drinks} />
+              <Text fontWeight={'normal'}>{drinkSnap?.drinkName}</Text>
+              <ProductBadge product={drinkSnap} />
             </HStack>
           </NextLink>
         );
