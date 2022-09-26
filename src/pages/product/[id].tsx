@@ -1,9 +1,11 @@
+import { useEffect } from 'react';
 import {
   Box,
   Button,
   Container,
   Flex,
   Heading,
+  HStack,
   IconButton,
   Image,
   Spinner,
@@ -14,7 +16,7 @@ import {
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 
-import { RiArrowLeftLine } from 'react-icons/ri';
+import { RiAddFill, RiArrowLeftLine, RiSubtractLine } from 'react-icons/ri';
 
 import Navbar from '@components/Navbar';
 import Helmet from '@components/Helmet';
@@ -24,19 +26,18 @@ import ProductNav from '@components/Products/ProductNav';
 import { useProductStore } from '@store/hooks/useProductStore';
 
 import { numberWithCommas } from '@utils/index';
-import { useEffect } from 'react';
 import { useCartStore } from '@store/hooks/useCartStore';
 import { Cart } from 'src/types';
 
 const ProductDetails: React.FC = () => {
-  const { query, back } = useRouter();
+  const router = useRouter();
+  const id = router.query.id;
 
   const cart = useCartStore((state) => state.cart);
   const addProduct = useCartStore((state) => state.addProduct);
   const removeProduct = useCartStore((state) => state.removeProduct);
 
   const buttonSize = useBreakpointValue({ base: 'xs', md: 'sm' });
-  const id = String(query.id);
 
   const product = useProductStore((state) => state.product);
   const getProduct = useProductStore((state) => state.getProduct);
@@ -45,7 +46,7 @@ const ProductDetails: React.FC = () => {
   let quantity = 0;
 
   const newProduct: Cart = {
-    id: product?.productId,
+    id: id,
     drinkName: product?.drinkName,
     description: product?.description,
     url: product?.url,
@@ -57,13 +58,15 @@ const ProductDetails: React.FC = () => {
   const inCart = Boolean(cart.find((el) => el.id === id));
 
   useEffect(() => {
-    let subscribe = true;
-    if (subscribe) {
-      getProduct(id);
+    if (router.isReady) {
+      let subscribe = true;
+      if (subscribe) {
+        getProduct(id);
+      }
+      return () => {
+        subscribe = false;
+      };
     }
-    return () => {
-      subscribe = false;
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -90,7 +93,7 @@ const ProductDetails: React.FC = () => {
                 aria-label="back-icon"
                 size={'sm'}
                 variant="ghost"
-                onClick={back}
+                onClick={() => router.back()}
                 colorScheme="secondary"
                 icon={<RiArrowLeftLine size={'18px'} />}
               />
@@ -132,6 +135,23 @@ const ProductDetails: React.FC = () => {
                   <Heading as="h2" size="lg" color={'primary.700'}>
                     $ {String(numberWithCommas(product?.price))}
                   </Heading>
+                  {inCart && (
+                    <HStack my={5}>
+                      <IconButton
+                        size="sm"
+                        onClick={() => removeProduct(newProduct)}
+                        aria-label="remove product"
+                        icon={<RiSubtractLine size="18px" />}
+                      />
+                      <Text fontSize={'md'}> {quantity}</Text>
+                      <IconButton
+                        size="sm"
+                        onClick={() => addProduct(newProduct)}
+                        aria-label="add product"
+                        icon={<RiAddFill size="18px" />}
+                      />
+                    </HStack>
+                  )}
                 </VStack>
               </Stack>
             </Box>
