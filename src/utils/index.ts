@@ -25,6 +25,7 @@ export const customToast = (options?: UseToastOptions | undefined) => {
     duration: 4000,
     isClosable: true,
     variant: 'subtle',
+    position: 'bottom-right',
     containerStyle: {
       fontSize: '12px',
       fontWeight: 600,
