@@ -31,7 +31,7 @@ const Cart: React.FC = () => {
   const cartLength = cart?.length;
 
   const itemsPrice = cart
-    .map((cartItem) => cartItem?.price * cartItem?.qty! || 1)
+    .map((cartItem) => cartItem?.price * cartItem?.qty || 1)
     .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
   return (
