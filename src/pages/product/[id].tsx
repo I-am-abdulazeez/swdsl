@@ -126,15 +126,20 @@ const ProductDetails: React.FC = () => {
                   src={product?.url}
                   alt={product?.id}
                 />
-                <VStack align="stretch">
-                  <Text textAlign={'left'}>
-                    <ProductBadge product={product} />
-                  </Text>
-                  <Heading>{product?.drinkName}</Heading>
-                  <Text>{product?.description}</Text>
-                  <Heading as="h2" size="lg" color={'primary.700'}>
-                    $ {String(numberWithCommas(product?.price))}
-                  </Heading>
+                {/* VStack that holds the Drink Details UI */}
+                <VStack align="stretch" spacing={5}>
+                  <Box>
+                    <Text textAlign={'left'}>
+                      <ProductBadge product={product} />
+                    </Text>
+                    <Heading>{product?.drinkName}</Heading>
+                    <Text fontWeight={'semibold'} my={4}>
+                      {product?.description}
+                    </Text>
+                    <Heading as="h2" size="lg" color={'primary.700'}>
+                      $ {String(numberWithCommas(product?.price))}
+                    </Heading>
+                  </Box>
                   {inCart && (
                     <HStack my={5}>
                       <IconButton
@@ -142,6 +147,7 @@ const ProductDetails: React.FC = () => {
                         onClick={() => removeProduct(newProduct)}
                         aria-label="remove product"
                         icon={<RiSubtractLine size="18px" />}
+                        disabled={quantity === 1}
                       />
                       <Text fontSize={'md'}> {quantity}</Text>
                       <IconButton
