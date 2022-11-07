@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import {
   Box,
@@ -12,6 +12,9 @@ import {
   Spacer,
   Checkbox,
   Stack,
+  Input,
+  Switch,
+  FormLabel,
 } from '@chakra-ui/react';
 
 import { RiAddFill, RiDeleteBin2Line, RiSubtractLine } from 'react-icons/ri';
@@ -31,6 +34,13 @@ const CartItem: React.FC<CartItemProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = useRef<HTMLButtonElement | null>(null);
+
+  const [buyInPacks, setBuyInPacks] = useState(false);
+
+  useEffect(() => {
+    console.log(buyInPacks);
+    setBuyInPacks(false);
+  }, []);
 
   return (
     <Box>
@@ -61,17 +71,25 @@ const CartItem: React.FC<CartItemProps> = ({
               {cartItem?.description}
             </Text>
           </VStack>
-          <Stack
-            spacing={{ base: 5, md: 2 }}
-            direction={{ base: 'row', md: 'column' }}
-          >
-            <Checkbox defaultChecked={false} colorScheme="primary">
-              12 pack
-            </Checkbox>
-            <Checkbox defaultChecked={false} colorScheme="primary">
-              6 pack
-            </Checkbox>
-          </Stack>
+          {buyInPacks && (
+            <Stack
+              spacing={{ base: 5, md: 2 }}
+              direction={'column'}
+              alignItems={{ base: 'center', sm: 'initial' }}
+            >
+              <HStack>
+                <Input placeholder={'10'} width={12} padding={2} />
+                <Text fontWeight={'semibold'}>X 6 packs</Text>
+              </HStack>
+              <Text textAlign={'center'} fontWeight={'semibold'}>
+                or
+              </Text>
+              <HStack>
+                <Input placeholder={'10'} width={12} padding={2} />
+                <Text fontWeight={'semibold'}>X 12 packs</Text>
+              </HStack>
+            </Stack>
+          )}
           <Text fontSize={'16px'}>{cartItem?.price.toFixed(2)}</Text>
           <Text fontSize={'16px'}>{cartItem?.price * cartItem?.qty!}</Text>
         </Stack>
@@ -88,23 +106,39 @@ const CartItem: React.FC<CartItemProps> = ({
             </Button>
           </Box>
           <Spacer />
-          <HStack spacing={4}>
-            <IconButton
-              size="xs"
-              onClick={() => removeProduct(cartItem)}
-              aria-label="remove product"
-              isDisabled={cartItem?.qty === 1}
-              icon={<RiSubtractLine size="18px" />}
-            />
-            <Text>{cartItem?.qty}</Text>
-            <IconButton
-              size="xs"
-              onClick={() => addProduct(cartItem)}
-              aria-label="add product"
-              colorScheme={'primary'}
-              icon={<RiAddFill size="18px" />}
-            />
-          </HStack>
+          {!buyInPacks && (
+            <HStack spacing={4}>
+              <IconButton
+                size="xs"
+                onClick={() => removeProduct(cartItem)}
+                aria-label="remove product"
+                isDisabled={cartItem?.qty === 1}
+                icon={<RiSubtractLine size="18px" />}
+              />
+              <Text>{cartItem?.qty}</Text>
+              <IconButton
+                size="xs"
+                onClick={() => addProduct(cartItem)}
+                aria-label="add product"
+                colorScheme={'primary'}
+                icon={<RiAddFill size="18px" />}
+              />
+            </HStack>
+          )}
+        </HStack>
+        <HStack mt={7} alignItems={'center'}>
+          <Text fontWeight={'semibold'}>Buy in wholesale</Text>
+          <Switch
+            id="packs switch"
+            colorScheme={'primary'}
+            isChecked={buyInPacks}
+            onChange={() => {
+              setBuyInPacks((prev) => !prev);
+            }}
+            size={'sm'}
+            fontWeight={'semibold'}
+          />
+          <Text fontWeight={'semibold'}>Buy in packs</Text>
         </HStack>
       </Box>
     </Box>
