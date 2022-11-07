@@ -3,14 +3,14 @@ import {
   Button,
   Heading,
   HStack,
-  IconButton,
+  // IconButton,
   Image,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
+// import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
 
 import ProductBadge from '@components/Products/ProductBadge';
 
@@ -84,7 +84,7 @@ const ProductList: React.FC<ProductListProps> = ({
                 View Product
               </Button>
             </NextLink>
-            {inCart ? (
+            {/* {inCart ? (
               <HStack>
                 <IconButton
                   size="sm"
@@ -109,7 +109,7 @@ const ProductList: React.FC<ProductListProps> = ({
               >
                 Add to cart
               </Button>
-            )}
+            )} */}
           </HStack>
         </Stack>
       </Stack>
