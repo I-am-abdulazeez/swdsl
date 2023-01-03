@@ -16,13 +16,11 @@ const NavCategoryList: React.FC<NavCategoryListProps> = ({ category }) => {
     <>
       {drinksByCategory(category)?.map((product) => {
         return (
-          <Flex key={product?.productId}>
-            <NextLink href={`product/${product?.productId}`}>
-              <Button size={'sm'} variant={'ghost'} fontWeight={'normal'}>
-                {product?.drinkName}
-              </Button>
-            </NextLink>
-          </Flex>
+          <NextLink href={`product/${product?.productId}`}>
+            <Button size={'sm'} variant={'ghost'} fontWeight={'medium'}>
+              {product?.drinkName}
+            </Button>
+          </NextLink>
         );
       })}
     </>
