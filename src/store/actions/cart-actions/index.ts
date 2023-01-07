@@ -38,6 +38,7 @@ export const cartActions: CartActions = {
       });
     }
   },
+
   removeProduct: (cartItem) => {
     const cart = useCartStore.getState().cart;
     let cartArray = [...cart];
@@ -74,6 +75,7 @@ export const cartActions: CartActions = {
       });
     }
   },
+
   removeAllProduct: (cartItems) => {
     const cart = useCartStore.getState().cart;
     let cartArray = cart;
@@ -92,4 +94,11 @@ export const cartActions: CartActions = {
       title: `Product removed from cart`,
     });
   },
+
+  // toggleBuyInPacks: () => {
+  //   useCartStore.setState((state) => ({
+  //     ...state,
+  //     buyInPacks: !state.buyInPacks,
+  //   }));
+  // },
 };
