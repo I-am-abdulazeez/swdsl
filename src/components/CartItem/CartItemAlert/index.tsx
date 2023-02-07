@@ -6,6 +6,7 @@ import {
   AlertDialogBody,
   AlertDialogFooter,
   Button,
+  AlertDialogCloseButton,
 } from '@chakra-ui/react';
 import { CartItemAlertProps } from '@interfaces/index';
 
@@ -18,26 +19,28 @@ const CartItemAlert: React.FC<CartItemAlertProps> = ({
 }) => {
   return (
     <AlertDialog
-      motionPreset="slideInBottom"
+      motionPreset="scale"
       isOpen={isOpen}
       isCentered
       leastDestructiveRef={cancelRef}
       onClose={onClose}
+      closeOnOverlayClick={false}
     >
-      <AlertDialogOverlay>
+      <AlertDialogOverlay backdropFilter={'blur(15px)'}>
         <AlertDialogContent>
+          <AlertDialogCloseButton size={'sm'} />
           <AlertDialogHeader fontSize="md" fontWeight="semibold">
             Remove{' '}
             <span style={{ fontWeight: 'bold' }}>{cartItem?.drinkName}</span>{' '}
             from cart?
           </AlertDialogHeader>
 
-          <AlertDialogBody fontSize={'14px'}>
+          <AlertDialogBody fontSize={'14px'} fontWeight={'medium'}>
             Are you sure? You can't undo this action afterwards.
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button size={'xs'} ref={cancelRef} onClick={onClose}>
-              Leave
+              Cancel
             </Button>
             <Button
               colorScheme="red"

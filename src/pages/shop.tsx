@@ -45,7 +45,7 @@ const Shop: React.FC = () => {
     <Box>
       <Helmet title="Shop Wine | Shayowithdsl" />
       <Navbar />
-      <Box as={'main'} my={{ base: 12, md: 24 }}>
+      <Box as={'main'} pt={{ base: 12, md: 24 }}>
         <Container maxW="container.lg">
           <Box width={{ base: 'auto', md: '700px' }} mx="auto">
             <DrinkSearch />
