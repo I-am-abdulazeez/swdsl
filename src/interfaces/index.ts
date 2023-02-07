@@ -41,7 +41,7 @@ export interface ProductListProps {
   onRemoveFromCart: (cartItem: Cart) => void;
 }
 
-export interface ProductNavProps {
+export interface ProductProps {
   product: DocumentData | null;
 }
 
