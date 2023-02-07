@@ -7,7 +7,7 @@ const NavAccordionButton: React.FC<NavAccordionButtonProps> = ({
 }) => {
   return (
     <h2>
-      <AccordionButton fontSize={'sm'} fontWeight={'medium'}>
+      <AccordionButton fontSize={'sm'} fontWeight={'bold'}>
         <Box flex="1" textAlign="left">
           {category}
         </Box>
