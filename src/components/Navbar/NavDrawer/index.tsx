@@ -43,7 +43,7 @@ const NavDrawer: React.FC = () => {
         closeOnOverlayClick={false}
         placement="left"
         onClose={onClose}
-        size={'xs'}
+        size={'sm'}
         isOpen={isOpen}
       >
         <DrawerOverlay backdropFilter={'blur(10px)'} />
