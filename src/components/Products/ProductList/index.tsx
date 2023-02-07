@@ -18,6 +18,7 @@ import { ProductListProps } from '@interfaces/index';
 import { numberWithCommas } from '@utils/index';
 import { Cart } from 'src/types';
 import { useCartStore } from '@store/hooks/useCartStore';
+import ProductTag from '../ProductTag';
 
 const ProductList: React.FC<ProductListProps> = ({
   product,
@@ -53,7 +54,7 @@ const ProductList: React.FC<ProductListProps> = ({
       </>
       <Image
         p={6}
-        height={'200px'}
+        height={'150px'}
         src={product?.url}
         alt={`${product?.drinkName}`}
       />
@@ -62,10 +63,25 @@ const ProductList: React.FC<ProductListProps> = ({
           <ProductBadge product={product} />
         </Box>
         <Box mt={0} mb={4}>
-          <Heading mt={1} size={'sm'}>
-            {product?.drinkName}
-          </Heading>
-          <Text fontWeight={'medium'} fontSize={'sm'}>
+          <HStack>
+            <Heading
+              textOverflow={'ellipsis'}
+              whiteSpace={'nowrap'}
+              overflow={'hidden'}
+              mt={1}
+              size={'sm'}
+            >
+              {product?.drinkName}
+            </Heading>
+            <ProductTag product={product} />
+          </HStack>
+          <Text
+            textOverflow={'ellipsis'}
+            whiteSpace={'nowrap'}
+            overflow={'hidden'}
+            fontWeight={'medium'}
+            fontSize={'sm'}
+          >
             {product?.description}
           </Text>
           <Heading
