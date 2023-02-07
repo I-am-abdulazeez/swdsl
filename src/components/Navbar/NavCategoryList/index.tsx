@@ -1,6 +1,8 @@
 import NextLink from 'next/link';
 
-import { Flex, Button } from '@chakra-ui/react';
+import { Button } from '@chakra-ui/react';
+
+import ProductTag from '@components/Products/ProductTag';
 
 import { useProductStore } from '@store/hooks/useProductStore';
 import { NavCategoryListProps } from '@interfaces/index';
@@ -16,9 +18,13 @@ const NavCategoryList: React.FC<NavCategoryListProps> = ({ category }) => {
     <>
       {drinksByCategory(category)?.map((product) => {
         return (
-          <NextLink href={`product/${product?.productId}`}>
+          <NextLink
+            href={`product/${product?.productId}`}
+            key={product?.productId}
+          >
             <Button size={'sm'} variant={'ghost'} fontWeight={'medium'}>
               {product?.drinkName}
+              <ProductTag product={product} />
             </Button>
           </NextLink>
         );
