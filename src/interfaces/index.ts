@@ -36,9 +36,9 @@ export interface AuthHeadingProps {
 
 export interface ProductListProps {
   product: DocumentData | Product;
-  inCart: boolean;
-  onAddToCart: (cartItem: Cart) => void;
-  onRemoveFromCart: (cartItem: Cart) => void;
+  inCart?: boolean;
+  onAddToCart?: (cartItem: Cart) => void;
+  onRemoveFromCart?: (cartItem: Cart) => void;
 }
 
 export interface ProductProps {
