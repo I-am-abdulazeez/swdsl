@@ -110,7 +110,6 @@ export const ShayoVideos: SVideos[] = [
 ];
 
 export const DrinkCategory = [
-  'Non alcoholic',
   'Whisky',
   'Cognac',
   'Red wine',
