@@ -69,7 +69,7 @@ const CartItem: React.FC<CartItemProps> = ({
           <VStack spacing={2} align={'flex-start'}>
             <HStack>
               <Heading size="md">{cartItem?.drinkName}</Heading>
-              <ProductTag product={product} />
+              {/* <ProductTag product={product} /> */}
             </HStack>
             <ProductBadge product={cartItem} />
             <Text fontSize="sm" width={{ base: 'initial', md: '350px' }}>
