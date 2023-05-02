@@ -1,4 +1,4 @@
-import { RefObject } from 'react';
+import { RefObject, Dispatch, SetStateAction } from 'react';
 import { DocumentData } from 'firebase/firestore';
 import { Cart, Product } from 'src/types';
 
@@ -64,6 +64,10 @@ export interface IconButtonBadgeProps {
   badgeContent: number;
 }
 
+export interface CategoryNavProps {
+  category: string | string[] | undefined;
+}
+
 export interface CartItemProps {
   cartItem: Cart;
   addProduct: (product: Cart) => void;
@@ -77,4 +81,11 @@ export interface CartItemAlertProps {
   cancelRef: RefObject<HTMLButtonElement>;
   onClose: () => void;
   removeAllProduct: (id: any) => void;
+}
+
+export interface SelectableListProps {
+  handleItemClick: (index: number) => void;
+  selectedItem: number | null;
+  setSelectedItem: Dispatch<SetStateAction<number>>;
+  product: DocumentData | null;
 }
