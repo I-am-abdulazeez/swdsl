@@ -10,13 +10,13 @@ import { NavCategoryListProps } from '@interfaces/index';
 const NavCategoryList: React.FC<NavCategoryListProps> = ({ category }) => {
   const products = useProductStore((state) => state.products);
 
-  const drinksByCategory = (category: string) => {
+  const getDrinksByCategory = (category: string) => {
     return products?.filter((product) => product?.category === category);
   };
 
   return (
     <>
-      {drinksByCategory(category)?.map((product) => {
+      {getDrinksByCategory(category)?.map((product) => {
         return (
           <NextLink
             href={`product/${product?.productId}`}
