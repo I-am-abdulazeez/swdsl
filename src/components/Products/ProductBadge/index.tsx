@@ -1,9 +1,7 @@
 import { Badge } from '@chakra-ui/layout';
 import { DocumentData } from 'firebase/firestore';
 
-const ProductBadge: React.FC<DocumentData> = (props) => {
-  const { product } = props;
-
+const ProductBadge: React.FC<DocumentData> = ({ product }) => {
   return (
     <Badge
       borderRadius="md"
