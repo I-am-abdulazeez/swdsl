@@ -29,6 +29,7 @@ import { numberWithCommas } from '@utils/index';
 import { useCartStore } from '@store/hooks/useCartStore';
 import { Cart } from 'src/types';
 import SelectableList from '@components/SelectableList';
+import ProductTag from '@components/Products/ProductTag';
 
 const ProductDetails: React.FC = () => {
   const router = useRouter();
@@ -146,8 +147,11 @@ const ProductDetails: React.FC = () => {
                     <Text textAlign={'left'}>
                       <ProductBadge product={product} />
                     </Text>
-                    <Heading>{product?.drinkName}</Heading>
-                    <Text fontWeight={'semibold'} my={4}>
+                    <HStack>
+                      <Heading>{product?.drinkName}</Heading>
+                      <ProductTag product={product} />
+                    </HStack>
+                    <Text fontWeight={'semibold'} my={3}>
                       {product?.description}
                     </Text>
                     {/* <Heading as="h2" size="lg" color={'primary.700'}>
