@@ -31,13 +31,8 @@ const Shop: React.FC = () => {
   const removeProduct = useCartStore((state) => state.removeProduct);
 
   useEffect(() => {
-    let subscribe = true;
-    if (subscribe) {
-      getProducts();
-    }
-    return () => {
-      subscribe = false;
-    };
+    getProducts();
+    return () => useCartStore.destroy();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
