@@ -13,12 +13,13 @@ import NextLink from 'next/link';
 // import { RiAddFill, RiSubtractLine } from 'react-icons/ri';
 
 import ProductBadge from '@components/Products/ProductBadge';
+import ProductTag from '../ProductTag';
 
 import { ProductListProps } from '@interfaces/index';
 import { numberWithCommas } from '@utils/index';
-import { Cart } from 'src/types';
 import { useCartStore } from '@store/hooks/useCartStore';
-import ProductTag from '../ProductTag';
+
+import { Cart } from 'src/types';
 
 const ProductList: React.FC<ProductListProps> = ({
   product,
@@ -69,7 +70,7 @@ const ProductList: React.FC<ProductListProps> = ({
               whiteSpace={'nowrap'}
               overflow={'hidden'}
               mt={1}
-              size={'sm'}
+              size={'md'}
             >
               {product?.drinkName}
             </Heading>
