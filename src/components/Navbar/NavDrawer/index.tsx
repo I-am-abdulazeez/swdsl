@@ -53,7 +53,7 @@ const NavDrawer: React.FC = () => {
             color={'primary.500'}
             fontSize={'md'}
           >
-            All category
+            Drinks Categories
           </DrawerHeader>
           <DrawerCloseButton size={'sm'} />
           <DrawerBody>
