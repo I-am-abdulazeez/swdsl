@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -28,10 +28,13 @@ import { useProductStore } from '@store/hooks/useProductStore';
 import { numberWithCommas } from '@utils/index';
 import { useCartStore } from '@store/hooks/useCartStore';
 import { Cart } from 'src/types';
+import SelectableList from '@components/SelectableList';
 
 const ProductDetails: React.FC = () => {
   const router = useRouter();
   const id = router.query.id;
+
+  const [selectedItem, setSelectedItem] = useState<number>(0);
 
   const cart = useCartStore((state) => state.cart);
   const addProduct = useCartStore((state) => state.addProduct);
@@ -55,16 +58,27 @@ const ProductDetails: React.FC = () => {
     qty: 0,
   };
 
+  const handleItemClick = (index: number) => {
+    setSelectedItem(index);
+  };
+
+  const updatePrice = () => {
+    useProductStore.setState((state) => ({
+      product: {
+        ...state.product,
+        price: product?.price * 3,
+      },
+    }));
+  };
+
   const inCart = Boolean(cart.find((el) => el.id === id));
 
   useEffect(() => {
     if (router.isReady) {
-      let subscribe = true;
-      if (subscribe) {
-        getProduct(id);
-      }
+      getProduct(id);
       return () => {
-        subscribe = false;
+        useProductStore.destroy();
+        useCartStore.destroy();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,9 +150,18 @@ const ProductDetails: React.FC = () => {
                     <Text fontWeight={'semibold'} my={4}>
                       {product?.description}
                     </Text>
-                    <Heading as="h2" size="lg" color={'primary.700'}>
+                    {/* <Heading as="h2" size="lg" color={'primary.700'}>
                       $ {String(numberWithCommas(product?.price))}
-                    </Heading>
+                    </Heading> */}
+
+                    {/* <SelectableList
+                      selectedItem={selectedItem}
+                      setSelectedItem={setSelectedItem}
+                      handleItemClick={handleItemClick}
+                      product={product}
+                    /> */}
+
+                    {/* <Button onClick={updatePrice}>Update Price</Button> */}
                   </Box>
                   {inCart && (
                     <HStack my={5}>
