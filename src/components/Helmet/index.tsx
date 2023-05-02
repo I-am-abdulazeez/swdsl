@@ -1,10 +1,8 @@
-import Head from "next/head";
+import Head from 'next/head';
 
-import { HelmetProps } from "@interfaces/index";
+import { HelmetProps } from '@interfaces/index';
 
-const Helmet: React.FC<HelmetProps> = (props) => {
-  const { title } = props;
-
+const Helmet: React.FC<HelmetProps> = ({ title }) => {
   return (
     <Head>
       <title>{title}</title>
